@@ -1,0 +1,1 @@
+export { default as WarehouseList } from './warehouse-list/warehouse-list';
