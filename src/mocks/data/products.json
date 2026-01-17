@@ -3,7 +3,7 @@
     "uuid": "0001a111-b001-4a01-9001-000000000001",
     "name": "Red Apple",
     "description": "Sweet and crunchy fruit rich in fiber and antioxidants.",
-    "imageUrl": "https://images.example.com/produce/red-apple.jpg",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg",
     "category": "fruit"
   },
   {
@@ -17,21 +17,21 @@
     "uuid": "0003a111-b003-4a03-9003-000000000003",
     "name": "Banana",
     "description": "Soft tropical fruit high in potassium and energy.",
-    "imageUrl": "https://images.example.com/produce/banana.jpg",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg",
     "category": "fruit"
   },
   {
     "uuid": "0004a111-b004-4a04-9004-000000000004",
     "name": "Orange",
     "description": "Juicy citrus fruit packed with vitamin C.",
-    "imageUrl": "https://images.example.com/produce/orange.jpg",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Orange-Fruit-Pieces.jpg",
     "category": "fruit"
   },
   {
     "uuid": "0005a111-b005-4a05-9005-000000000005",
     "name": "Strawberry",
     "description": "Small red fruit with a sweet aroma and flavor.",
-    "imageUrl": "https://images.example.com/produce/strawberry.jpg",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/29/PerfectStrawberry.jpg",
     "category": "fruit"
   },
   {
