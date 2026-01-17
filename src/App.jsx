@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router';
-import { Navbar } from './components/ui';
+import { Footer, Navbar } from './components/ui';
 import { HomePage, ProductsDetailsPage, ProductsPage } from './pages';
 
 function App() {
@@ -13,6 +13,8 @@ function App() {
         <Route path='/products' element={ <ProductsPage /> } />
         <Route path='/products/:id' element={ <ProductsDetailsPage /> } />
       </Routes>
+
+      <Footer />
     </>
   )
 }
