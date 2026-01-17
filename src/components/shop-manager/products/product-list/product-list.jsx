@@ -7,6 +7,7 @@ function ProductList () {
 
     const [products, setProducts] = useState([]);
     const [search, setSearch] = useState('');
+    const [reload, setReload] = useState(true);
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -15,22 +16,25 @@ function ProductList () {
         };
 
         fetchProducts();
-    }, []);
+    }, [reload]);
 
-    const handleFinder = (value) => {
-       setSearch(value); 
+    const handleFinderItem = (title) => setSearch(title);
+
+    const handleDeleteItem = async (uuid) => {
+        await ShopManager.setProductDelete(uuid);
+        setReload(prev => !prev);
     };
 
     return (
         <div>
-            <ProductFinder onChange={ handleFinder }/>
+            <ProductFinder onChange={ handleFinderItem }/>
             <ol className="list-group">
                 { products && 
                     (products
                     .filter((product) => 
                         product.name.toLowerCase().includes(search.toLowerCase()))
                     .map((product) => 
-                        <ProductItem key={ product.uuid } product={ product } /> )) }
+                        <ProductItem key={ product.uuid } product={ product } onDelete={ handleDeleteItem }/> )) }
             </ol>
         </div>
     );

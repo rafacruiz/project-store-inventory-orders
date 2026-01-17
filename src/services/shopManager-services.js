@@ -12,3 +12,5 @@ http.interceptors.response.use(
 export const getProducts = () => http.get('/products');
 
 export const getProductId = (id) => http.get(`/products/${id}`);
+
+export const setProductDelete = (id) => http.delete(`/products/${id}`);

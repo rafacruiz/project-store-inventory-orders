@@ -1,7 +1,7 @@
 
 import { setupWorker } from 'msw/browser';
-import { handleListProducts, handleDetailsProduct } from './products';
+import { handleListProducts, handleDetailsProduct, handleDeleteProduct } from './products';
 
-const worker = setupWorker(handleListProducts, handleDetailsProduct);
+const worker = setupWorker(handleListProducts, handleDetailsProduct, handleDeleteProduct);
 
 export default worker;
