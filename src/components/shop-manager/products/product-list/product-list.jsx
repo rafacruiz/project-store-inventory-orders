@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
+import { ButtonAdd, InputFinder } from '../../../ui';
 import ProductItem from "../product-item/product-item";
-import ProductFinder from "../product-finder/product-finder";
 import * as ShopManager from '../../../../services/shopManager-services';
 
 function ProductList () {
@@ -25,9 +25,29 @@ function ProductList () {
         setReload(prev => !prev);
     };
 
+    const btnAddOption = {
+        'mode': 'success',
+        'placement': 'left',
+        'title': 'Add product',
+        'to': '/products/add',
+    }
+
+    const inpFinderOption = {
+        'id': 'product',
+        'placeholder': 'Finder products...'
+    }
+
     return (
-        <div>
-            <ProductFinder onChange={ handleFinderItem }/>
+        <>
+            <div className="d-flex py-3">
+                <div className="me-2">
+                    <ButtonAdd buttonOption={ btnAddOption } />
+                </div>
+                <div className="mx-auto w-100">
+                    <InputFinder onChange={ handleFinderItem } inputOption={ inpFinderOption } />
+                </div>                
+            </div>
+            
             <ol className="list-group">
                 { products && 
                     (products
@@ -36,7 +56,7 @@ function ProductList () {
                     .map((product) => 
                         <ProductItem key={ product.uuid } product={ product } onDelete={ handleDeleteItem }/> )) }
             </ol>
-        </div>
+        </>
     );
 }
 
