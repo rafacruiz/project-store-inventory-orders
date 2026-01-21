@@ -1,14 +1,21 @@
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 function ButtonAdd ({ buttonOption }) {
 
-    const tooltipAddList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-    const toolList = [...tooltipAddList].map(
-        tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl)
-    )
+    const ref = useRef(null);
+
+    useEffect(() => {
+        const tooltipTriggerEl = new bootstrap.Tooltip(ref.current);
+
+        return () => {
+            tooltipTriggerEl.dispose();
+        }
+    }, []);
 
     return (<>
-            <Link 
+            <Link
+                ref = { ref }
                 className={`btn btn-outline-${ buttonOption.mode}`}
                 data-bs-toggle="tooltip"
                 data-bs-placement={ buttonOption.placement }
