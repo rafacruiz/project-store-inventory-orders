@@ -14,3 +14,5 @@ export const getProducts = () => http.get('/products');
 export const getProductId = (id) => http.get(`/products/${id}`);
 
 export const setProductDelete = (id) => http.delete(`/products/${id}`);
+
+export const setCreateProduct = (data) => http.post('/products', data);

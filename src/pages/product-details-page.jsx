@@ -19,7 +19,7 @@ function ProductsDetailsPage () {
     }, [id]);
     
     const jumbotron = {
-        'title': 'Product',
+        'title': 'Products',
         'subTitle': product?.name
     }
 

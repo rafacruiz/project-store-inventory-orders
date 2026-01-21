@@ -29,3 +29,20 @@ export const handleDeleteProduct = http.delete(`${baseApiURL}/products/:id`, (re
 
     return HttpResponse.json(products);
 });
+
+export const handleCreateProduct = http.post(`${baseApiURL}/products`, async (req) => {
+    let product = await req.request.clone().json();
+    
+    product = {
+        'uuid': self.crypto.randomUUID().toString(),
+        'name': product.NameProduct,
+        'description': product.DescriptionProduct,
+        'imageUrl': product.ImageProduct,
+        'category': product.CategoryProduct,
+    }
+
+    products.push(product);
+    store();
+   
+    return HttpResponse.json(product, { status: 201 });
+});
