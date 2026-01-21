@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
 import Select from "react-select";
+import { ButtonBack } from '../../../ui';
 import * as ShopManager from '../../../../services/shopManager-services';
-import { useNavigate } from "react-router-dom";
+
 
 function ProductAdd () {
 
@@ -114,6 +116,7 @@ function ProductAdd () {
                 </div>
 
                 <button type="submit" className="btn btn-primary" disabled={!isValid}>Save</button>
+                <ButtonBack to={'/products'} />
             </form>
         </>);
 }
