@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router';
 import { Footer, Navbar } from './components/ui';
-import { HomePage, ProductsDetailsPage, ProductsPage, ProductsAddPage } from './pages';
+import { HomePage, ProductsDetailsPage, ProductsPage, ProductsAddPage, NotFoundPage } from './pages';
 
 function App() {
   
@@ -13,6 +13,7 @@ function App() {
         <Route path='/products' element={ <ProductsPage /> } />
         <Route path='/products/:id' element={ <ProductsDetailsPage /> } />
         <Route path='/products/add' element={ <ProductsAddPage /> } />
+        <Route path='*' element={ <NotFoundPage /> } />
       </Routes>
 
       <Footer />
