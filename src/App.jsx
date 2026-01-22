@@ -8,14 +8,16 @@ function App() {
     <>
       <Navbar />
 
-      <Routes>
-        <Route path='/' element={ <HomePage /> } />
-        <Route path='/products' element={ <ProductsPage /> } />
-        <Route path='/products/:id' element={ <ProductsDetailsPage /> } />
-        <Route path='/products/add' element={ <ProductsAddPage /> } />
-        <Route path='*' element={ <NotFoundPage /> } />
-      </Routes>
-
+      <div className="d-flex flex-column min-vh-100">
+        <Routes>
+          <Route path='/' element={ <HomePage /> } />
+          <Route path='/products' element={ <ProductsPage /> } />
+          <Route path='/products/:id' element={ <ProductsDetailsPage /> } />
+          <Route path='/products/add' element={ <ProductsAddPage /> } />
+          <Route path='*' element={ <NotFoundPage /> } />
+        </Routes>
+      </div>
+      
       <Footer />
     </>
   )
