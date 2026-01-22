@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
 import Select from "react-select";
 import { ButtonBack } from '../../../ui';
-import * as ShopManager from '../../../../services/shopManager-services';
+import * as ShopManager from '../../../../services/shopManager-service';
 
 
 function ProductAdd () {

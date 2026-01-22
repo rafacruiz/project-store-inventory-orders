@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import { ButtonAdd, InputFinder } from '../../../ui';
+import { useAuth } from '../../../../contexts';
 import ProductItem from "../product-item/product-item";
-import * as ShopManager from '../../../../services/shopManager-services';
+import * as ShopManager from '../../../../services/shopManager-service';
 
 function ProductList () {
 
     const [products, setProducts] = useState([]);
     const [search, setSearch] = useState('');
     const [reload, setReload] = useState(true);
+
+    const { user } = useAuth();
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -40,9 +43,10 @@ function ProductList () {
     return (
         <>
             <div className="d-flex py-3">
-                <div className="me-2">
-                    <ButtonAdd buttonOption={ btnAddOption } />
-                </div>
+                { user.role === 'admin' &&  
+                    (<div className="me-2">
+                        <ButtonAdd buttonOption={ btnAddOption } /> 
+                    </div>)}
                 <div className="mx-auto w-100">
                     <InputFinder onChange={ handleFinderItem } inputOption={ inpFinderOption } />
                 </div>                

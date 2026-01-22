@@ -13,10 +13,11 @@ function ButtonAdd ({ buttonOption }) {
         }
     }, []);
 
-    return (<>
-            <Link
-                ref = { ref }
-                className={`btn btn-outline-${ buttonOption.mode}`}
+    return (
+        <>
+            <Link 
+                ref={ ref }
+                className={ `btn btn-outline-${ buttonOption.mode}` }
                 data-bs-toggle="tooltip"
                 data-bs-placement={ buttonOption.placement }
                 title={ buttonOption.title }

@@ -1,0 +1,17 @@
+[
+    {
+        "email": "admin@shop.com",
+        "password": "123456",
+        "role": "admin"
+    },
+    {
+        "email": "shop1@shop.com",
+        "password": "123456",
+        "role": "shop"
+    },
+    {
+        "email": "shop2@shop.com",
+        "password": "shop456",
+        "role": "shop"
+    }
+]

@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { PageLayout } from "../components/layouts";
 import { ProductDetails } from "../components/shop-manager/products";
-import * as ShopManager from '../services/shopManager-services';
+import * as ShopManager from '../services/shopManager-service';
 
 function ProductsDetailsPage () {
 
