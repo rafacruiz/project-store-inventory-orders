@@ -11,7 +11,7 @@ function Sidebar () {
                 <li className="nav-item">
                     <Link className="nav-link text-black d-flex align-items-center gap-2" to={'/dashboard'}>
                         <i className="fa fa-home fa-fw"></i>
-                        <span className="d-none d-md-inline">Home</span>
+                        <span className="d-none d-md-inline">Dashboard</span>
                     </Link>
                 </li>
                 { user.role === 'admin' && (

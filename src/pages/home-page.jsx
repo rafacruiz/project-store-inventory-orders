@@ -4,7 +4,7 @@ import { Dashboard } from '../components/ui';
 function HomePage () {
     const jumbotron = {
         title: 'ShopManager',
-        subTitle: 'Home'
+        subTitle: 'Dashboard'
     }
 
     return (
