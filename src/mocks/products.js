@@ -10,8 +10,11 @@ let products = localStorage.getItem(PRODUCTS_LS_KEY) ? JSON.parse(localStorage.g
 
 const store = () => localStorage.setItem(PRODUCTS_LS_KEY, JSON.stringify(products));
 
-export const handleListProducts = http.get(`${baseApiURL}/products`, () => {
+export const handleListProducts = http.get(`${baseApiURL}/products`, async () => {
     store();
+    
+    await new Promise((r) => setTimeout(r, 2000)); // DELETE
+
     return HttpResponse.json(products);
 });
 

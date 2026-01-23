@@ -1,3 +1,4 @@
+import { BounceLoader } from "react-spinners";
 import { useEffect, useState } from "react";
 import { ButtonAdd, InputFinder } from '../../../ui';
 import { useAuth } from '../../../../contexts';
@@ -19,7 +20,7 @@ function ProductList () {
                 setProducts(AllProducts);    
             } catch (error) {
                 console.error('Error fetching products:', error);
-            } 
+            }
         };
 
         fetchProducts();
@@ -48,28 +49,41 @@ function ProductList () {
         'placeholder': 'Finder products...'
     }
 
-    return (
-        <>
-            <div className="d-flex py-3">
-                { user.role === 'admin' &&  
-                    (<div className="me-2">
-                        <ButtonAdd buttonOption={ btnAddOption } /> 
-                    </div>)}
-                <div className="mx-auto w-100">
-                    <InputFinder onChange={ handleFinderItem } inputOption={ inpFinderOption } />
-                </div>                
-            </div>
-            
-            <ol className="list-group">
-                { products && 
-                    (products
-                    .filter((product) => 
+    if (!products || products.length === 0) {
+        return (
+                <div className="d-flex justify-content-center align-items-center py-4">
+                    <BounceLoader color="#030404" size={ 35 }  />
+                </div>
+            );
+    } else {
+        return (
+            <>
+                <div className="d-flex py-3">
+                    { user.role === 'admin' &&  
+                        (<div className="me-2">
+                            <ButtonAdd buttonOption={ btnAddOption } /> 
+                        </div>) }
+                    <div className="mx-auto w-100">
+                        <InputFinder onChange={ handleFinderItem } inputOption={ inpFinderOption } />
+                    </div>                
+                </div>
+                
+                <ol className="list-group">
+                    {products && (products
+                    ?.filter((product) => 
                         product.name.toLowerCase().includes(search.toLowerCase()))
+                    .sort((a, b) => 
+                        a.name.localeCompare(b.name))
                     .map((product) => 
-                        <ProductItem key={ product.uuid } product={ product } onDelete={ handleDeleteItem }/> )) }
-            </ol>
-        </>
-    );
+                        <ProductItem 
+                            key={ product.uuid } 
+                            product={ product } 
+                            onDelete={ handleDeleteItem }/> 
+                        ))}
+                </ol>
+            </>
+        );
+    }
 }
 
 export default ProductList;

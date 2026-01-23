@@ -15,6 +15,9 @@ export const handleLoginUser = http.post(`${baseApiURL}/user`, async (req) => {
                 message: 'Invalid user',
             }, { status: 401 });
     } else {
+
+        await new Promise((r) => setTimeout(r, 2000)); // DELETE
+
         return HttpResponse.json(isExistsUser, { status: 201 });
     }
 });

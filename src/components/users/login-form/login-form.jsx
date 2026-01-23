@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import * as AuthUsers from '../../../services/auth-service';
 import { useAuth } from '../../../contexts/auth-context';
 import { useEffect } from "react";
+import { BounceLoader } from "react-spinners";
 
 function LoginForm () {
     
@@ -68,7 +69,7 @@ function LoginForm () {
 
     return (
         <form onSubmit={ handleSubmit(handleLogin) }>
-            {errors.root && (
+            { errors.root && (
                 <div className="alert alert-danger d-flex justify-content-center align-items-center gap-2">
                     <i className="fa fa-exclamation-triangle"></i>
                     <div>
@@ -84,7 +85,7 @@ function LoginForm () {
                     id="emailUser" 
                     placeholder="name@example.com" 
                     { ...register('emailUser', validations.emailUser) } />
-                {errors.emailUser && (<div className="invalid-feedback">{errors.emailUser.message}</div>)}
+                { errors.emailUser && (<div className="invalid-feedback">{errors.emailUser.message}</div>) }
                 <label>Email</label>
             </div>
 
@@ -95,12 +96,12 @@ function LoginForm () {
                     id="passwordUser" 
                     placeholder="Password" 
                     { ...register('passwordUser', validations.passwordUser) }/>
-                {errors.passwordUser && (<div className="invalid-feedback">{errors.passwordUser.message}</div>)}
+                { errors.passwordUser && (<div className="invalid-feedback">{errors.passwordUser.message}</div>) }
                 <label>Password</label>
             </div>
 
-            <button type="submit" className="btn btn-primary w-100" disabled={isSubmitting} >
-                {isSubmitting ? 'Logging in...' : 'Login'}
+            <button type="submit" className="btn btn-primary w-100" disabled={ isSubmitting } >
+                { isSubmitting ? <BounceLoader className="mt-2" color="#030404" size={22}  /> : 'Login' }
             </button>
         </form>
     );
