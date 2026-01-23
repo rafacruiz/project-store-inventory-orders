@@ -14,8 +14,12 @@ function ProductList () {
 
     useEffect(() => {
         const fetchProducts = async () => {
-            const AllProducts = await ShopManager.getProducts();
-            setProducts(AllProducts);
+            try {
+                const AllProducts = await ShopManager.getProducts();
+                setProducts(AllProducts);    
+            } catch (error) {
+                console.error('Error fetching products:', error);
+            } 
         };
 
         fetchProducts();
@@ -24,8 +28,12 @@ function ProductList () {
     const handleFinderItem = (title) => setSearch(title);
 
     const handleDeleteItem = async (uuid) => {
-        await ShopManager.setProductDelete(uuid);
-        setReload(prev => !prev);
+        try {
+            await ShopManager.setProductDelete(uuid);
+            setReload(prev => !prev);
+        } catch (error) {
+            console.error('Error deleting product:', error);
+        }
     };
 
     const btnAddOption = {

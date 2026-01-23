@@ -6,7 +6,18 @@ const http = axios.create({
 
 http.interceptors.response.use(
     (res) => res.data,
-    (err) => Promise.reject(err)
+    (err) => {
+        const { status, data } = err?.response || {};
+        
+        if (status === 400) {
+            console.error('API Error:', data || err.message);
+        }
+
+        return Promise.reject({
+            message: data?.message || 'Bad Request',
+            status: status
+        });
+    }
 );
 
 export const getProducts = () => http.get('/products');

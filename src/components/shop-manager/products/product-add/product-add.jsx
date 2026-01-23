@@ -51,12 +51,12 @@ function ProductAdd () {
         try {
             await ShopManager.setCreateProduct(data);
             reset();
-            navigate('/products');
+            navigate('/products'); // MODIFICAR POR UN MENSAJESE DE EXITO
         } catch (error) {
-            const { status } = error;
-            if ( status === 400) {
-                const { message } = error.response?.data || {};
-                console.error(message);
+            if ( error.status === 400) {
+                console.error(error?.message || 'Bad Request');
+            } else {
+                console.error(error || 'Unexpected error');
             }
         }
     };

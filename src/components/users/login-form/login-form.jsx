@@ -17,8 +17,9 @@ function LoginForm () {
             handleSubmit,
             reset,
             setError,
-            formState: { errors, isValid } 
-        } = useForm({ mode: 'all' });
+            clearErrors,
+            formState: { isSubmitting, errors } 
+        } = useForm({ mode: 'onChange' });
 
     const handleLogin = async (userData) => {
         try {
@@ -28,14 +29,13 @@ function LoginForm () {
             login(response);
             navigate('/dashboard');
         } catch (error) {
-            const { status } = error;
+            const { status, message } = error;
 
             if (status === 401) {
-                const { message } = error?.response.data || {};
-                console.error(message);
+                console.error(message || {});
 
                 setError('user', {
-                    message: message
+                    message: message || 'Unauthorized access'
                 });
             }
         }
@@ -55,7 +55,8 @@ function LoginForm () {
                     className={`form-control ${errors.emailUser ? 'is-invalid' : ''}`}
                     id="emailUser" 
                     placeholder="name@example.com" 
-                    { ...register('emailUser', validations.emailUser) } />
+                    { ...register('emailUser', validations.emailUser) } 
+                    onChange={() => clearErrors('user')} />
                 {errors.emailUser && (<div className="invalid-feedback">{errors.emailUser.message}</div>)}
                 <label>Email</label>
             </div>
@@ -63,15 +64,18 @@ function LoginForm () {
             <div className="form-floating mb-3">
                 <input 
                     type="password" 
-                    className={`form-control ${errors.passwordUser ? 'is-invalid' : ''}`} 
+                    className={`form-control ${ errors.passwordUser ? 'is-invalid' : ''}`} 
                     id="passwordUser" 
                     placeholder="Password" 
-                    { ...register('passwordUser', validations.passwordUser) } />
+                    { ...register('passwordUser', validations.passwordUser) }
+                    onChange={() => clearErrors('user')} />
                 {errors.passwordUser && (<div className="invalid-feedback">{errors.passwordUser.message}</div>)}
                 <label>Password</label>
             </div>
 
-            <button type="submit" className="btn btn-primary w-100" disabled={!isValid} >Login</button>
+            <button type="submit" className="btn btn-primary w-100" disabled={isSubmitting} >
+                {isSubmitting ? 'Logging in...' : 'Login'}
+            </button>
         </form>
     );
 }
