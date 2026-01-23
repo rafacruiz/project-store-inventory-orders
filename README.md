@@ -1,16 +1,48 @@
-# React + Vite
+# Project Store Inventory & Orders
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descripción
+Este proyecto es un **laboratorio** que simula un sistema de gestión de **almacén, productos y pedidos** para tiendas.  
+Incluye funcionalidades básicas de control de acceso y autenticación de usuarios.
 
-Currently, two official plugins are available:
+El objetivo principal es **aprender y practicar** conceptos de desarrollo web, gestión de inventario y control de acceso.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Funcionalidades
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Gestión de **productos**:
+  - Crear, editar y eliminar productos
+  - Listado de productos disponibles en el almacén
 
-## Expanding the ESLint configuration
+- Gestión de **pedidos**:
+  - Crear pedidos asociados a productos
+  - Visualizar el estado de los pedidos
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Control de acceso**:
+  - Autenticación de usuarios
+  - Diferentes roles de acceso (ej. administrador, empleado)
+
+- **Laboratorio**:
+  - Código orientado a aprendizaje y pruebas
+  - Integración con servicios simulados
+
+---
+
+## Tecnologías
+
+- Frontend: React, React Hook Form
+- Backend: Servicio simulado mediante API
+- Gestión de estado: Context API
+- Control de errores y validaciones
+- Axios para llamadas HTTP con interceptor de errores
+
+---
+
+## Instalación
+
+```bash
+git clone <URL_DEL_REPOSITORIO>
+cd project-store-inventory-orders
+npm install
+npm start
+
