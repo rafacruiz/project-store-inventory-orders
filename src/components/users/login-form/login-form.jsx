@@ -2,30 +2,54 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import * as AuthUsers from '../../../services/auth-service';
 import { useAuth } from '../../../contexts/auth-context';
+import { useEffect } from "react";
 
 function LoginForm () {
     
     const navigate = useNavigate();
+
     const { login } = useAuth();
 
     const validations = {
-        emailUser: { required: 'Email is required' },
-        passwordUser: { required: 'Password is required' }
+        emailUser: { 
+            required: 'Email is required',
+            pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: 'Invalid email format'
+            }
+        },
+        passwordUser: { 
+            required: 'Password is required',
+            minLength: {
+                value: 6,
+                message: 'Password must be at least 6 characters long'
+            },
+        }
     }
 
     const { register, 
             handleSubmit,
-            reset,
             setError,
+            watch,
             clearErrors,
             formState: { isSubmitting, errors } 
-        } = useForm({ mode: 'onChange' });
+        } = useForm({ 
+            mode: 'all', 
+            reValidateMode: "onChange" 
+        });
+
+    const [email, pass] = watch(['emailUser', 'passwordUser']);
+
+    useEffect(() => {
+        if (errors?.root) {
+            clearErrors('root');
+        }
+    }, [email, pass]);
 
     const handleLogin = async (userData) => {
         try {
             const response = await AuthUsers.getUserLogin(userData);
             console.info(response);
-            reset();
             login(response);
             navigate('/dashboard');
         } catch (error) {
@@ -34,7 +58,8 @@ function LoginForm () {
             if (status === 401) {
                 console.error(message || {});
 
-                setError('user', {
+                setError('root', {
+                    type: 'server',
                     message: message || 'Unauthorized access'
                 });
             }
@@ -43,20 +68,22 @@ function LoginForm () {
 
     return (
         <form onSubmit={ handleSubmit(handleLogin) }>
-            {errors.user && (
-                <div className="alert alert-danger text-center">
-                    {errors.user.message}
+            {errors.root && (
+                <div className="alert alert-danger d-flex justify-content-center align-items-center gap-2">
+                    <i className="fa fa-exclamation-triangle"></i>
+                    <div>
+                        { errors.root.message }
+                    </div>
                 </div>
             )}
             
             <div className="form-floating mb-3">
                 <input 
                     type="email" 
-                    className={`form-control ${errors.emailUser ? 'is-invalid' : ''}`}
+                    className={`form-control ${ errors.emailUser ? 'is-invalid' : ''}`}
                     id="emailUser" 
                     placeholder="name@example.com" 
-                    { ...register('emailUser', validations.emailUser) } 
-                    onChange={() => clearErrors('user')} />
+                    { ...register('emailUser', validations.emailUser) } />
                 {errors.emailUser && (<div className="invalid-feedback">{errors.emailUser.message}</div>)}
                 <label>Email</label>
             </div>
@@ -67,8 +94,7 @@ function LoginForm () {
                     className={`form-control ${ errors.passwordUser ? 'is-invalid' : ''}`} 
                     id="passwordUser" 
                     placeholder="Password" 
-                    { ...register('passwordUser', validations.passwordUser) }
-                    onChange={() => clearErrors('user')} />
+                    { ...register('passwordUser', validations.passwordUser) }/>
                 {errors.passwordUser && (<div className="invalid-feedback">{errors.passwordUser.message}</div>)}
                 <label>Password</label>
             </div>
