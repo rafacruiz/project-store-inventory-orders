@@ -101,7 +101,7 @@ function LoginForm () {
             </div>
 
             <button type="submit" className="btn btn-primary w-100" disabled={ isSubmitting } >
-                { isSubmitting ? <BounceLoader className="mt-2" color="#030404" size={22}  /> : 'Login' }
+                { isSubmitting ? <BounceLoader className="mt-2" color="#f8fafa" size={22}  /> : 'Login' }
             </button>
         </form>
     );
