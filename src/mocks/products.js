@@ -10,42 +10,51 @@ export let products = localStorage.getItem(PRODUCTS_LS_KEY) ? JSON.parse(localSt
 
 const store = () => localStorage.setItem(PRODUCTS_LS_KEY, JSON.stringify(products));
 
-export const handleListProducts = http.get(`${baseApiURL}/products`, async () => {
-    store();
+export const handleListProducts = 
+    http.get(`${baseApiURL}/products`, async () => {
     
-    await new Promise((r) => setTimeout(r, 2000)); // DELETE
-
-    return HttpResponse.json(products);
-});
-
-export const handleDetailsProduct = http.get(`${baseApiURL}/products/:id`, (req) => {
-    const { id } = req.params;
-    const product = products.find((product) => product.id === id);
+        store();
     
-    return HttpResponse.json(product);
-});
+        await new Promise((r) => setTimeout(r, 2000)); // DELETE
 
-export const handleDeleteProduct = http.delete(`${baseApiURL}/products/:id`, (req) => {
-    const { id } = req.params;
-    products = products.filter((product) => !product.id.includes(id));
-    store();
+        return HttpResponse.json(products);
+    });
 
-    return HttpResponse.json(products);
-});
+export const handleDetailsProduct = 
+    http.get(`${baseApiURL}/products/:id`, (req) => {
+        const { id } = req.params;
+        const product = products.find((product) => product.id === id);
 
-export const handleCreateProduct = http.post(`${baseApiURL}/products`, async (req) => {
-    let product = await req.request.clone().json();
+        if (!product) return HttpResponse.json({ message: 'Error details product' }, { status: 404 });
+        
+        return HttpResponse.json(product);
+    });
+
+export const handleDeleteProduct = 
+    http.delete(`${baseApiURL}/products/:id`, (req) => {
+        const { id } = req.params;
+        products = products.filter((product) => !product.id.includes(id));
+
+        if (!products) return HttpResponse.json({ message: 'Error delete product' }, { status: 404 });
+        store();
+
+        return HttpResponse.json(products);
+    });
+
+export const handleCreateProduct = 
+    http.post(`${baseApiURL}/products`, async (req) => {
+        let product = await req.request.clone().json();
+        
+        product = {
+            'id': self.crypto.randomUUID().toString(),
+            'name': product.nameProduct,
+            'description': product.descriptionProduct,
+            'imageUrl': product.imageProduct,
+            'category': product.categoryProduct,
+        }
+
+        products.push(product);
+        store();
     
-    product = {
-        'id': self.crypto.randomUUID().toString(),
-        'name': product.nameProduct,
-        'description': product.descriptionProduct,
-        'imageUrl': product.imageProduct,
-        'category': product.categoryProduct,
-    }
-
-    products.push(product);
-    store();
-   
-    return HttpResponse.json(product, { status: 201 });
-});
+        return HttpResponse.json(product, { status: 201 });
+    });
