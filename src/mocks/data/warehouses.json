@@ -1,0 +1,27 @@
+[
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "name": "Almacén Central",
+    "email": "central@almacen.com",
+    "location": "Ciudad A",
+    "products": [
+      { "id": 101, "name": "Producto A", "stock": 50 }
+    ]
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440001",
+    "name": "Almacén Norte",
+    "email": "norte@almacen.com",
+    "location": "Ciudad B",
+    "products": []
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440002",
+    "name": "Almacén Sur",
+    "email": "sur@almacen.com",
+    "location": "Ciudad C",
+    "products": [
+      { "id": 103, "name": "Producto C", "stock": 60 }
+    ]
+  }
+]

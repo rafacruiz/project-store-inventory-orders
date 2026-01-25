@@ -1,285 +1,365 @@
 [
   {
-    "uuid": "0001a111-b001-4a01-9001-000000000001",
+    "id": "0001a111-b001-4a01-9001-000000000001",
     "name": "Red Apple",
     "description": "Sweet and crunchy fruit rich in fiber and antioxidants.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg",
-    "category": "fruit"
+    "category": "fruit",
+    "sku": "1000001",
+    "active": false
   },
   {
-    "uuid": "0002a111-b002-4a02-9002-000000000002",
+    "id": "0002a111-b002-4a02-9002-000000000002",
     "name": "Green Apple",
     "description": "Tart and refreshing apple, ideal for salads and snacks.",
     "imageUrl": "https://images.example.com/produce/green-apple.jpg",
-    "category": "fruit"
+    "category": "fruit",
+    "sku": "1000002",
+    "active": false
   },
   {
-    "uuid": "0003a111-b003-4a03-9003-000000000003",
+    "id": "0003a111-b003-4a03-9003-000000000003",
     "name": "Banana",
     "description": "Soft tropical fruit high in potassium and energy.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg",
-    "category": "fruit"
+    "category": "fruit",
+    "sku": "1000003",
+    "active": true
   },
   {
-    "uuid": "0004a111-b004-4a04-9004-000000000004",
+    "id": "0004a111-b004-4a04-9004-000000000004",
     "name": "Orange",
     "description": "Juicy citrus fruit packed with vitamin C.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Orange-Fruit-Pieces.jpg",
-    "category": "fruit"
+    "category": "fruit",
+    "sku": "1000004",
+    "active": false
   },
   {
-    "uuid": "0005a111-b005-4a05-9005-000000000005",
+    "id": "0005a111-b005-4a05-9005-000000000005",
     "name": "Strawberry",
     "description": "Small red fruit with a sweet aroma and flavor.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/29/PerfectStrawberry.jpg",
-    "category": "fruit"
+    "category": "fruit",
+    "sku": "1000005",
+    "active": false
   },
   {
-    "uuid": "0006a111-b006-4a06-9006-000000000006",
+    "id": "0006a111-b006-4a06-9006-000000000006",
     "name": "Blueberry",
     "description": "Antioxidant-rich berry, perfect for desserts and smoothies.",
     "imageUrl": "https://images.example.com/produce/blueberry.jpg",
-    "category": "fruit"
+    "category": "fruit",
+    "sku": "1000006",
+    "active": false
   },
   {
-    "uuid": "0007a111-b007-4a07-9007-000000000007",
+    "id": "0007a111-b007-4a07-9007-000000000007",
     "name": "Raspberry",
     "description": "Delicate berry with a balance of sweetness and acidity.",
     "imageUrl": "https://images.example.com/produce/raspberry.jpg",
-    "category": "fruit"
+    "category": "fruit",
+    "sku": "1000007",
+    "active": false
   },
   {
-    "uuid": "0008a111-b008-4a08-9008-000000000008",
+    "id": "0008a111-b008-4a08-9008-000000000008",
     "name": "Blackberry",
     "description": "Dark berry rich in vitamins and fiber.",
     "imageUrl": "https://images.example.com/produce/blackberry.jpg",
-    "category": "fruit"
+    "category": "fruit",
+    "sku": "1000008",
+    "active": false
   },
   {
-    "uuid": "0009a111-b009-4a09-9009-000000000009",
+    "id": "0009a111-b009-4a09-9009-000000000009",
     "name": "Grapes",
     "description": "Small juicy fruits enjoyed fresh or dried.",
     "imageUrl": "https://images.example.com/produce/grapes.jpg",
-    "category": "fruit"
+    "category": "fruit",
+    "sku": "1000009",
+    "active": false
   },
   {
-    "uuid": "0010a111-b010-4a10-9010-000000000010",
+    "id": "0010a111-b010-4a10-9010-000000000010",
     "name": "Watermelon",
     "description": "Large refreshing fruit with high water content.",
     "imageUrl": "https://images.example.com/produce/watermelon.jpg",
-    "category": "fruit"
+    "category": "fruit",
+    "sku": "1000010",
+    "active": false
   },
 
   {
-    "uuid": "0011b222-c011-4b11-9011-000000000011",
+    "id": "0011b222-c011-4b11-9011-000000000011",
     "name": "Pineapple",
     "description": "Tropical fruit with a sweet and tangy taste.",
     "imageUrl": "https://images.example.com/produce/pineapple.jpg",
-    "category": "fruit"
+    "category": "fruit",
+    "sku": "1000011",
+    "active": false
   },
   {
-    "uuid": "0012b222-c012-4b12-9012-000000000012",
+    "id": "0012b222-c012-4b12-9012-000000000012",
     "name": "Mango",
     "description": "Soft and sweet tropical fruit, rich in vitamins.",
     "imageUrl": "https://images.example.com/produce/mango.jpg",
-    "category": "fruit"
+    "category": "fruit",
+    "sku": "1000012",
+    "active": false
   },
   {
-    "uuid": "0013b222-c013-4b13-9013-000000000013",
+    "id": "0013b222-c013-4b13-9013-000000000013",
     "name": "Papaya",
     "description": "Tropical fruit with digestive properties.",
     "imageUrl": "https://images.example.com/produce/papaya.jpg",
-    "category": "fruit"
+    "category": "fruit",
+    "sku": "1000013",
+    "active": false
   },
   {
-    "uuid": "0014b222-c014-4b14-9014-000000000014",
+    "id": "0014b222-c014-4b14-9014-000000000014",
     "name": "Peach",
     "description": "Soft and juicy fruit with a fragrant aroma.",
     "imageUrl": "https://images.example.com/produce/peach.jpg",
-    "category": "fruit"
+    "category": "fruit",
+    "sku": "1000014",
+    "active": false
   },
   {
-    "uuid": "0015b222-c015-4b15-9015-000000000015",
+    "id": "0015b222-c015-4b15-9015-000000000015",
     "name": "Pear",
     "description": "Sweet fruit with a soft texture when ripe.",
     "imageUrl": "https://images.example.com/produce/pear.jpg",
-    "category": "fruit"
+    "category": "fruit",
+    "sku": "1000015",
+    "active": false
   },
   {
-    "uuid": "0016b222-c016-4b16-9016-000000000016",
+    "id": "0016b222-c016-4b16-9016-000000000016",
     "name": "Plum",
     "description": "Stone fruit with a juicy and slightly tart flavor.",
     "imageUrl": "https://images.example.com/produce/plum.jpg",
-    "category": "fruit"
+    "category": "fruit",
+    "sku": "1000016",
+    "active": false
   },
   {
-    "uuid": "0017b222-c017-4b17-9017-000000000017",
+    "id": "0017b222-c017-4b17-9017-000000000017",
     "name": "Cherry",
     "description": "Small stone fruit with a sweet taste.",
     "imageUrl": "https://images.example.com/produce/cherry.jpg",
-    "category": "fruit"
+    "category": "fruit",
+    "sku": "1000017",
+    "active": false
   },
   {
-    "uuid": "0018b222-c018-4b18-9018-000000000018",
+    "id": "0018b222-c018-4b18-9018-000000000018",
     "name": "Kiwi",
     "description": "Tangy fruit with green flesh and tiny seeds.",
     "imageUrl": "https://images.example.com/produce/kiwi.jpg",
-    "category": "fruit"
+    "category": "fruit",
+    "sku": "1000018",
+    "active": false
   },
   {
-    "uuid": "0019b222-c019-4b19-9019-000000000019",
+    "id": "0019b222-c019-4b19-9019-000000000019",
     "name": "Lemon",
     "description": "Sour citrus fruit widely used in cooking.",
     "imageUrl": "https://images.example.com/produce/lemon.jpg",
-    "category": "fruit"
+    "category": "fruit",
+    "sku": "1000019",
+    "active": false
   },
   {
-    "uuid": "0020b222-c020-4b20-9020-000000000020",
+    "id": "0020b222-c020-4b20-9020-000000000020",
     "name": "Lime",
     "description": "Acidic citrus fruit used for drinks and seasoning.",
     "imageUrl": "https://images.example.com/produce/lime.jpg",
-    "category": "fruit"
+    "category": "fruit",
+    "sku": "1000020",
+    "active": false
   },
 
   {
-    "uuid": "0021c333-d021-4c21-9021-000000000021",
+    "id": "0021c333-d021-4c21-9021-000000000021",
     "name": "Carrot",
     "description": "Crunchy root vegetable rich in beta-carotene.",
     "imageUrl": "https://images.example.com/produce/carrot.jpg",
-    "category": "vegetable"
+    "category": "vegetable",
+    "sku": "1000021",
+    "active": false
   },
   {
-    "uuid": "0022c333-d022-4c22-9022-000000000022",
+    "id": "0022c333-d022-4c22-9022-000000000022",
     "name": "Potato",
     "description": "Starchy vegetable used in many dishes worldwide.",
     "imageUrl": "https://images.example.com/produce/potato.jpg",
-    "category": "vegetable"
+    "category": "vegetable",
+    "sku": "1000022",
+    "active": false
   },
   {
-    "uuid": "0023c333-d023-4c23-9023-000000000023",
+    "id": "0023c333-d023-4c23-9023-000000000023",
     "name": "Sweet Potato",
     "description": "Root vegetable with a sweet flavor and soft texture.",
     "imageUrl": "https://images.example.com/produce/sweet-potato.jpg",
-    "category": "vegetable"
+    "category": "vegetable",
+    "sku": "1000023",
+    "active": false
   },
   {
-    "uuid": "0024c333-d024-4c24-9024-000000000024",
+    "id": "0024c333-d024-4c24-9024-000000000024",
     "name": "Onion",
     "description": "Vegetable with a strong flavor used as a base ingredient.",
     "imageUrl": "https://images.example.com/produce/onion.jpg",
-    "category": "vegetable"
+    "category": "vegetable",
+    "sku": "1000024",
+    "active": false
   },
   {
-    "uuid": "0025c333-d025-4c25-9025-000000000025",
+    "id": "0025c333-d025-4c25-9025-000000000025",
     "name": "Garlic",
     "description": "Aromatic vegetable used for seasoning dishes.",
     "imageUrl": "https://images.example.com/produce/garlic.jpg",
-    "category": "vegetable"
+    "category": "vegetable",
+    "sku": "1000025",
+    "active": false
   },
   {
-    "uuid": "0026c333-d026-4c26-9026-000000000026",
+    "id": "0026c333-d026-4c26-9026-000000000026",
     "name": "Tomato",
     "description": "Juicy vegetable commonly used in sauces and salads.",
     "imageUrl": "https://images.example.com/produce/tomato.jpg",
-    "category": "vegetable"
+    "category": "vegetable",
+    "sku": "1000026",
+    "active": false
   },
   {
-    "uuid": "0027c333-d027-4c27-9027-000000000027",
+    "id": "0027c333-d027-4c27-9027-000000000027",
     "name": "Cucumber",
     "description": "Refreshing vegetable with high water content.",
     "imageUrl": "https://images.example.com/produce/cucumber.jpg",
-    "category": "vegetable"
+    "category": "vegetable",
+    "sku": "1000027",
+    "active": false
   },
   {
-    "uuid": "0028c333-d028-4c28-9028-000000000028",
+    "id": "0028c333-d028-4c28-9028-000000000028",
     "name": "Zucchini",
     "description": "Soft green vegetable commonly used cooked or raw.",
     "imageUrl": "https://images.example.com/produce/zucchini.jpg",
-    "category": "vegetable"
+    "category": "vegetable",
+    "sku": "1000028",
+    "active": false
   },
   {
-    "uuid": "0029c333-d029-4c29-9029-000000000029",
+    "id": "0029c333-d029-4c29-9029-000000000029",
     "name": "Eggplant",
     "description": "Purple vegetable with a mild flavor when cooked.",
     "imageUrl": "https://images.example.com/produce/eggplant.jpg",
-    "category": "vegetable"
+    "category": "vegetable",
+    "sku": "1000029",
+    "active": false
   },
   {
-    "uuid": "0030c333-d030-4c30-9030-000000000030",
+    "id": "0030c333-d030-4c30-9030-000000000030",
     "name": "Bell Pepper",
     "description": "Colorful vegetable sweet and crunchy.",
     "imageUrl": "https://images.example.com/produce/bell-pepper.jpg",
-    "category": "vegetable"
+    "category": "vegetable",
+    "sku": "1000030",
+    "active": false
   },
 
   {
-    "uuid": "0031d444-e031-4d31-9031-000000000031",
+    "id": "0031d444-e031-4d31-9031-000000000031",
     "name": "Broccoli",
     "description": "Green vegetable rich in vitamins and minerals.",
     "imageUrl": "https://images.example.com/produce/broccoli.jpg",
-    "category": "vegetable"
+    "category": "vegetable",
+    "sku": "1000031",
+    "active": false
   },
   {
-    "uuid": "0032d444-e032-4d32-9032-000000000032",
+    "id": "0032d444-e032-4d32-9032-000000000032",
     "name": "Cauliflower",
     "description": "White vegetable often used as a low-carb substitute.",
     "imageUrl": "https://images.example.com/produce/cauliflower.jpg",
-    "category": "vegetable"
+    "category": "vegetable",
+    "sku": "1000032",
+    "active": false
   },
   {
-    "uuid": "0033d444-e033-4d33-9033-000000000033",
+    "id": "0033d444-e033-4d33-9033-000000000033",
     "name": "Spinach",
     "description": "Leafy green vegetable rich in iron.",
     "imageUrl": "https://images.example.com/produce/spinach.jpg",
-    "category": "vegetable"
+    "category": "vegetable",
+    "sku": "1000033",
+    "active": false
   },
   {
-    "uuid": "0034d444-e034-4d34-9034-000000000034",
+    "id": "0034d444-e034-4d34-9034-000000000034",
     "name": "Lettuce",
     "description": "Fresh leafy vegetable commonly used in salads.",
     "imageUrl": "https://images.example.com/produce/lettuce.jpg",
-    "category": "vegetable"
+    "category": "vegetable",
+    "sku": "1000034",
+    "active": false
   },
   {
-    "uuid": "0035d444-e035-4d35-9035-000000000035",
+    "id": "0035d444-e035-4d35-9035-000000000035",
     "name": "Cabbage",
     "description": "Dense leafy vegetable used raw or cooked.",
     "imageUrl": "https://images.example.com/produce/cabbage.jpg",
-    "category": "vegetable"
+    "category": "vegetable",
+    "sku": "1000035",
+    "active": false
   },
   {
-    "uuid": "0036d444-e036-4d36-9036-000000000036",
+    "id": "0036d444-e036-4d36-9036-000000000036",
     "name": "Celery",
     "description": "Crunchy vegetable often used in soups and salads.",
     "imageUrl": "https://images.example.com/produce/celery.jpg",
-    "category": "vegetable"
+    "category": "vegetable",
+    "sku": "1000036",
+    "active": false
   },
   {
-    "uuid": "0037d444-e037-4d37-9037-000000000037",
+    "id": "0037d444-e037-4d37-9037-000000000037",
     "name": "Asparagus",
     "description": "Tender green vegetable with a delicate flavor.",
     "imageUrl": "https://images.example.com/produce/asparagus.jpg",
-    "category": "vegetable"
+    "category": "vegetable",
+    "sku": "1000037",
+    "active": false
   },
   {
-    "uuid": "0038d444-e038-4d38-9038-000000000038",
+    "id": "0038d444-e038-4d38-9038-000000000038",
     "name": "Green Beans",
     "description": "Slender green vegetable often steamed or sautéed.",
     "imageUrl": "https://images.example.com/produce/green-beans.jpg",
-    "category": "vegetable"
+    "category": "vegetable",
+    "sku": "1000038",
+    "active": false
   },
   {
-    "uuid": "0039d444-e039-4d39-9039-000000000039",
+    "id": "0039d444-e039-4d39-9039-000000000039",
     "name": "Peas",
     "description": "Small green vegetables with a sweet taste.",
     "imageUrl": "https://images.example.com/produce/peas.jpg",
-    "category": "vegetable"
+    "category": "vegetable",
+    "sku": "1000039",
+    "active": false
   },
   {
-    "uuid": "0040d444-e040-4d40-9040-000000000040",
+    "id": "0040d444-e040-4d40-9040-000000000040",
     "name": "Corn",
     "description": "Yellow vegetable with a naturally sweet flavor.",
     "imageUrl": "https://images.example.com/produce/corn.jpg",
-    "category": "vegetable"
+    "category": "vegetable",
+    "sku": "1000040",
+    "active": false
   }
 ]

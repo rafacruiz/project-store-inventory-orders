@@ -1,116 +1,124 @@
-import React from "react";
-import { Bar, Doughnut, Line } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  ArcElement,
-  LineElement,
-  PointElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-
-// Registramos los elementos de Chart.js
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  ArcElement,
-  LineElement,
-  PointElement,
-  Title,
-  Tooltip,
-  Legend
-);
+import React, { useEffect, useRef } from "react";
 
 const Dashboard = () => {
-  // Datos de relleno para productos
-  const productsData = {
-    labels: ["Electronics", "Clothing", "Books", "Toys", "Home"],
-    datasets: [
-      {
-        label: "Stock per Category",
-        data: [120, 80, 45, 60, 30],
-        backgroundColor: "rgba(0, 123, 255, 0.6)",
-        borderColor: "rgba(0, 123, 255, 1)",
-        borderWidth: 1,
-      },
-    ],
-  };
+  const productsCanvas = useRef(null);
+  const ordersCanvas = useRef(null);
+  const stockCanvas = useRef(null);
 
-  // Datos de relleno para pedidos por tienda
-  const ordersData = {
-    labels: ["Store A", "Store B", "Store C", "Store D"],
-    datasets: [
-      {
-        label: "Orders",
-        data: [15, 30, 22, 18],
-        backgroundColor: [
-          "rgba(40, 167, 69, 0.6)",
-          "rgba(255, 193, 7, 0.6)",
-          "rgba(220, 53, 69, 0.6)",
-          "rgba(23, 162, 184, 0.6)",
-        ],
-        borderColor: [
-          "rgba(40, 167, 69, 1)",
-          "rgba(255, 193, 7, 1)",
-          "rgba(220, 53, 69, 1)",
-          "rgba(23, 162, 184, 1)",
-        ],
-        borderWidth: 1,
-      },
-    ],
-  };
+  const productsChart = useRef(null);
+  const ordersChart = useRef(null);
+  const stockChart = useRef(null);
 
-  // Datos de relleno para stock vs pedidos pendientes
-  const stockVsOrdersData = {
-    labels: ["Total Stock", "Pending Orders"],
-    datasets: [
-      {
-        label: "Stock vs Orders",
-        data: [335, 120],
-        backgroundColor: ["rgba(0, 123, 255, 0.6)", "rgba(220, 53, 69, 0.6)"],
-        borderColor: ["rgba(0, 123, 255,1)", "rgba(220, 53, 69,1)"],
-        borderWidth: 1,
+  useEffect(() => {
+    // 🔥 Destroy previous charts if they exist
+    if (productsChart.current) productsChart.current.destroy();
+    if (ordersChart.current) ordersChart.current.destroy();
+    if (stockChart.current) stockChart.current.destroy();
+
+    // Products in Stock (Bar)
+    productsChart.current = new window.Chart(productsCanvas.current, {
+      type: "bar",
+      data: {
+        labels: ["Electronics", "Clothing", "Books", "Toys", "Home"],
+        datasets: [
+          {
+            label: "Stock per Category",
+            data: [120, 80, 45, 60, 30],
+            backgroundColor: "rgba(0, 123, 255, 0.6)",
+            borderColor: "rgba(0, 123, 255, 1)",
+            borderWidth: 1,
+          },
+        ],
       },
-    ],
-  };
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+      },
+    });
+
+    // Orders per Store (Doughnut)
+    ordersChart.current = new window.Chart(ordersCanvas.current, {
+      type: "doughnut",
+      data: {
+        labels: ["Store A", "Store B", "Store C", "Store D"],
+        datasets: [
+          {
+            data: [15, 30, 22, 18],
+            backgroundColor: [
+              "rgba(40, 167, 69, 0.6)",
+              "rgba(255, 193, 7, 0.6)",
+              "rgba(220, 53, 69, 0.6)",
+              "rgba(23, 162, 184, 0.6)",
+            ],
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+      },
+    });
+
+    // Stock vs Pending Orders (Line)
+    stockChart.current = new window.Chart(stockCanvas.current, {
+      type: "line",
+      data: {
+        labels: ["Total Stock", "Pending Orders"],
+        datasets: [
+          {
+            label: "Stock vs Orders",
+            data: [335, 120],
+            borderColor: "rgba(0, 123, 255, 1)",
+            backgroundColor: "rgba(0, 123, 255, 0.3)",
+            tension: 0.4,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+      },
+    });
+
+    // 🧹 Cleanup when component unmounts
+    return () => {
+      if (productsChart.current) productsChart.current.destroy();
+      if (ordersChart.current) ordersChart.current.destroy();
+      if (stockChart.current) stockChart.current.destroy();
+    };
+  }, []);
 
   return (
     <div className="container my-4">
-      <h6 className="mb-4">Warehouse & Orders </h6>
+      <h6 className="mb-4">Warehouse & Orders</h6>
 
       <div className="row g-4">
         <div className="col-md-6">
-            <div className="card h-100">
-                <div className="card-header">Products in Stock</div>
-                <div className="card-body d-flex align-items-center justify-content-center">
-                <div style={{ width: "100%", height: "300px" }}>
-                    <Bar data={productsData} options={{ maintainAspectRatio: false }} />
-                </div>
-                </div>
+          <div className="card h-100">
+            <div className="card-header">Products in Stock</div>
+            <div className="card-body">
+              <div style={{ height: "300px" }}>
+                <canvas ref={productsCanvas} />
+              </div>
             </div>
-            </div>
+          </div>
+        </div>
 
-            <div className="col-md-6">
-            <div className="card h-100">
-                <div className="card-header">Orders per Store</div>
-                <div className="card-body d-flex align-items-center justify-content-center">
-                <div style={{ width: "100%", height: "300px" }}>
-                    <Doughnut data={ordersData} options={{ maintainAspectRatio: false }} />
-                </div>
-                </div>
+        <div className="col-md-6">
+          <div className="card h-100">
+            <div className="card-header">Orders per Store</div>
+            <div className="card-body">
+              <div style={{ height: "300px" }}>
+                <canvas ref={ordersCanvas} />
+              </div>
             </div>
+          </div>
         </div>
 
         <div className="col-md-12">
           <div className="card">
             <div className="card-header">Stock vs Pending Orders</div>
             <div className="card-body">
-              <Line data={stockVsOrdersData} />
+              <canvas ref={stockCanvas} />
             </div>
           </div>
         </div>

@@ -1,41 +1,60 @@
+import { BounceLoader } from "react-spinners";
 import { useEffect, useState } from "react";
-import * as ShopManagerServices from '../../../../services/shopManager-services';
+import ProductList from "../../products/Product-list/product-list";
+import WarehouseItem from "../warehouse-item/warehouse-item";
+import * as ShopManager from '../../../../services/shopManager-service';
 
-function WarehouseList () {
+function WarehouseList ({ warehouseId = '550e8400-e29b-41d4-a716-446655440001' }) {
 
-    const [products, setProducts] = useState([]);
+    const [warehouses, setWarehouses] = useState([]);
+    const [reload, setReload] = useState(true);
 
     useEffect(() => {
-        const fetchProducts = async () => {
-            const products = await ShopManagerServices.getWarehouseProducts();
-            setProducts(products) 
+        const handleWarehouse = async (warehouseId) => {
+            const warehouse = await ShopManager.getWarehouse(warehouseId);
+            setWarehouses(warehouse);
         };
 
-        fetchProducts();
-    }, []);
+        handleWarehouse(warehouseId);
+    }, [reload]);
 
-    if (!products) {
-        return (<div className="d-flex justify-content-center py-4">Cargando...</div>);
+    const handleAddItemWarehouse = async (productId) => {
+        try {
+            await ShopManager.setProductWarehouses(warehouseId, {id: productId});
+            setReload(prev => !prev);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    
+    if (!warehouses || warehouses.length === 0) {
+        return (
+            <div className="d-flex justify-content-center align-items-center py-4">
+                <BounceLoader color="#030404" size={ 35 }  />
+            </div>);
     } else {
         return (
-            <>{
-                products.map((product) => (
-                    <div className="card mb-3" style={{maxWidth:`540px`}} key={product.id}>
-                        <div className="row g-0">
-                            <div className="col-md-4">
-                            <img src={product.image} className="img-fluid rounded-start" alt={product.image} />
-                            </div>
-                            <div className="col-md-8">
-                            <div className="card-body">
-                                <h5 className="card-title">{product.name}</h5>
-                                <p className="card-text">This is a wider card with supporting text.</p>
-                                <p className="card-text"><small className="text-body-secondary">{product.id}</small></p>
-                            </div>
-                            </div>
+            <>
+                <small className="fw-semibold text-secondary"> Products in {warehouses.name} Warehouse </small>
+
+                <ol className="list-group pt-3">
+                    { warehouses.length !== 0 
+                        ? warehouses.products.map((product) => ( 
+                            <WarehouseItem warehouseId={ warehouseId } product={ product } key={ product.id }/> 
+                        )) 
+                        : <div className="alert alert-primary d-flex justify-content-center align-items-center gap-2">
+                            <i className="fa fa-info-circle"></i>
+                            <span> No products found in warehouse "{ warehouses.name }" </span>
                         </div>
-                    </div>
-                ))
-            }</>);
+                    }
+                </ol>
+
+                <hr className="border border-secondary" />
+
+                <small className="fw-semibold text-secondary"> Add Products to Inventory </small>
+                
+                <ProductList warehouse={ true } addItemWarehouse={ handleAddItemWarehouse }/>
+            </>);
     }
 }
 

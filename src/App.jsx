@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router';
 import { Footer, Navbar } from './components/ui';
 import { PrivateRoute, RoleRoute } from './guards';
-import { HomePage, ProductsDetailsPage, ProductsPage, ProductsAddPage, NotFoundPage, LoginPage } from './pages';
+import { HomePage, ProductsDetailsPage, ProductsPage, ProductsAddPage, NotFoundPage, LoginPage, WarehousePage } from './pages';
 
 function App() {
   
@@ -19,6 +19,16 @@ function App() {
               <PrivateRoute> 
                 <HomePage /> 
               </PrivateRoute> } />
+          
+          <Route
+            path='/warehouse'
+            element={
+              <PrivateRoute>
+                <RoleRoute>
+                  <WarehousePage />
+                </RoleRoute>
+              </PrivateRoute>
+            } />
 
           <Route 
             path='/products' 

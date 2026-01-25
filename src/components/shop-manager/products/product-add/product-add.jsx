@@ -4,21 +4,20 @@ import Select from "react-select";
 import { ButtonBack } from '../../../ui';
 import * as ShopManager from '../../../../services/shopManager-service';
 
+const category = [
+    { value: 'Fruit', label: 'Fruit'},
+    { value: 'Vegetable', label: 'Vegetable'}
+]
+
+const validations = {
+    nameProduct: { required: 'Name is required' },
+    categoryProduct: { required: 'Category is required' },
+    descriptionProduct: { required: 'Description is required'},
+};
 
 function ProductAdd () {
 
     const navigate = useNavigate();
-
-    const validations = {
-        NameProduct: { required: 'Name is required' },
-        CategoryProduct: { required: 'Category is required' },
-        DescriptionProduct: { required: 'Description is required'},
-    };
-
-    const category = [
-        { value: 'Fruit', label: 'Fruit'},
-        { value: 'Vegetable', label: 'Vegetable'}
-    ]
 
     const { register, 
             handleSubmit,
@@ -36,7 +35,7 @@ function ProductAdd () {
             ...base,
             minHeight: '55px',
             borderRadius: '.375rem',
-            borderColor: errors.CategoryProduct
+            borderColor: errors.categoryProduct
             ? '#dc3545'
             : state.isFocused 
             ? '#86b7fe' 
@@ -49,9 +48,9 @@ function ProductAdd () {
 
     const onSubmit = async (data) => {
         try {
-            await ShopManager.setCreateProduct(data);
+            await ShopManager.setProductCreate(data);
             reset();
-            navigate('/products'); // MODIFICAR POR UN MENSAJESE DE EXITO
+            navigate('/products');
         } catch (error) {
             if ( error.status === 400) {
                 console.error(error?.message || 'Bad Request');
@@ -66,17 +65,17 @@ function ProductAdd () {
                 <div className="form-floating">
                     <input 
                         type="text" 
-                        className={`form-control ${errors.NameProduct ? 'is-invalid' : ''}`}
-                        id="NameProduct" 
+                        className={`form-control ${errors.nameProduct ? 'is-invalid' : ''}`}
+                        id="nameProduct" 
                         placeholder="Name" 
-                        {...register('NameProduct', validations.NameProduct)} />
-                    {errors.NameProduct && (<div className="invalid-feedback">{errors.NameProduct.message}</div>)}
+                        {...register('nameProduct', validations.nameProduct)} />
+                    {errors.nameProduct && (<div className="invalid-feedback">{errors.nameProduct.message}</div>)}
                     <label>Name Product</label>
                 </div>
 
                 <div className="form-floating">
                     <Controller 
-                        name="CategoryProduct"
+                        name="categoryProduct"
                         control={ control }
                         defaultValue=""
                         rules={{ required: 'Category is required' }}
@@ -91,17 +90,17 @@ function ProductAdd () {
                             />
                         )}
                     />
-                    {errors.CategoryProduct && (<div className="invalid-feedback d-block">{errors.CategoryProduct.message}</div>)}
+                    {errors.categoryProduct && (<div className="invalid-feedback d-block">{errors.categoryProduct.message}</div>)}
                 </div>
                 
                 <div className="form-floating">
                     <textarea 
-                        className={`form-control ${errors.DescriptionProduct ? 'is-invalid' : ''}`}
+                        className={`form-control ${errors.descriptionProduct ? 'is-invalid' : ''}`}
                         placeholder="Leave a description here" 
-                        id="DescriptionProduct"
-                        {...register('DescriptionProduct', validations.DescriptionProduct)} >
+                        id="descriptionProduct"
+                        {...register('descriptionProduct', validations.descriptionProduct)} >
                     </textarea>
-                    {errors.DescriptionProduct && (<div className="invalid-feedback">{errors.DescriptionProduct.message}</div>)}
+                    {errors.descriptionProduct && (<div className="invalid-feedback">{errors.descriptionProduct.message}</div>)}
                     <label>Description Product</label>
                 </div>
 

@@ -17,7 +17,7 @@ function ProductDetails ({ product }) {
                             <div className="card-body">
                                 <h5 className="card-title">{ product.name }</h5>
                                 <p className="card-text">{ product.description }</p>
-                                <p className="card-text"><small className="text-body-secondary">{ product.uuid }</small></p>
+                                <p className="card-text"><small className="text-body-secondary">{ product.id }</small></p>
                             </div>
                         </div>
                     </div>

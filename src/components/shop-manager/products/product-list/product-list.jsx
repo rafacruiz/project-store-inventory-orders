@@ -5,7 +5,19 @@ import { useAuth } from '../../../../contexts';
 import ProductItem from "../product-item/product-item";
 import * as ShopManager from '../../../../services/shopManager-service';
 
-function ProductList () {
+function ProductList ({ warehouse = false, addItemWarehouse = () => {}}) {
+    
+    const btnAddOption = {
+        'mode': 'success',
+        'placement': 'left',
+        'title': 'Add product',
+        'to': '/products/add',
+    }
+
+    const inpFinderOption = {
+        'id': 'product',
+        'placeholder': 'Finder products...'
+    }
 
     const [products, setProducts] = useState([]);
     const [search, setSearch] = useState('');
@@ -28,26 +40,16 @@ function ProductList () {
 
     const handleFinderItem = (title) => setSearch(title);
 
-    const handleDeleteItem = async (uuid) => {
+    const handleDeleteItem = async (id) => {
         try {
-            await ShopManager.setProductDelete(uuid);
+            await ShopManager.setProductDelete(id);
             setReload(prev => !prev);
         } catch (error) {
             console.error('Error deleting product:', error);
         }
     };
 
-    const btnAddOption = {
-        'mode': 'success',
-        'placement': 'left',
-        'title': 'Add product',
-        'to': '/products/add',
-    }
-
-    const inpFinderOption = {
-        'id': 'product',
-        'placeholder': 'Finder products...'
-    }
+    const handleAddItemWarehouse = (id) => { addItemWarehouse(id)}
 
     if (!products || products.length === 0) {
         return (
@@ -59,10 +61,9 @@ function ProductList () {
         return (
             <>
                 <div className="d-flex py-3">
-                    { user.role === 'admin' &&  
-                        (<div className="me-2">
-                            <ButtonAdd buttonOption={ btnAddOption } /> 
-                        </div>) }
+                    {(user.role === 'admin' && !warehouse) && (
+                        <div className="me-2"><ButtonAdd buttonOption={ btnAddOption } /> </div>
+                    )}
                     <div className="mx-auto w-100">
                         <InputFinder onChange={ handleFinderItem } inputOption={ inpFinderOption } />
                     </div>                
@@ -72,13 +73,13 @@ function ProductList () {
                     {products && (products
                     ?.filter((product) => 
                         product.name.toLowerCase().includes(search.toLowerCase()))
-                    .sort((a, b) => 
-                        a.name.localeCompare(b.name))
                     .map((product) => 
                         <ProductItem 
-                            key={ product.uuid } 
+                            key={ product.id } 
                             product={ product } 
-                            onDelete={ handleDeleteItem }/> 
+                            showWarehouse={ warehouse }
+                            onDelete={ handleDeleteItem } 
+                            handleAddItemWarehouse={ handleAddItemWarehouse } /> 
                         ))}
                 </ol>
             </>

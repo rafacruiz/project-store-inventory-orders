@@ -20,10 +20,36 @@ http.interceptors.response.use(
     }
 );
 
-export const getProducts = () => http.get('/products');
+export const getProducts = async () => {
+    const products = await http.get('/products');
 
-export const getProductId = (id) => http.get(`/products/${id}`);
+    return products.toSorted((a, b) => 
+        a.name.localeCompare(b.name));
+};
 
-export const setProductDelete = (id) => http.delete(`/products/${id}`);
+export const getProductId = (id) => 
+    http.get(`/products/${id}`);
 
-export const setCreateProduct = (data) => http.post('/products', data);
+export const setProductDelete = (id) => 
+    http.delete(`/products/${id}`);
+
+export const setProductCreate = (data) => 
+    http.post('/products', data);
+
+export const getWarehouses = () => 
+    http.get('/warehouses');
+
+export const getWarehouse = (warehouseId) => 
+    http.get(`/warehouses/${warehouseId}`);
+
+export const getProductsWarehouses = (warehouseId) => 
+    http.get(`/warehouses/${warehouseId}/products`);
+
+export const setProductWarehouses = (warehouseId, body) => 
+    http.post(`/warehouses/${warehouseId}/product`, body);
+
+export const setProductUpdateWarehouse = (warehouseId, productId, body) => 
+    http.patch(`/warehouses/${warehouseId}/product/${productId}`, body);
+
+export const setProductDeleteWarehouse = (warehouseId, productId) => 
+    http.delete(`/warehouses/${warehouseId}/product/${productId}`);
