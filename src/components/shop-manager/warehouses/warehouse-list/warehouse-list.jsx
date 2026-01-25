@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import ProductList from "../../products/Product-list/product-list";
 import WarehouseItem from "../warehouse-item/warehouse-item";
 import * as ShopManager from '../../../../services/shopManager-service';
+import toast, { Toaster } from "react-hot-toast";
 
 function WarehouseList ({ warehouseId = '550e8400-e29b-41d4-a716-446655440001' }) {
 
@@ -21,9 +22,11 @@ function WarehouseList ({ warehouseId = '550e8400-e29b-41d4-a716-446655440001' }
     const handleAddItemWarehouse = async (productId) => {
         try {
             await ShopManager.setProductWarehouses(warehouseId, {id: productId});
-            console.info('Product added to the warehouse')
+            console.info('Product added to the warehouse');
+            toast.success('Product added to the warehouse!');
             setReload(prev => !prev);
         } catch (error) {
+            toast.error(error.message);
             console.error(error.message);
         }
     };
@@ -32,8 +35,10 @@ function WarehouseList ({ warehouseId = '550e8400-e29b-41d4-a716-446655440001' }
         try {
             await ShopManager.setProductUpdateWarehouses(warehouseId, productId, { stock: value });
             console.log('Product stock updated');
+            toast.success('Product stock updated!');
             setReload(prev => !prev);
         } catch (error) {
+            toast.error(error.message);
             console.error(error.message);
         }
     };
@@ -42,8 +47,10 @@ function WarehouseList ({ warehouseId = '550e8400-e29b-41d4-a716-446655440001' }
         try {
             await ShopManager.setProductUpdateWarehouses(warehouseId, productId, { active: newActive });
             console.info('Product active status updated');
+            toast.success('Product active status updated!');
             setReload(prev => !prev);
         } catch (error) {
+            toast.error(error.message);
             console.error(error.message);
         }
     };
@@ -52,8 +59,10 @@ function WarehouseList ({ warehouseId = '550e8400-e29b-41d4-a716-446655440001' }
         try {
             await ShopManager.setProductDeleteWarehouses(warehouseId, productId);
             console.info('Product removed successfully');
+            toast.success('Product removed successfully!');
             setReload(prev => !prev);
         } catch (error) {
+            toast.error(error.message);
             console.error(error.message);
         }
     };
@@ -66,10 +75,13 @@ function WarehouseList ({ warehouseId = '550e8400-e29b-41d4-a716-446655440001' }
     } else {
         return (
             <>
+                <Toaster position="top-center" reverseOrder={false} />
                 <small className="fw-semibold text-secondary"> Products in {warehouses.name} Warehouse </small>
                 <ol className="list-group pt-3">
                     { (warehouses.products.length !== 0) 
-                        ? warehouses.products.map((product) => ( 
+                        ? warehouses.products
+                            .toSorted((a, b) => a.name.localeCompare(b.name))
+                            .map((product) => ( 
                             <WarehouseItem 
                                 key={ product.id }
                                 product={ product }
