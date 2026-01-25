@@ -48,8 +48,8 @@ export const getProductsWarehouses = (warehouseId) =>
 export const setProductWarehouses = (warehouseId, body) => 
     http.post(`/warehouses/${warehouseId}/product`, body);
 
-export const setProductUpdateWarehouse = (warehouseId, productId, body) => 
+export const setProductUpdateWarehouses = (warehouseId, productId, body) => 
     http.patch(`/warehouses/${warehouseId}/product/${productId}`, body);
 
-export const setProductDeleteWarehouse = (warehouseId, productId) => 
+export const setProductDeleteWarehouses = (warehouseId, productId) => 
     http.delete(`/warehouses/${warehouseId}/product/${productId}`);

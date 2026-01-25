@@ -2,7 +2,7 @@
 import { setupWorker } from 'msw/browser';
 import { handleLoginUser } from './auth';
 import { handleListProducts, handleDetailsProduct, handleDeleteProduct, handleCreateProduct } from './products';
-import { handleWarehouses, handleWarehouse, handleProductsWarehouse, handleAddProductWarehouse, handleUpdateProductWarehouse } from './warehouse';
+import { handleWarehouses, handleWarehouse, handleProductsWarehouse, handleAddProductWarehouse, handleUpdateProductWarehouse, handleDeleteProductWarehouse } from './warehouse';
 
 const worker = setupWorker(
     handleListProducts, 
@@ -14,6 +14,7 @@ const worker = setupWorker(
     handleWarehouse, 
     handleProductsWarehouse,
     handleAddProductWarehouse,
-    handleUpdateProductWarehouse);
+    handleUpdateProductWarehouse,
+    handleDeleteProductWarehouse);
 
 export default worker;

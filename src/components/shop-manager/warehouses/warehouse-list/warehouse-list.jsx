@@ -21,9 +21,40 @@ function WarehouseList ({ warehouseId = '550e8400-e29b-41d4-a716-446655440001' }
     const handleAddItemWarehouse = async (productId) => {
         try {
             await ShopManager.setProductWarehouses(warehouseId, {id: productId});
+            console.info('Product added to the warehouse')
             setReload(prev => !prev);
         } catch (error) {
-            console.error(error);
+            console.error(error.message);
+        }
+    };
+
+    const handleUpdateStockWarehouse = async (productId, value) => {
+        try {
+            await ShopManager.setProductUpdateWarehouses(warehouseId, productId, { stock: value });
+            console.log('Product stock updated');
+            setReload(prev => !prev);
+        } catch (error) {
+            console.error(error.message);
+        }
+    };
+
+    const handleToggleActiveWarehouse = async (productId, newActive) => {
+        try {
+            await ShopManager.setProductUpdateWarehouses(warehouseId, productId, { active: newActive });
+            console.info('Product active status updated');
+            setReload(prev => !prev);
+        } catch (error) {
+            console.error(error.message);
+        }
+    };
+
+    const handleDeleteWarehouse = async (productId) => {
+        try {
+            await ShopManager.setProductDeleteWarehouses(warehouseId, productId);
+            console.info('Product removed successfully');
+            setReload(prev => !prev);
+        } catch (error) {
+            console.error(error.message);
         }
     };
     
@@ -36,11 +67,15 @@ function WarehouseList ({ warehouseId = '550e8400-e29b-41d4-a716-446655440001' }
         return (
             <>
                 <small className="fw-semibold text-secondary"> Products in {warehouses.name} Warehouse </small>
-
                 <ol className="list-group pt-3">
-                    { warehouses.length !== 0 
+                    { (warehouses.products.length !== 0) 
                         ? warehouses.products.map((product) => ( 
-                            <WarehouseItem warehouseId={ warehouseId } product={ product } key={ product.id }/> 
+                            <WarehouseItem 
+                                key={ product.id }
+                                product={ product }
+                                onUpdateStock= { handleUpdateStockWarehouse } 
+                                onToggleActiveWare={ handleToggleActiveWarehouse } 
+                                onDeleteWare={ handleDeleteWarehouse }/>
                         )) 
                         : <div className="alert alert-primary d-flex justify-content-center align-items-center gap-2">
                             <i className="fa fa-info-circle"></i>
@@ -52,7 +87,6 @@ function WarehouseList ({ warehouseId = '550e8400-e29b-41d4-a716-446655440001' }
                 <hr className="border border-secondary" />
 
                 <small className="fw-semibold text-secondary"> Add Products to Inventory </small>
-                
                 <ProductList warehouse={ true } addItemWarehouse={ handleAddItemWarehouse }/>
             </>);
     }

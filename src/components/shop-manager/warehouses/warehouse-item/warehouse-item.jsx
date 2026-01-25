@@ -1,17 +1,11 @@
 
-import * as ShopManager from '../../../../services/shopManager-service';
+function WarehouseItem({ product, onUpdateStock, onToggleActiveWare, onDeleteWare }) {
 
-function WarehouseItem({ warehouseId, product }) {
+  const handleStockProduct = (productId, value) => onUpdateStock(productId, value);
 
-    const handleToggleProduct = async (warehouseId, productId) => { 
-        try {
-            await ShopManager.setProductUpdateWarehouse(warehouseId, productId, { active: true });
-        } catch (error) {
-            console.error(error);
-        }
-    };
+  const handleToggleProduct = (productId, newActive) => onToggleActiveWare(productId, newActive);
 
-    const handleDeleteItem = (productId) => { console.log(productId) };
+  const handleDeleteItem = (productId) => onDeleteWare(productId);
 
   return (
     <li className="list-group-item">
@@ -27,21 +21,21 @@ function WarehouseItem({ warehouseId, product }) {
             type="number"
             className="form-control form-control-sm"
             value={product.stock}
-            onChange={(e) => handleStock(e.target.value, product)}
+            onChange={(e) => handleStockProduct(product.id, e.target.value)}
           />
         </div>
 
         <div className="col-6 col-md-2">
           <button
             className={`btn btn-sm w-100 ${ product.active ? 'btn-success' : 'btn-danger' }`}
-            onClick={() => handleToggleProduct(warehouseId, product.id)} >
+            onClick={() => handleToggleProduct(product.id, !product.active)} >
             {product.active ? 'Active' : 'Inactive'}
           </button>
         </div>
 
         <div className="col-12 col-md-2 text-end">
           <button className="btn btn-outline-danger btn-sm w-100"
-            onClick={() => handleDeleteItem(warehouseId, product.id)} >
+            onClick={() => handleDeleteItem(product.id)} >
             Delete
           </button>
         </div>
