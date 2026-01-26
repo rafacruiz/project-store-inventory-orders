@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router';
 import { Footer, Navbar } from './components/ui';
 import { PrivateRoute, RoleRoute } from './guards';
 import { HomePage, ProductsDetailsPage, ProductsPage, ProductsAddPage, NotFoundPage, LoginPage, WarehousePage } from './pages';
+import { WarehouseList, WarehouseSelect } from './components/shop-manager/warehouses';
 
 function App() {
   
@@ -11,6 +12,7 @@ function App() {
 
       <div className="d-flex flex-column min-vh-100">
         <Routes>
+          
           <Route path='/' element={ <LoginPage /> } />
 
           <Route 
@@ -19,7 +21,7 @@ function App() {
               <PrivateRoute> 
                 <HomePage /> 
               </PrivateRoute> } />
-          
+
           <Route
             path='/warehouse'
             element={
@@ -28,8 +30,11 @@ function App() {
                   <WarehousePage />
                 </RoleRoute>
               </PrivateRoute>
-            } />
-
+            }>
+            <Route index element={ <WarehouseSelect />} />
+            <Route path='/warehouse/:warehouseId' element={ <WarehouseList />} />
+          </Route> 
+          
           <Route 
             path='/products' 
             element={ 

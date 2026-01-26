@@ -1,12 +1,14 @@
 import { BounceLoader } from "react-spinners";
 import { useEffect, useState } from "react";
-import ProductList from "../../products/Product-list/product-list";
-import WarehouseItem from "../warehouse-item/warehouse-item";
+import { ProductList } from '../../products';
+import { WarehouseItem } from '../../warehouses';
 import * as ShopManager from '../../../../services/shopManager-service';
 import toast, { Toaster } from "react-hot-toast";
+import { useParams } from "react-router-dom";
 
-function WarehouseList ({ warehouseId = '550e8400-e29b-41d4-a716-446655440001' }) {
+function WarehouseList () {
 
+    const { warehouseId } = useParams();
     const [warehouses, setWarehouses] = useState([]);
     const [reload, setReload] = useState(true);
 
