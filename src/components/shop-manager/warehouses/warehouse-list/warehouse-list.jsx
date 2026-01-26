@@ -33,6 +33,30 @@ function WarehouseList () {
         }
     };
 
+    const handleUpdatePriceWarehouse = async (productId, value) => {
+        try {
+            await ShopManager.setProductUpdateWarehouses(warehouseId, productId, { price: value });
+            console.log('Product price stock updated');
+            toast.success('Product price stock updated!');
+            setReload(prev => !prev);
+        } catch (error) {
+            toast.error(error.message);
+            console.error(error.message);
+        }
+    }
+
+    const handleUpdateMinStockWarehouse = async (productId, value) => {
+        try {
+            await ShopManager.setProductUpdateWarehouses(warehouseId, productId, { minStock: value });
+            console.log('Product min. stock updated');
+            toast.success('Product min. stock updated!');
+            setReload(prev => !prev);
+        } catch (error) {
+            toast.error(error.message);
+            console.error(error.message);
+        }
+    }
+
     const handleUpdateStockWarehouse = async (productId, value) => {
         try {
             await ShopManager.setProductUpdateWarehouses(warehouseId, productId, { stock: value });
@@ -87,6 +111,8 @@ function WarehouseList () {
                             <WarehouseItem 
                                 key={ product.id }
                                 product={ product }
+                                onUpdatePrice={ handleUpdatePriceWarehouse }
+                                onUpdateMinStock={ handleUpdateMinStockWarehouse }
                                 onUpdateStock= { handleUpdateStockWarehouse } 
                                 onToggleActiveWare={ handleToggleActiveWarehouse } 
                                 onDeleteWare={ handleDeleteWarehouse }/>

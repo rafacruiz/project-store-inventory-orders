@@ -53,7 +53,13 @@ export const handleAddProductWarehouse =
             return HttpResponse.json({ message: 'Product not found' }, { status: 404 });
         }
 
-        warehouse.products.push({...product, stock: 0});
+        warehouse.products.push(
+            {
+                ...product, 
+                stock: 0, 
+                price: 0, 
+                minStock: 0
+            });
         store();
 
         return HttpResponse.json(warehouse, { status: 201 });
