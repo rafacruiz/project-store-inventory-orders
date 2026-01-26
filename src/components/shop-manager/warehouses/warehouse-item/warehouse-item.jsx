@@ -9,7 +9,7 @@ function WarehouseItem({ product, onUpdatePrice, onUpdateMinStock, onUpdateStock
 
   const handleToggleProduct = (productId, newActive) => onToggleActiveWare(productId, newActive);
 
-  const handleDeleteItem = (productId) => onDeleteWare(productId);
+  const handleDeleteItem = (productId, active) => onDeleteWare(productId, active);
 
   const isOutOfStock = product.stock === 0;
   const isLowStock = product.stock <= product.minStock;
@@ -71,7 +71,7 @@ function WarehouseItem({ product, onUpdatePrice, onUpdateMinStock, onUpdateStock
         <div className="col-12 col-md-2 text-end">
           <small className="text-muted">&nbsp;</small>
           <button className="btn btn-outline-danger btn-sm w-100"
-            onClick={() => handleDeleteItem(product.id)} >
+            onClick={() => handleDeleteItem(product.id, product.active)} >
             Delete
           </button>
         </div>

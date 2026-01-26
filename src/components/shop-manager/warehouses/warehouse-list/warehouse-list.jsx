@@ -24,72 +24,91 @@ function WarehouseList () {
     const handleAddItemWarehouse = async (productId) => {
         try {
             await ShopManager.setProductWarehouses(warehouseId, {id: productId});
-            console.info('Product added to the warehouse');
-            toast.success('Product added to the warehouse!');
+            const successMessage = 'Product added to the warehouse';
+            console.info(successMessage);
+            toast.success(successMessage);
             setReload(prev => !prev);
         } catch (error) {
-            toast.error(error.message);
-            console.error(error.message);
+            const errorMessage = error?.message || 'Error added product';;
+            console.error(errorMessage);
+            toast.error(errorMessage);
         }
     };
 
     const handleUpdatePriceWarehouse = async (productId, value) => {
         try {
             await ShopManager.setProductUpdateWarehouses(warehouseId, productId, { price: value });
-            console.log('Product price stock updated');
-            toast.success('Product price stock updated!');
+            const successMessage = 'Product price stock updated';
+            console.info(successMessage);
+            toast.success(successMessage);
             setReload(prev => !prev);
         } catch (error) {
-            toast.error(error.message);
-            console.error(error.message);
+            const errorMessage = error?.message || 'Error price updated product';;
+            console.error(errorMessage);
+            toast.error(errorMessage);
         }
     }
 
     const handleUpdateMinStockWarehouse = async (productId, value) => {
         try {
             await ShopManager.setProductUpdateWarehouses(warehouseId, productId, { minStock: value });
-            console.log('Product min. stock updated');
-            toast.success('Product min. stock updated!');
+            const successMessage = 'Product min. stock updated';
+            console.info(successMessage);
+            toast.success(successMessage);
             setReload(prev => !prev);
         } catch (error) {
-            toast.error(error.message);
-            console.error(error.message);
+            const errorMessage = error?.message || 'Error min. stock updated product';;
+            console.error(errorMessage);
+            toast.error(errorMessage);
         }
     }
 
     const handleUpdateStockWarehouse = async (productId, value) => {
         try {
             await ShopManager.setProductUpdateWarehouses(warehouseId, productId, { stock: value });
-            console.log('Product stock updated');
-            toast.success('Product stock updated!');
+            const successMessage = 'Product stock updated!';
+            console.info(successMessage);
+            toast.success(successMessage);
             setReload(prev => !prev);
         } catch (error) {
-            toast.error(error.message);
-            console.error(error.message);
+            const errorMessage = error?.message || 'Error stock updated product';;
+            console.error(errorMessage);
+            toast.error(errorMessage);
         }
     };
 
     const handleToggleActiveWarehouse = async (productId, newActive) => {
         try {
             await ShopManager.setProductUpdateWarehouses(warehouseId, productId, { active: newActive });
-            console.info('Product active status updated');
-            toast.success('Product active status updated!');
+            const successMessage = 'Product active status updated!';
+            console.info(successMessage);
+            toast.success(successMessage);
             setReload(prev => !prev);
         } catch (error) {
-            toast.error(error.message);
-            console.error(error.message);
+            const errorMessage = error?.message || 'Error active status updated product';;
+            console.error(errorMessage);
+            toast.error(errorMessage);
         }
     };
 
-    const handleDeleteWarehouse = async (productId) => {
+    const handleDeleteWarehouse = async (productId, active) => {
+        if (active) {
+            const message = 'Active product cannot be deleted!'
+            toast.error(message);
+            console.info(message);
+            return;
+        }
+
         try {
             await ShopManager.setProductDeleteWarehouses(warehouseId, productId);
-            console.info('Product removed successfully');
-            toast.success('Product removed successfully!');
+            const successMessage = 'Product removed successfully!';
+            console.info(successMessage);
+            toast.success(successMessage);
             setReload(prev => !prev);
         } catch (error) {
-            toast.error(error.message);
-            console.error(error.message);
+            const errorMessage = error?.message || 'Error deleting product';;
+            console.error(errorMessage);
+            toast.error(errorMessage);
         }
     };
     
