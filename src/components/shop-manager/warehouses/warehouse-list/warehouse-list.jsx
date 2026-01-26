@@ -14,8 +14,12 @@ function WarehouseList () {
 
     useEffect(() => {
         const handleWarehouse = async (warehouseId) => {
-            const warehouse = await ShopManager.getWarehouse(warehouseId);
-            setWarehouses(warehouse);
+            try {
+                const warehouse = await ShopManager.getWarehouse(warehouseId);
+                setWarehouses(warehouse);    
+            } catch (error) {
+                console.error(error.message || error);
+            }
         };
 
         handleWarehouse(warehouseId);

@@ -8,7 +8,7 @@ function LoginPage () {
                 <div className="d-flex justify-content-center align-items-center py-3">
                     <img 
                         src={boxIcon} 
-                        class="rounded mx-auto d-block" 
+                        className="rounded mx-auto d-block" 
                         alt="ShopManager" 
                         style={{ width: '60px', height: '60px' }} />
                 </div>

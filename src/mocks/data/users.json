@@ -1,17 +1,35 @@
 [
     {
+        "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
         "email": "admin@shop.com",
         "password": "123456",
         "role": "admin"
     },
     {
+        "id": "9c858901-8a57-4791-81fe-4c455b099bc9",
         "email": "shop1@shop.com",
         "password": "123456",
-        "role": "shop"
+        "nameShop": "Shop 1",
+        "role": "shop",
+        "warehouseId": "550e8400-e29b-41d4-a716-446655440001",
+        "order": []
     },
     {
+        "id": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
         "email": "shop2@shop.com",
         "password": "shop456",
-        "role": "shop"
+        "nameShop": "Shop 2",
+        "role": "shop",
+        "warehouseId": "550e8400-e29b-41d4-a716-446655440001",
+        "order": []
+    },
+    {
+        "id": "123e4567-e89b-12d3-a456-426614174000",
+        "email": "shop3@shop.com",
+        "password": "123456",
+        "nameShop": "Shop 3",
+        "role": "shop",
+        "warehouseId": "550e8400-e29b-41d4-a716-446655440002",
+        "order": []
     }
 ]

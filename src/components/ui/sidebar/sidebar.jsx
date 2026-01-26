@@ -23,7 +23,7 @@ function Sidebar () {
                     </li>
                 )}
                 <li className="nav-item">
-                    <Link className="nav-link text-black d-flex align-items-center gap-2" to={''}>
+                    <Link className="nav-link text-black d-flex align-items-center gap-2" to={'/stores'}>
                         <i className="fa fa-building fa-fw"></i>
                         <span className="d-none d-md-inline">Store</span>
                     </Link>

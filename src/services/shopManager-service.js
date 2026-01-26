@@ -53,3 +53,6 @@ export const setProductUpdateWarehouses = (warehouseId, productId, body) =>
 
 export const setProductDeleteWarehouses = (warehouseId, productId) => 
     http.delete(`/warehouses/${warehouseId}/product/${productId}`);
+
+export const getStores = () =>
+    http.get('/stores');

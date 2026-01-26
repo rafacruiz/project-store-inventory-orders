@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router';
 import { Footer, Navbar } from './components/ui';
 import { PrivateRoute, RoleRoute } from './guards';
-import { HomePage, ProductsDetailsPage, ProductsPage, ProductsAddPage, NotFoundPage, LoginPage, WarehousePage } from './pages';
+import { HomePage, ProductsDetailsPage, ProductsPage, ProductsAddPage, NotFoundPage, LoginPage, WarehousePage, StoresPage } from './pages';
 import { WarehouseList, WarehouseSelect } from './components/shop-manager/warehouses';
 
 function App() {
@@ -56,6 +56,13 @@ function App() {
                 <RoleRoute> 
                   <ProductsAddPage /> 
                 </RoleRoute> 
+              </PrivateRoute> } />
+          
+          <Route
+            path='/stores'
+            element={
+              <PrivateRoute> 
+                <StoresPage />
               </PrivateRoute> } />
               
           <Route path='*' element={ <NotFoundPage /> } />
