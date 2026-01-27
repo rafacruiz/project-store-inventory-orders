@@ -1,12 +1,24 @@
-import { BounceLoader } from "react-spinners";
 import { useEffect, useState } from "react";
+import { BounceLoader } from "react-spinners";
+import { ButtonAdd, InputFinder } from "../../../ui";
 import * as ShopManager from '../../../../services/shopManager-service';
+
+const inpFinderOption = {
+    'id': 'product',
+    'placeholder': 'Finder products...'
+}
 
 function StoreList () {
 
-    const [stores, setStores] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const btnAddOption = {
+        'mode': 'success',
+        'placement': 'left',
+        'title': 'Add store',
+        'to': '',
+    }
 
+    const [stores, setStores] = useState(null);
+    
     useEffect(() => {
         const fetchStores = async () => {
             try {
@@ -14,51 +26,62 @@ function StoreList () {
                 setStores(stores);
             } catch (error) {
                 console.error(error?.message || error);
-            } finally {
-                setLoading(false);
             }
         };
 
         fetchStores();
     }, []);
 
-    if (loading) {
-        return (
+    if (stores === null) {
+         return (
             <div className="d-flex justify-content-center align-items-center py-4">
-                <BounceLoader color="#030404" size={35} />
+                <BounceLoader color="#030404" size={ 35 }  />
+            </div>);
+    }
+
+    if (stores.length === 0) {
+         return (
+            <div className="alert alert-primary d-flex justify-content-center align-items-center gap-2">
+                <i className="fa fa-info-circle"></i>
+                <span> No stores available </span>
             </div>
         );
     }
 
-    if (stores.length === 0) {
-        return <div className="text-center py-4">No stores available</div>;
-    }
-
     return (
-        <div className="list-group">
-            
-            {stores.map((store) => (
-                <div className="card shadow-sm mb-3" key={ store.id }>
-                    <div className="card-header bg-primary text-white">
-                        <h5 className="mb-0">{ store.nameShop }</h5>
-                        <small className="text-light">Role: { store.role }</small>
+        <>
+            <div className="d-flex py-3">
+                <div className="me-2"> <ButtonAdd buttonOption={ btnAddOption } /> </div>
+                
+                <div className="mx-auto w-100">
+                    <InputFinder />
+                </div>                
+            </div>
+
+            <div className="list-group">
+                {stores.map((store) => (
+                    <div className="card shadow-sm mb-3" key={ store.id }>
+                        <div className="card-header bg-primary text-white">
+                            <h5 className="mb-0">{ store.nameShop }</h5>
+                            <small className="text-light">Role: { store.role }</small>
+                        </div>
+                        <div className="card-body">
+                            <ul className="list-group list-group-flush mb-2">
+                            <li className="list-group-item">
+                                <strong>ID:</strong> { store.id }
+                            </li>
+                            <li className="list-group-item">
+                                <strong>Email:</strong> { store.email }
+                            </li>
+                            <li className="list-group-item">
+                                <strong>Warehouse ID:</strong> { store.warehouseId }
+                            </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div className="card-body">
-                        <ul className="list-group list-group-flush mb-2">
-                        <li className="list-group-item">
-                            <strong>ID:</strong> { store.id }
-                        </li>
-                        <li className="list-group-item">
-                            <strong>Email:</strong> { store.email }
-                        </li>
-                        <li className="list-group-item">
-                            <strong>Warehouse ID:</strong> { store.warehouseId }
-                        </li>
-                        </ul>
-                    </div>
-                </div>
-            ))}
-        </div>
+                ))}
+            </div>
+        </>
     );
 }
 

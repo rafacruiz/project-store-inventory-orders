@@ -1,15 +1,22 @@
-import { BounceLoader } from "react-spinners";
 import { useEffect, useState } from "react";
+import { BounceLoader } from "react-spinners";
+import { InputFinder } from "../../../ui";
+import toast, { Toaster } from "react-hot-toast";
+import { useParams } from "react-router-dom";
 import { ProductList } from '../../products';
 import { WarehouseItem } from '../../warehouses';
 import * as ShopManager from '../../../../services/shopManager-service';
-import toast, { Toaster } from "react-hot-toast";
-import { useParams } from "react-router-dom";
+
+const inpFinderOption = {
+    'id': 'product',
+    'placeholder': 'Finder products...'
+}
 
 function WarehouseList () {
 
     const { warehouseId } = useParams();
-    const [warehouses, setWarehouses] = useState([]);
+
+    const [warehouses, setWarehouses] = useState(null);
     const [reload, setReload] = useState(true);
 
     useEffect(() => {
@@ -23,7 +30,7 @@ function WarehouseList () {
         };
 
         handleWarehouse(warehouseId);
-    }, [reload]);
+    }, [reload, warehouseId]);
 
     const handleAddItemWarehouse = async (productId) => {
         try {
@@ -116,43 +123,60 @@ function WarehouseList () {
         }
     };
     
-    if (!warehouses || warehouses.length === 0) {
+    if (warehouses === null) {
         return (
             <div className="d-flex justify-content-center align-items-center py-4">
                 <BounceLoader color="#030404" size={ 35 }  />
             </div>);
-    } else {
+    } 
+    
+    if(warehouses.length === 0){
         return (
-            <>
-                <Toaster position="top-center" reverseOrder={false} />
-                <small className="fw-semibold text-secondary"> Products in {warehouses.name} Warehouse </small>
-                <ol className="list-group pt-3">
-                    { (warehouses.products.length !== 0) 
-                        ? warehouses.products
-                            .toSorted((a, b) => a.name.localeCompare(b.name))
-                            .map((product) => ( 
-                            <WarehouseItem 
-                                key={ product.id }
-                                product={ product }
-                                onUpdatePrice={ handleUpdatePriceWarehouse }
-                                onUpdateMinStock={ handleUpdateMinStockWarehouse }
-                                onUpdateStock= { handleUpdateStockWarehouse } 
-                                onToggleActiveWare={ handleToggleActiveWarehouse } 
-                                onDeleteWare={ handleDeleteWarehouse }/>
-                        )) 
-                        : <div className="alert alert-primary d-flex justify-content-center align-items-center gap-2">
-                            <i className="fa fa-info-circle"></i>
-                            <span> No products found in warehouse "{ warehouses.name }" </span>
-                        </div>
-                    }
-                </ol>
-
-                <hr className="border border-secondary" />
-
-                <small className="fw-semibold text-secondary"> Add Products to Inventory </small>
-                <ProductList warehouse={ true } addItemWarehouse={ handleAddItemWarehouse }/>
-            </>);
+            <div className="alert alert-primary d-flex justify-content-center align-items-center gap-2">
+                <i className="fa fa-info-circle"></i>
+                <span> No warehouses available </span>
+            </div>
+        );
     }
+     
+    return (
+        <>
+            <Toaster position="top-center" reverseOrder={false} />
+            <small className="fw-semibold text-secondary"> Products in {warehouses.name} Warehouse </small>
+            
+            <div className="d-flex py-3">                
+                <div className="mx-auto w-100">
+                    <InputFinder />
+                </div>                
+            </div>
+
+            <ol className="list-group pt-3">
+                { (warehouses.products.length !== 0) 
+                    ? warehouses.products
+                        .toSorted((a, b) => a.name.localeCompare(b.name))
+                        .map((product) => ( 
+                        <WarehouseItem 
+                            key={ product.id }
+                            product={ product }
+                            onUpdatePrice={ handleUpdatePriceWarehouse }
+                            onUpdateMinStock={ handleUpdateMinStockWarehouse }
+                            onUpdateStock= { handleUpdateStockWarehouse } 
+                            onToggleActiveWare={ handleToggleActiveWarehouse } 
+                            onDeleteWare={ handleDeleteWarehouse }/>
+                    )) 
+                    : <div className="alert alert-primary d-flex justify-content-center align-items-center gap-2">
+                        <i className="fa fa-info-circle"></i>
+                        <span> No products found in warehouse "{ warehouses.name }" </span>
+                    </div>
+                }
+            </ol>
+
+            <hr className="border border-secondary" />
+
+            <small className="fw-semibold text-secondary"> Add Products to Inventory </small>
+            <ProductList warehouse={ true } addItemWarehouse={ handleAddItemWarehouse }/>
+        </>);
+    
 }
 
 export default WarehouseList;

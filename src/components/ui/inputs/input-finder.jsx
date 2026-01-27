@@ -10,8 +10,8 @@ function InputFinder ({ onChange, inputOption }) {
         <input 
             type="text" 
             className="form-control"
-            id={`name-${inputOption.id}-finder`}
-            placeholder={ inputOption.placeholder } 
+            id={`name-${inputOption?.id}-finder`}
+            placeholder={ inputOption?.placeholder } 
             onChange={ handleChange } />
     );
 }

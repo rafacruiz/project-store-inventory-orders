@@ -1,32 +1,32 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { BounceLoader } from "react-spinners";
 import * as AuthUsers from '../../../services/auth-service';
 import { useAuth } from '../../../contexts/auth-context';
-import { useEffect } from "react";
-import { BounceLoader } from "react-spinners";
+
+const validations = {
+    emailUser: { 
+        required: 'Email is required',
+        pattern: {
+            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+            message: 'Invalid email format'
+        }
+    },
+    passwordUser: { 
+        required: 'Password is required',
+        minLength: {
+            value: 6,
+            message: 'Password must be at least 6 characters long'
+        },
+    }
+}
 
 function LoginForm () {
     
     const navigate = useNavigate();
 
     const { login } = useAuth();
-
-    const validations = {
-        emailUser: { 
-            required: 'Email is required',
-            pattern: {
-                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                message: 'Invalid email format'
-            }
-        },
-        passwordUser: { 
-            required: 'Password is required',
-            minLength: {
-                value: 6,
-                message: 'Password must be at least 6 characters long'
-            },
-        }
-    }
 
     const { register, 
             handleSubmit,
