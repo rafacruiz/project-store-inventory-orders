@@ -1,4 +1,5 @@
 import boxIcon from '../assets/img/icons/box-icon.png';
+import '../components/users/login-form/login-form.css';
 import { LoginForm } from "../components/users";
 
 function LoginPage () {
@@ -13,7 +14,7 @@ function LoginPage () {
                         style={{ width: '60px', height: '60px' }} />
                 </div>
                 <div className="card shadow">
-                    <div className="card-body p-4">
+                    <div className="page card-body p-4">
                         <LoginForm />
                     </div>
                 </div>
