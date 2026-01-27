@@ -80,9 +80,8 @@ function ProductList ({ warehouse = false, addItemWarehouse = () => {}}) {
             </div>
             
             <ol className="list-group">
-                {products && (products
-                ?.filter((product) => 
-                    product.name.toLowerCase().includes(search.toLowerCase()))
+                {products
+                ?.filter((product) => product.name.toLowerCase().includes(search.toLowerCase()))
                 .map((product) => 
                     <ProductItem 
                         key={ product.id } 
@@ -90,7 +89,7 @@ function ProductList ({ warehouse = false, addItemWarehouse = () => {}}) {
                         showWarehouse={ warehouse }
                         onDelete={ handleDeleteItem } 
                         handleAddItemWarehouse={ handleAddItemWarehouse } /> 
-                    ))}
+                    )}
             </ol>
         </>
     );

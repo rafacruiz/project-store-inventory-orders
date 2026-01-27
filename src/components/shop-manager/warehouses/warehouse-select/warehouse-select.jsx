@@ -9,8 +9,8 @@ const VIEW = {
 };
 
 const inpFinderOption = {
-    'id': 'product',
-    'placeholder': 'Finder products...'
+    'id': 'warehouses',
+    'placeholder': 'Finder warehouses...'
 }
 
 function WarehouseSelect() {
@@ -23,7 +23,10 @@ function WarehouseSelect() {
     }
 
     const [warehouses, setWarehouses] = useState([]);
+    const [search, setSearch] = useState('');
     const [view, setView] = useState(VIEW.GRID);
+
+    const handleFinderItem = (title) => setSearch(title);
 
     useEffect(() => {
             const fetchWarehouse = async () => {
@@ -43,7 +46,12 @@ function WarehouseSelect() {
             <div className="d-flex justify-content-end py-3 mb-3">
                 <div className="me-2"> <ButtonAdd buttonOption={ btnAddOption } /> </div>
                 
-                <div className="mx-auto me-2 w-100"> <InputFinder /> </div>
+                <div className="mx-auto me-2 w-100"> 
+                    <InputFinder 
+                        onChange={ handleFinderItem } 
+                        inputOption={ inpFinderOption } 
+                    /> 
+                </div>
 
                 <select
                     className="form-select w-auto"
@@ -59,7 +67,8 @@ function WarehouseSelect() {
                 <div className="list-group">
                     <WarehouseSelectItem 
                         warehouses={warehouses} 
-                        variant="list" />
+                        variant="list"
+                        search={search} />
                 </div>
             )}
 
@@ -67,7 +76,8 @@ function WarehouseSelect() {
                 <div className="row g-3">
                     <WarehouseSelectItem
                         warehouses={warehouses}
-                        variant="grid" />
+                        variant="grid"
+                        search={search} />
                 </div>
             )}
         </>

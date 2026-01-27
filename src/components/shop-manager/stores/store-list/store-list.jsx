@@ -4,8 +4,8 @@ import { ButtonAdd, InputFinder } from "../../../ui";
 import * as ShopManager from '../../../../services/shopManager-service';
 
 const inpFinderOption = {
-    'id': 'product',
-    'placeholder': 'Finder products...'
+    'id': 'stores',
+    'placeholder': 'Finder name stores...'
 }
 
 function StoreList () {
@@ -18,6 +18,7 @@ function StoreList () {
     }
 
     const [stores, setStores] = useState(null);
+    const [search, setSearch] = useState('');
     
     useEffect(() => {
         const fetchStores = async () => {
@@ -31,6 +32,8 @@ function StoreList () {
 
         fetchStores();
     }, []);
+
+    const handleFinderItem = (title) => setSearch(title);
 
     if (stores === null) {
          return (
@@ -54,12 +57,14 @@ function StoreList () {
                 <div className="me-2"> <ButtonAdd buttonOption={ btnAddOption } /> </div>
                 
                 <div className="mx-auto w-100">
-                    <InputFinder />
+                    <InputFinder onChange={ handleFinderItem } inputOption={ inpFinderOption } />
                 </div>                
             </div>
 
             <div className="list-group">
-                {stores.map((store) => (
+                {stores
+                    ?.filter((store) => store.nameShop.toLowerCase().includes(search.toLowerCase()))
+                    .map((store) => (
                     <div className="card shadow-sm mb-3" key={ store.id }>
                         <div className="card-header bg-primary text-white">
                             <h5 className="mb-0">{ store.nameShop }</h5>

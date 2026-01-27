@@ -8,8 +8,8 @@ import { WarehouseItem } from '../../warehouses';
 import * as ShopManager from '../../../../services/shopManager-service';
 
 const inpFinderOption = {
-    'id': 'product',
-    'placeholder': 'Finder products...'
+    'id': 'warehouse',
+    'placeholder': 'Finder products warehouse...'
 }
 
 function WarehouseList () {
@@ -17,6 +17,7 @@ function WarehouseList () {
     const { warehouseId } = useParams();
 
     const [warehouses, setWarehouses] = useState(null);
+    const [search, setSearch] = useState('');
     const [reload, setReload] = useState(true);
 
     useEffect(() => {
@@ -31,6 +32,8 @@ function WarehouseList () {
 
         handleWarehouse(warehouseId);
     }, [reload, warehouseId]);
+
+    const handleFinderItem = (title) => setSearch(title);
 
     const handleAddItemWarehouse = async (productId) => {
         try {
@@ -88,8 +91,15 @@ function WarehouseList () {
         }
     };
 
-    const handleToggleActiveWarehouse = async (productId, newActive) => {
+    const handleToggleActiveWarehouse = async (productId, newActive, stock) => {
         try {
+            if (stock === 0 && newActive) {
+                const message = 'This product has zero stock and cannot be activated!'
+                toast.error(<span className="text-center">{message}</span>);
+                console.info(message);
+                return;
+            }
+
             await ShopManager.setProductUpdateWarehouses(warehouseId, productId, { active: newActive });
             const successMessage = 'Product active status updated!';
             console.info(successMessage);
@@ -146,13 +156,14 @@ function WarehouseList () {
             
             <div className="d-flex py-3">                
                 <div className="mx-auto w-100">
-                    <InputFinder />
+                    <InputFinder onChange={ handleFinderItem } inputOption={ inpFinderOption } />
                 </div>                
             </div>
 
             <ol className="list-group pt-3">
                 { (warehouses.products.length !== 0) 
                     ? warehouses.products
+                        ?.filter((product) => product.name.toLowerCase().includes(search.toLowerCase()))
                         .toSorted((a, b) => a.name.localeCompare(b.name))
                         .map((product) => ( 
                         <WarehouseItem 
