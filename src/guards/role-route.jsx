@@ -5,7 +5,7 @@ function RoleRoute ({ children }) {
 
     const { user } = useAuth();
     
-    if (user?.role !== 'admin') return <Navigate to='/dashboard' />;
+    if (user?.role !== 'admin') return <Navigate to='/orders' />;
 
     return children
 }

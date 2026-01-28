@@ -23,8 +23,8 @@ export const handleListProducts =
 export const handleDetailsProduct = 
     http.get(`${baseApiURL}/products/:id`, (req) => {
         const { id } = req.params;
+        
         const product = products.find((product) => product.id === id);
-
         if (!product) return HttpResponse.json({ message: 'Error details product' }, { status: 404 });
         
         return HttpResponse.json(product);
@@ -33,9 +33,10 @@ export const handleDetailsProduct =
 export const handleDeleteProduct = 
     http.delete(`${baseApiURL}/products/:id`, (req) => {
         const { id } = req.params;
+        
         products = products.filter((product) => !product.id.includes(id));
-
         if (!products) return HttpResponse.json({ message: 'Error delete product' }, { status: 404 });
+
         store();
 
         return HttpResponse.json(products);

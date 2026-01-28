@@ -1,3 +1,4 @@
+
 import { http, HttpResponse } from 'msw';
 import DefaultWarehouse from './data/warehouses.json';
 import { products } from './products';
@@ -10,28 +11,32 @@ let warehouses = localStorage.getItem(WAREHOUSE_LS_KEY) ? JSON.parse(localStorag
 
 const store = () => localStorage.setItem(WAREHOUSE_LS_KEY, JSON.stringify(warehouses));
 
-export const handleWarehouses = http.get(`${baseApiURL}/warehouses`, () => 
-    HttpResponse.json(warehouses, { status: 200 } ));
+export const handleWarehouses = 
+    http.get(`${baseApiURL}/warehouses`, () => HttpResponse.json(warehouses, { status: 200 } ));
 
-export const handleWarehouse = http.get(`${baseApiURL}/warehouses/:id`, (req) => {
-    const { id } = req.params;
-    const warehouse = warehouses.find(wh => wh.id === id);
-    if (!warehouse) {
-        return HttpResponse.json({ message: 'Warehouse not found' }, { status: 404 });
-    }
-    
-    return HttpResponse.json(warehouse, { status: 200 });
-});
+export const handleWarehouse = 
+    http.get(`${baseApiURL}/warehouses/:id`, (req) => {
+        const { id } = req.params;
+        const warehouse = warehouses.find(wh => wh.id === id);
+        
+        if (!warehouse) return HttpResponse.json({ message: 'Warehouse not found' }, { status: 400 });
+        
+        return HttpResponse.json(warehouse, { status: 200 });
+    });
 
-export const handleProductsWarehouse = http.get(`${baseApiURL}/warehouses/:id`, (req) => {
-    const { id } = req.params;
-    const warehouse = warehouses.find(wh => wh.id === id);
-    if (!warehouse) {
-        return HttpResponse.json({ message: 'Warehouse not found' }, { status: 404 });
-    }
+export const handleProductsWarehouse = 
+    http.get(`${baseApiURL}/warehouses/:id/products`, (req) => {
+        const { id } = req.params;
+        const warehouse = warehouses.find(wh => wh.id === id);
 
-    return HttpResponse.json(warehouse.products, { status: 200 });
-});
+        if (!warehouse) return HttpResponse.json({ message: 'Warehouse not found' }, { status: 400 });
+
+        const products = warehouse.products.filter((product) => product.active);
+
+        if (!products) return HttpResponse.json({ message: 'Products of warehouse not found' }, { status: 400 });
+
+        return HttpResponse.json(products, { status: 200 });
+    });
 
 export const handleAddProductWarehouse = 
     http.post(`${baseApiURL}/warehouses/:warehouseId/product`, async (req) => {
@@ -39,20 +44,14 @@ export const handleAddProductWarehouse =
         const { id } = await req.request.clone().json();
 
         const warehouse = warehouses.find(wh => wh.id === warehouseId);
-        if (!warehouse) {
-            return HttpResponse.json({ message: 'Warehouse not found' }, { status: 404 });
-        }
-
+        if (!warehouse) return HttpResponse.json({ message: 'Warehouse not found' }, { status: 400 });
+        
         const warehouseProduct = warehouse.products.find(product => product.id === id);
-        if (warehouseProduct) {
-            return HttpResponse.json({ message: 'Product found in warehouse' }, { status: 404 });
-        }
-
+        if (warehouseProduct) return HttpResponse.json({ message: 'Product found in warehouse' }, { status: 400 });
+        
         const product = products.find((product) => product.id === id);
-        if (!product) {
-            return HttpResponse.json({ message: 'Product not found' }, { status: 404 });
-        }
-
+        if (!product) return HttpResponse.json({ message: 'Product not found' }, { status: 400 });
+        
         warehouse.products.push(
             {
                 ...product, 
@@ -71,14 +70,10 @@ export const handleUpdateProductWarehouse =
         const updates = await req.request.clone().json();
 
         const warehouse = warehouses.find(wh => wh.id === warehouseId);
-        if (!warehouse) {
-          return HttpResponse.json({ message: 'Warehouse not found' }, { status: 404 });
-        }
-
+        if (!warehouse) return HttpResponse.json({ message: 'Warehouse not found' }, { status: 404 });
+        
         const product = warehouse.products.find(product => product.id === productId);
-        if (!product) {
-            return HttpResponse.json({ message: 'Product not found' }, { status: 404 });
-        }
+        if (!product) return HttpResponse.json({ message: 'Product not found' }, { status: 404 });
 
         Object.assign(product, updates);
         store();
@@ -91,10 +86,8 @@ export const handleDeleteProductWarehouse =
         const { warehouseId, productId } = req.params;
 
         const warehouse = warehouses.find(wh => wh.id === warehouseId);
-        if (!warehouse) {
-          return HttpResponse.json({ message: 'Warehouse not found' }, { status: 404 });
-        }
-
+        if (!warehouse) return HttpResponse.json({ message: 'Warehouse not found' }, { status: 404 });
+        
         warehouse.products = warehouse.products.filter(product => product.id !== productId);
         store();
 

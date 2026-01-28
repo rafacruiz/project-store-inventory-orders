@@ -2,7 +2,8 @@ import { Routes, Route } from 'react-router';
 import { Footer, Navbar } from './components/ui';
 import { AnimatePresence } from 'motion/react';
 import { PrivateRoute, RoleRoute } from './guards';
-import { HomePage, ProductsDetailsPage, ProductsPage, ProductsAddPage, NotFoundPage, LoginPage, WarehousePage, StoresPage } from './pages';
+import { HomePage, ProductsDetailsPage, ProductsPage, ProductsAddPage, NotFoundPage, 
+  LoginPage, WarehousePage, StoresPage, OrdersPage } from './pages';
 import { WarehouseList, WarehouseSelect } from './components/shop-manager/warehouses';
 
 function App() {
@@ -19,8 +20,10 @@ function App() {
             <Route 
               path='/dashboard' 
               element={ 
-                <PrivateRoute> 
-                  <HomePage /> 
+                <PrivateRoute>
+                  <RoleRoute>
+                    <HomePage />
+                  </RoleRoute>
                 </PrivateRoute> } />
 
             <Route
@@ -40,14 +43,18 @@ function App() {
               path='/products' 
               element={ 
                 <PrivateRoute> 
-                  <ProductsPage /> 
+                  <RoleRoute>
+                    <ProductsPage /> 
+                  </RoleRoute>
                 </PrivateRoute> } />
 
             <Route 
               path='/products/:id' 
               element={ 
-                <PrivateRoute> 
-                  <ProductsDetailsPage /> 
+                <PrivateRoute>
+                   <RoleRoute>
+                    <ProductsDetailsPage /> 
+                   </RoleRoute>
                 </PrivateRoute> } />
 
             <Route 
@@ -62,10 +69,20 @@ function App() {
             <Route
               path='/stores'
               element={
-                <PrivateRoute> 
-                  <StoresPage />
+                <PrivateRoute>
+                   <RoleRoute>
+                    <StoresPage />
+                   </RoleRoute>
                 </PrivateRoute> } />
-                
+
+              <Route
+                path='/orders'
+                element={
+                  <PrivateRoute>
+                    <OrdersPage />
+                  </PrivateRoute>
+                } />
+
             <Route path='*' element={ <NotFoundPage /> } />
           </Routes>
         </AnimatePresence>
