@@ -1,16 +1,6 @@
 
 function WarehouseItem({ product, onUpdatePrice, onUpdateMinStock, onUpdateStock, onToggleActiveWare, onDeleteWare }) {
 
-  const handlePriceProduct = (productId, value) => onUpdatePrice(productId, Number(value));
-
-  const handleMinStockProduct = (productId, value) => onUpdateMinStock(productId, Number(value));
-
-  const handleStockProduct = (productId, value) => onUpdateStock(productId, Number(value));
-
-  const handleToggleProduct = (productId, newActive, stock) => onToggleActiveWare(productId, newActive, stock);
-
-  const handleDeleteItem = (productId, active) => onDeleteWare(productId, active);
-
   const isOutOfStock = product.stock === 0;
   const isLowStock = product.stock <= product.minStock;
 
@@ -35,7 +25,7 @@ function WarehouseItem({ product, onUpdatePrice, onUpdateMinStock, onUpdateStock
             type="number"
             className="form-control form-control-sm"
             value={ product.price }
-            onChange={(e) => handlePriceProduct(product.id, e.target.value)}
+            onChange={(e) => onUpdatePrice(product.id, Number(e.target.value))}
           />
         </div>
 
@@ -45,7 +35,7 @@ function WarehouseItem({ product, onUpdatePrice, onUpdateMinStock, onUpdateStock
             type="number"
             className="form-control form-control-sm"
             value={ product.minStock }
-            onChange={(e) => handleMinStockProduct(product.id, e.target.value)}
+            onChange={(e) => onUpdateMinStock(product.id,  Number(e.target.value))}
           />
         </div>
 
@@ -55,7 +45,7 @@ function WarehouseItem({ product, onUpdatePrice, onUpdateMinStock, onUpdateStock
             type="number"
             className="form-control form-control-sm"
             value={ product.stock }
-            onChange={(e) => handleStockProduct(product.id, e.target.value)}
+            onChange={(e) => onUpdateStock(product.id, Number(e.target.value))}
           />
         </div>
 
@@ -63,7 +53,7 @@ function WarehouseItem({ product, onUpdatePrice, onUpdateMinStock, onUpdateStock
           <small className="text-muted">&nbsp;</small>
           <button
             className={`btn btn-sm w-100 ${ product.active ? 'btn-success' : 'btn-danger' }`}
-            onClick={() => handleToggleProduct(product.id, !product.active, product.stock)} >
+            onClick={() => onToggleActiveWare(product.id, !product.active, product.stock)} >
             {product.active ? 'Active' : 'Inactive'}
           </button>
         </div>
@@ -71,7 +61,7 @@ function WarehouseItem({ product, onUpdatePrice, onUpdateMinStock, onUpdateStock
         <div className="col-12 col-md-2 text-end">
           <small className="text-muted">&nbsp;</small>
           <button className="btn btn-outline-danger btn-sm w-100"
-            onClick={() => handleDeleteItem(product.id, product.active)} >
+            onClick={() => onDeleteWare(product.id, product.active)} >
             Delete
           </button>
         </div>

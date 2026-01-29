@@ -26,8 +26,6 @@ function WarehouseSelect() {
     const [search, setSearch] = useState('');
     const [view, setView] = useState(VIEW.GRID);
 
-    const handleFinderItem = (title) => setSearch(title);
-
     useEffect(() => {
             const fetchWarehouse = async () => {
             try {
@@ -48,7 +46,7 @@ function WarehouseSelect() {
                 
                 <div className="mx-auto me-2 w-100"> 
                     <InputFinder 
-                        onChange={ handleFinderItem } 
+                        onChange={ setSearch } 
                         inputOption={ inpFinderOption } 
                     /> 
                 </div>

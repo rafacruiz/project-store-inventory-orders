@@ -33,8 +33,6 @@ function WarehouseList () {
         handleWarehouse(warehouseId);
     }, [reload, warehouseId]);
 
-    const handleFinderItem = (title) => setSearch(title);
-
     const handleAddItemWarehouse = async (productId) => {
         try {
             await ShopManager.setProductWarehouses(warehouseId, {id: productId});
@@ -139,15 +137,6 @@ function WarehouseList () {
                 <BounceLoader color="#030404" size={ 35 }  />
             </div>);
     } 
-    
-    if(warehouses.length === 0){
-        return (
-            <div className="alert alert-primary d-flex justify-content-center align-items-center gap-2">
-                <i className="fa fa-info-circle"></i>
-                <span> No warehouses available </span>
-            </div>
-        );
-    }
      
     return (
         <>
@@ -156,14 +145,14 @@ function WarehouseList () {
             
             <div className="d-flex py-3">                
                 <div className="mx-auto w-100">
-                    <InputFinder onChange={ handleFinderItem } inputOption={ inpFinderOption } />
+                    <InputFinder onChange={ setSearch } inputOption={ inpFinderOption } />
                 </div>                
             </div>
 
             <ol className="list-group pt-3">
                 { (warehouses.products.length !== 0) 
                     ? warehouses.products
-                        ?.filter((product) => product.name.toLowerCase().includes(search.toLowerCase()))
+                        .filter((product) => product.name.toLowerCase().includes(search.toLowerCase()))
                         .toSorted((a, b) => a.name.localeCompare(b.name))
                         .map((product) => ( 
                         <WarehouseItem 
@@ -187,7 +176,6 @@ function WarehouseList () {
             <small className="fw-semibold text-secondary"> Add Products to Inventory </small>
             <ProductList warehouse={ true } addItemWarehouse={ handleAddItemWarehouse }/>
         </>);
-    
 }
 
 export default WarehouseList;

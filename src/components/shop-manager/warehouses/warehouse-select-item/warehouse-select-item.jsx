@@ -1,6 +1,5 @@
 import { Link, useParams } from "react-router-dom";
 import './warehouse-select-item.css';
-import { useState } from "react";
 
 function WarehouseSelectItem({ warehouses, variant, search }) {
   
