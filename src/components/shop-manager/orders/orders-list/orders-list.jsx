@@ -36,13 +36,6 @@ function OrdersList () {
         if (user?.id) fetchOrders(user?.id);
     }, [user?.id]);
 
-    if (orders === null) {
-        return (
-            <div className="d-flex justify-content-center align-items-center py-4">
-                <BounceLoader color="#030404" size={ 35 }  />
-            </div>);
-    }
-
     const handleStatusOrder = (isOpen) => {
         if (isOpen) {
             const fetchOrdersByStore = async () => {
@@ -72,7 +65,11 @@ function OrdersList () {
                 <button className="btn btn-primary w-100" onClick={() => handleStatusOrder(true) }>Open order</button>
             </div>
             
-            {(orders.length !== 0) ? (
+            {orders === null ? (
+                <div className="d-flex justify-content-center align-items-center py-4">
+                    <BounceLoader color="#030404" size={ 35 } />
+                </div>
+            ) : (orders?.length) ? (
                 <>
                     <div className="d-flex py-3">                
                         <div className="mx-auto w-100">
