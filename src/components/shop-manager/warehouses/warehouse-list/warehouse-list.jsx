@@ -150,7 +150,7 @@ function WarehouseList () {
             </div>
 
             <ol className="list-group pt-3">
-                { (warehouses.products.length !== 0) 
+                { (warehouses?.products?.length) 
                     ? warehouses.products
                         .filter((product) => product.name.toLowerCase().includes(search.toLowerCase()))
                         .toSorted((a, b) => a.name.localeCompare(b.name))
