@@ -7,10 +7,6 @@ function ProductItem ({ product, onDelete, showWarehouse, handleAddItemWarehouse
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
-    const handleDeleteItem = (id) => onDelete(id);
-
-    const handleAddItem = (id) => handleAddItemWarehouse(id);
-
     return (
         <li className="list-group-item d-flex justify-content-between align-items-center" >
             <div className="ms-2 me-auto">
@@ -27,14 +23,14 @@ function ProductItem ({ product, onDelete, showWarehouse, handleAddItemWarehouse
                     </Link>
 
                     <button className="btn btn-outline-danger btn-sm me-2"
-                        onClick={ () => handleDeleteItem(product.id) }> Delete
+                        onClick={ () => onDelete(product.id) }> Delete
                     </button>
                 </div>
             )}
 
             { showWarehouse && (
                 <button className="btn btn-outline-success btn-sm me-2"
-                    onClick={ () => handleAddItem(product.id) }> Add
+                    onClick={ () => handleAddItemWarehouse(product.id) }> Add
                 </button>
             )}
             

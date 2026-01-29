@@ -38,8 +38,6 @@ function ProductList ({ warehouse = false, addItemWarehouse = () => {}}) {
         fetchProducts();
     }, [reload]);
 
-    const handleFinderItem = (title) => setSearch(title);
-
     const handleDeleteItem = async (id) => {
         try {
             await ShopManager.setProductDelete(id);
@@ -49,8 +47,6 @@ function ProductList ({ warehouse = false, addItemWarehouse = () => {}}) {
         }
     };
 
-    const handleAddItemWarehouse = (id) => addItemWarehouse(id);
-
     if (products === null) {
         return (
                 <div className="d-flex justify-content-center align-items-center py-4">
@@ -59,7 +55,7 @@ function ProductList ({ warehouse = false, addItemWarehouse = () => {}}) {
             );
     } 
     
-    if (products.length === 0) {
+    if (!products?.length) {
         return (
             <div className="alert alert-primary d-flex justify-content-center align-items-center gap-2">
                 <i className="fa fa-info-circle"></i>
@@ -75,7 +71,7 @@ function ProductList ({ warehouse = false, addItemWarehouse = () => {}}) {
                     <div className="me-2"><ButtonAdd buttonOption={ btnAddOption } /> </div>
                 )}
                 <div className="mx-auto w-100">
-                    <InputFinder onChange={ handleFinderItem } inputOption={ inpFinderOption } />
+                    <InputFinder onChange={ setSearch } inputOption={ inpFinderOption } />
                 </div>                
             </div>
             
@@ -88,7 +84,7 @@ function ProductList ({ warehouse = false, addItemWarehouse = () => {}}) {
                         product={ product } 
                         showWarehouse={ warehouse }
                         onDelete={ handleDeleteItem } 
-                        handleAddItemWarehouse={ handleAddItemWarehouse } /> 
+                        handleAddItemWarehouse={ addItemWarehouse } /> 
                     )}
             </ol>
         </>
