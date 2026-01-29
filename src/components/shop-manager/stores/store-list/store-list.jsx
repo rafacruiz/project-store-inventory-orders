@@ -33,8 +33,6 @@ function StoreList () {
         fetchStores();
     }, []);
 
-    const handleFinderItem = (title) => setSearch(title);
-
     if (stores === null) {
          return (
             <div className="d-flex justify-content-center align-items-center py-4">
@@ -42,7 +40,7 @@ function StoreList () {
             </div>);
     }
 
-    if (stores.length === 0) {
+    if (!stores?.length) {
          return (
             <div className="alert alert-primary d-flex justify-content-center align-items-center gap-2">
                 <i className="fa fa-info-circle"></i>
@@ -57,7 +55,7 @@ function StoreList () {
                 <div className="me-2"> <ButtonAdd buttonOption={ btnAddOption } /> </div>
                 
                 <div className="mx-auto w-100">
-                    <InputFinder onChange={ handleFinderItem } inputOption={ inpFinderOption } />
+                    <InputFinder onChange={ setSearch } inputOption={ inpFinderOption } />
                 </div>                
             </div>
 
@@ -72,15 +70,15 @@ function StoreList () {
                         </div>
                         <div className="card-body">
                             <ul className="list-group list-group-flush mb-2">
-                            <li className="list-group-item">
-                                <strong>ID:</strong> { store.id }
-                            </li>
-                            <li className="list-group-item">
-                                <strong>Email:</strong> { store.email }
-                            </li>
-                            <li className="list-group-item">
-                                <strong>Warehouse ID:</strong> { store.warehouseId }
-                            </li>
+                                <li className="list-group-item">
+                                    <strong>ID:</strong> { store.id }
+                                </li>
+                                <li className="list-group-item">
+                                    <strong>Email:</strong> { store.email }
+                                </li>
+                                <li className="list-group-item">
+                                    <strong>Warehouse ID:</strong> { store.warehouseId }
+                                </li>
                             </ul>
                         </div>
                     </div>
