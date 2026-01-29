@@ -58,4 +58,11 @@ export const setProductDeleteWarehouses = (warehouseId, productId) =>
 export const getStores = () =>
     http.get('/stores');
 
-export const setOrdersByStore = (body) => http.post(`/orders/open`, body);
+export const getOrders = () => 
+    http.get('/orders');
+
+export const getOrderByStore = (storeId) => 
+    http.get(`/orders/store/${storeId}`);
+
+export const setOrdersOpen = (body) => 
+    http.post(`/orders/open`, body);

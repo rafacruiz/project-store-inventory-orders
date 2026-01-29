@@ -26,8 +26,8 @@ function OrdersProducts () {
             setProduct(products);
         }
 
-        fetchProductStore(user.warehouseId);
-    }, []);
+        if (user?.warehouseId) fetchProductStore(user?.warehouseId);
+    }, [user?.warehouseId]);
 
     if (products === null) {
         return (
@@ -44,8 +44,6 @@ function OrdersProducts () {
             </div>
         );
     }
-
-    const handleFinderItem = (title) => setSearch(title);
     
     return (
         <>
@@ -55,7 +53,7 @@ function OrdersProducts () {
                 <small className="fw-semibold text-secondary mb-2"> Orders products </small>
             
                 <div className="mx-auto w-100">
-                    <InputFinder onChange={ handleFinderItem } inputOption={ inpFinderOption } />
+                    <InputFinder onChange={ setSearch } inputOption={ inpFinderOption } />
                 </div>                
             
                 <ol className="list-group pt-3">

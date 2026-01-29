@@ -6,5 +6,6 @@ export { default as ProductsDetailsPage } from './product-details-page';
 export { default as ProductsAddPage } from './product-add-page';
 export { default as WarehousePage } from './warehouse-page';
 export { default as StoresPage } from './stores-page';
+export { default as StoreOrdersPage } from './stores-orders-page';
 export { default as OrdersPage } from './orders-page';
 export { default as NotFoundPage } from './404-page';

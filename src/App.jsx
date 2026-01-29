@@ -3,7 +3,8 @@ import { Footer, Navbar } from './components/ui';
 import { AnimatePresence } from 'motion/react';
 import { PrivateRoute, RoleRoute } from './guards';
 import { HomePage, ProductsDetailsPage, ProductsPage, ProductsAddPage, NotFoundPage, 
-  LoginPage, WarehousePage, StoresPage, OrdersPage } from './pages';
+  LoginPage, WarehousePage, StoresPage, OrdersPage, 
+  StoreOrdersPage} from './pages';
 import { WarehouseList, WarehouseSelect } from './components/shop-manager/warehouses';
 
 function App() {
@@ -70,16 +71,24 @@ function App() {
               path='/stores'
               element={
                 <PrivateRoute>
-                   <RoleRoute>
+                  <RoleRoute>
                     <StoresPage />
-                   </RoleRoute>
+                  </RoleRoute>
                 </PrivateRoute> } />
 
               <Route
-                path='/orders'
+                path='/stores/orders'
                 element={
                   <PrivateRoute>
                     <OrdersPage />
+                  </PrivateRoute>
+                } />
+
+              <Route
+                path='/stores/orders/new/:orderId'
+                element={
+                  <PrivateRoute>
+                    <StoreOrdersPage />
                   </PrivateRoute>
                 } />
 

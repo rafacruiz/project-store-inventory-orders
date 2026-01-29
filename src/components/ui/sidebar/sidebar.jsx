@@ -41,7 +41,7 @@ function Sidebar () {
 
                 { user.role === 'shop' && (
                     <li className="nav-item">
-                        <Link className="nav-link text-black d-flex align-items-center gap-2" to={'/orders'}>
+                        <Link className="nav-link text-black d-flex align-items-center gap-2" to={'/stores/orders'}>
                             <i className="fa fa-shopping-basket"> </i>
                             <span className="d-none d-md-inline">Orders</span>
                         </Link>

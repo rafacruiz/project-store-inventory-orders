@@ -3,8 +3,8 @@ import { setupWorker } from 'msw/browser';
 import { handleLoginUser } from './auth';
 import { handleListProducts, handleDetailsProduct, handleDeleteProduct, handleCreateProduct } from './products';
 import { handleWarehouses, handleWarehouse, handleProductsWarehouse, handleAddProductWarehouse, handleUpdateProductWarehouse, handleDeleteProductWarehouse } from './warehouse';
-import { handleStores, handleStoresOrders, handleStoreOrderOpen } from './stores';
-import { handleOrders } from './orders';
+import { handleStores } from './stores';
+import { handleOrders, handleOrderByStore, handleOrdersOpen } from './orders';
 
 const worker = setupWorker(
     handleListProducts, 
@@ -19,7 +19,8 @@ const worker = setupWorker(
     handleUpdateProductWarehouse,
     handleDeleteProductWarehouse,
     handleStores,
-    handleStoresOrders,
-    handleStoreOrderOpen);
+    handleOrders,
+    handleOrderByStore,
+    handleOrdersOpen);
 
 export default worker;
