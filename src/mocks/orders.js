@@ -11,6 +11,26 @@ export let orders = localStorage.getItem(ORDERS_LS_KEY) ? JSON.parse(localStorag
 
 const store = () => localStorage.setItem(ORDERS_LS_KEY, JSON.stringify(orders));
 
+
+export const handleOrdersOpen = 
+    http.post('/orders/open', async ({ request }) => {
+        const { storeId, warehouseId } = await request.json();
+
+        const order = {
+            id: crypto.randomUUID(),
+            storeId,
+            warehouseId,
+            status: 'open',
+            createdAt: new Date().toISOString(),
+            lines: []
+        };
+
+        orders.push(order);
+        saveOrders();
+
+        return HttpResponse.json(order, { status: 201 });
+    });
+
 export const handleOrders = 
     http.get(`${baseApiURL}/orders`, () => {
 

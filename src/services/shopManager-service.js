@@ -1,4 +1,5 @@
 import axios from "axios";
+import { body } from "motion/react-client";
 
 const http = axios.create({
     baseURL: 'https://fruitproducts.org/api/v1'
@@ -57,8 +58,4 @@ export const setProductDeleteWarehouses = (warehouseId, productId) =>
 export const getStores = () =>
     http.get('/stores');
 
-export const getStoresOrders = (storeId) => 
-    http.get(`/stores/${storeId}/orders`);
-
-export const setStoreOrderOpen = (storeId, body) => 
-    http.post(`/stores/${storeId}/open`, body);
+export const setOrdersByStore = (body) => http.post(`/orders/open`, body);

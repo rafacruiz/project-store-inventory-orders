@@ -9,7 +9,7 @@ const baseApiURL = 'https://fruitproducts.org/api/v1';
 const STORES_CURRENT_LS_KEY = 'userCurrent-db';
 const STORES_LS_KEY = 'stores-db';
 
-export let storesCurrent = localStorage.getItem(STORES_CURRENT_LS_KEY) && JSON.parse(localStorage.getItem(STORES_CURRENT_LS_KEY));
+export let storesCurrent = localStorage.getItem(STORES_CURRENT_LS_KEY) ? localStorage.getItem(STORES_CURRENT_LS_KEY) : [];
 export let stores = localStorage.getItem(STORES_LS_KEY) ? JSON.parse(localStorage.getItem(STORES_LS_KEY)) : DEFAULT_STORES;
 
 const storeCurrent = () => localStorage.setItem(STORES_CURRENT_LS_KEY, JSON.stringify(storesCurrent));
@@ -30,22 +30,20 @@ export const handleStoresOrders =
     http.get(`${baseApiURL}/stores/:storeId/orders`, (req) => {
         const { storeId } = req.params;
 
-        if (storesCurrent.id !== storeId) return HttpResponse.json({ message: 'Orders store not found' }, { status: 400 });
+        if (!storesCurrent) return HttpResponse.json({ message: 'Orders store not found' }, { status: 400 });
 
-        return HttpResponse.json(storesCurrent.order, { status: 200 });
+        return HttpResponse.json(storesCurrent?.order ?? [], { status: 200 });
     });
 
 export const handleStoreOrderOpen = 
     http.post(`${baseApiURL}/stores/:storeId/open`, async (req) => {
         const { storeId } = req.params;
-
         const warehouse = await req.request.clone().json();
-
         const now = new Date().toISOString();
 
         if (!storesCurrent) return HttpResponse.json({ message: 'Store not found' }, { status: 400 });
         
-        storesCurrent.order.push({
+        const newOrder = {
             'id': crypto.randomUUID(),
             'storeId': storeId,
             'warehouseId': warehouse.warehouseId,
@@ -53,9 +51,10 @@ export const handleStoreOrderOpen =
             'status': 'pending',
             'lines': [],
             'total': 0
-        });
+        }
 
+        storesCurrent.order.push(newOrder);
         storeCurrent();
 
-        return HttpResponse.json(store, { status: 201 });
+        return HttpResponse.json(newOrder, { status: 201 });
     });
