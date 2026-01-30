@@ -53,7 +53,7 @@ function WarehouseItem({ product, onUpdatePrice, onUpdateMinStock, onUpdateStock
           <small className="text-muted">&nbsp;</small>
           <button
             className={`btn btn-sm w-100 ${ product.active ? 'btn-success' : 'btn-danger' }`}
-            onClick={() => onToggleActiveWare(product.id, !product.active, product.stock)} >
+            onClick={() => onToggleActiveWare(product.id, !product.active, Number(product.stock), Number(product.price))} >
             {product.active ? 'Active' : 'Inactive'}
           </button>
         </div>

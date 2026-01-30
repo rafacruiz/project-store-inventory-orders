@@ -89,10 +89,17 @@ function WarehouseList () {
         }
     };
 
-    const handleToggleActiveWarehouse = async (productId, newActive, stock) => {
+    const handleToggleActiveWarehouse = async (productId, newActive, stock, price) => {
         try {
             if (stock === 0 && newActive) {
-                const message = 'This product has zero stock and cannot be activated!'
+                const message = 'This product has zero stock and cannot be activated!';
+                toast.error(<span className="text-center">{message}</span>);
+                console.info(message);
+                return;
+            }
+
+            if (!price && newActive) {
+                const message = 'This product has not price and cannot be activated!';
                 toast.error(<span className="text-center">{message}</span>);
                 console.info(message);
                 return;
