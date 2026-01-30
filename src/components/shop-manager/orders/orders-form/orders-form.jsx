@@ -35,21 +35,43 @@ function useOrderNavigation() {
     };
 }
 
-function OrdersAdd () {
+function OrdersForm () {
 
     const { orderId, warehouseId } = useOrderNavigation();
     
     const [products, setProduct] = useState(null);
+    const [order, setOrder] = useState(null);
     const [search, setSearch] = useState('');
 
     useEffect(() => {
         const fetchProductStore = async (warehouseId) => {
-            const products = await ShopManager.getProductsWarehouses(warehouseId);
-            setProduct(products);
+            try {
+                const products = await ShopManager.getProductsWarehouses(warehouseId);
+                setProduct(products);
+            } catch (error) {
+                const message = error?.message || 'Error fetching products';
+                console.error(message);
+                toast.error(message);
+            }
         }
 
         if (warehouseId) fetchProductStore(warehouseId);
     }, [warehouseId]);
+
+    useEffect(() => {
+        const fetchOrderLines = async () => {
+            try {
+                const order = await ShopManager.getOrdersById(orderId);
+                setOrder(order);    
+            } catch (error) {
+                const message = error?.message || 'Error fetching order lines';
+                console.error(message);
+                toast.error(message);
+            }
+        };
+
+        fetchOrderLines();
+    }, []);
 
     if (products === null) return <Loader />;
 
@@ -58,7 +80,9 @@ function OrdersAdd () {
             <Toaster position="top-center" reverseOrder={false} />
             <small className="fw-semibold text-secondary mb-2"> Orders { orderId } </small>
 
-            {products?.length ? (
+            { order.status === 'closed' 
+            ? ( <AlertMessage message='The order is closed. You cannot add products.' /> )
+            : products?.length ? (
                 <>
                     <div className="mx-auto w-100 py-3">
                         <InputFinder onChange={ setSearch } inputOption={ inpFinderOption } />
@@ -71,8 +95,8 @@ function OrdersAdd () {
                             .map((product) => (
                                 <OrdersItem
                                     key={ product.id }
+                                    order={ order }
                                     product={ product }
-                                    orderId={ orderId }
                                 />                        
                             ))
                         }
@@ -83,4 +107,4 @@ function OrdersAdd () {
     );
 }
 
-export default OrdersAdd;
+export default OrdersForm;

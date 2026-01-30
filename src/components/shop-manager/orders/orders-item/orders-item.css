@@ -1,0 +1,8 @@
+.order-line {
+  border: 1px solid transparent;
+  box-shadow: 0 1px 3px rgba(0,0,0,.08);
+}
+
+.order-line.is-dirty {
+  border-left: 4px solid #b8eba9;
+}

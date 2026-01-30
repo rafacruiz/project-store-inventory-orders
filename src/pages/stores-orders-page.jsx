@@ -1,19 +1,18 @@
-
 import { PageLayout } from '../components/layouts';
-import { OrdersAdd } from "../components/shop-manager/orders";
+import { OrdersList } from '../components/shop-manager/orders';
 
-function StoreOrdersPage() {
-    
+function StoresOrdersPage () {
+
     const jumbotron = {
         title: 'ShopManager',
-        subTitle: 'Stores order details'
+        subTitle: `Orders`
     }
 
     return (
-        <PageLayout jumbotron={ jumbotron }>
-            <OrdersAdd />
+        <PageLayout jumbotron={jumbotron}>
+            <OrdersList />
         </PageLayout>
     );
 }
 
-export default StoreOrdersPage;
+export default StoresOrdersPage;

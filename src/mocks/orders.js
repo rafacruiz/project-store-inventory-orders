@@ -45,20 +45,19 @@ export const handleOrdersOpen =
     });
 
 export const handleOrdersById = 
-    http.get(`${baseApiURL}/orders/:orderId/lines`, (req) => {
+    http.get(`${baseApiURL}/orders/:orderId`, (req) => {
         const { orderId } = req.params;
 
         if (!orderId) return HttpResponse.json(
             { message: 'orderId are required' }, { status: 400 } );
 
-        const orderLines = orders.find((order) => 
-            order.id === orderId
-            && order.status === 'open');
+        const order = orders.find((order) => 
+            order.id === orderId);
 
-        if (!orderLines) return HttpResponse.json( 
-            { message: 'Order lines not found' }, { status: 400 } );
+        if (!order) return HttpResponse.json( 
+            { message: 'Order not found' }, { status: 400 } );
         
-        return HttpResponse.json(orderLines, { status: 201 });
+        return HttpResponse.json(order, { status: 201 });
     });
 
 export const handleOrdersLinesUpdate = 
@@ -69,9 +68,6 @@ export const handleOrdersLinesUpdate =
         if (!orderId) return HttpResponse.json(
             { message: 'orderId are required' }, { status: 400 } );
         
-        if (!Array.isArray(updates.lines)) return HttpResponse.json( 
-            { message: 'Lines must be an array' }, { status: 400 } );
-        
         const order = orders.find((order) => 
             order.id === orderId
             && order.status === 'open');
@@ -79,11 +75,13 @@ export const handleOrdersLinesUpdate =
         if (!order) return HttpResponse.json( 
             { message: 'Order lines not found' }, { status: 400 } );
 
-        updates.lines.forEach(({ productId, quantity }) => {
-            const line = order.lines.find(l => l.productId === productId);
-            if (line) line.quantity = quantity;
-            else order.lines.push({ productId, quantity });
+        updates.forEach(({ id, quantity }) => {
+            const line = order.lines.find(line => line.id === id);
+            if (line) line.quantity = quantity
+            else order.lines.push(...updates);
         });
+
+        order.total = order.lines.reduce((sum, line) => sum + (line.quantity * (line.price || 0)), 0);
         
         store();
 

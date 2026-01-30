@@ -53,7 +53,9 @@ function OrdersList () {
         if (isOpen) {
             const fetchOrdersByStore = async () => {
                 try {
-                    const newOrder = await ShopManager.setOrdersOpen({storeId: user?.id, warehouseId: user?.warehouseId});
+                    const newOrder = await ShopManager.setOrdersOpen(
+                        {storeId: user?.id, warehouseId: user?.warehouseId});
+
                     const message = 'Order opened successfully';
                     console.log(message);
                     navigate('/stores/orders/new/' + newOrder.id, 
@@ -165,12 +167,22 @@ function OrdersList () {
                                 </div>
 
                                 <div className="d-flex gap-2">
-                                    <Link
-                                        to={`/stores/order/${order.id}/warehouse/${order.warehouseId}`} 
-                                        className="btn btn-outline-primary btn-sm">
-                                            <i className="fa fa-info me-1"></i>
-                                            Details
-                                    </Link>
+                                    {(order.status !== 'closed') &&
+                                        <Link
+                                            to={`/stores/order/${order.id}/warehouse/${order.warehouseId}`} 
+                                            className="btn btn-outline-primary btn-sm">
+                                                <i className="fa fa-pencil me-1"></i>
+                                                Edit order
+                                        </Link>
+                                    }
+                                    {(order.status === 'closed') &&
+                                        <Link
+                                            to={`/stores/order/${order.id}/details`} 
+                                            className="btn btn-outline-primary btn-sm">
+                                                <i className="fa fa-search me-1"></i>
+                                                Order details
+                                        </Link>
+                                    }
                                     <button 
                                         className="btn btn-success btn-sm" 
                                         disabled={ order.status !== 'open' } 

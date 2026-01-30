@@ -70,7 +70,7 @@ export const setOrdersOpen = (body) =>
 export const getOrdersById = (orderId) =>
     http.get(`/orders/${orderId}`);
 
-export const getOrdersLinesUpdate = (orderId, body) =>
+export const setOrdersLinesUpdate = (orderId, body) =>
     http.patch(`/orders/${orderId}/lines`, body);
 
 export const setOrdersUpdate = (orderId, warehouseId, body) =>
