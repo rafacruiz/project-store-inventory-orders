@@ -81,7 +81,7 @@ export const handleOrdersLinesUpdate =
             else order.lines.push(...updates);
         });
 
-        order.total = order.lines.reduce((sum, line) => sum + (line.quantity * (line.price || 0)), 0);
+        order.total = order.lines.reduce((sum, line) => sum + (line.quantity * (line.price.toFixed(2) || 0)), 0);
         
         store();
 
