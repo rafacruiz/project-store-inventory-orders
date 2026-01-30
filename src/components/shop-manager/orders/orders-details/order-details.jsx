@@ -103,9 +103,9 @@ function OrderDetails() {
                                             </div>
                                         </td>
                                         <td className="text-muted">{ line?.sku ?? 'Unknown' }</td>
-                                        <td className="text-end">{ line?.price ?? 0 } €</td>
+                                        <td className="text-end">{ line?.price.toFixed(2) ?? 0 } €</td>
                                         <td className="text-end">{ line?.quantity ?? 'Unknown' }</td>
-                                        <td className="text-end fw-semibold">{ (line?.quantity * line?.price) ?? 0 } €</td>
+                                        <td className="text-end fw-semibold">{ (line?.quantity * line?.price).toFixed(2) ?? 0 } €</td>
                                     </tr>
                                 ))}
                         </tbody>
