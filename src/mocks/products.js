@@ -17,7 +17,7 @@ export const handleListProducts =
     
         await new Promise((r) => setTimeout(r, 2000)); // DELETE
 
-        return HttpResponse.json(products);
+        return HttpResponse.json(products.toSorted((a, b) => a.name.localeCompare(b.name)));
     });
 
 export const handleDetailsProduct = 
@@ -34,7 +34,9 @@ export const handleDeleteProduct =
     http.delete(`${baseApiURL}/products/:id`, (req) => {
         const { id } = req.params;
         
-        products = products.filter((product) => !product.id.includes(id));
+        products = products
+            .filter((product) => !product.id.includes(id))
+            .toSorted((a, b) => a.status.localeCompare(b.status));
         if (!products) return HttpResponse.json({ message: 'Error delete product' }, { status: 404 });
 
         store();

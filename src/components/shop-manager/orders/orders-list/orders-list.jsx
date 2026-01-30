@@ -141,7 +141,6 @@ function OrdersList () {
                     <ol className="list-group pt-3">
                         {orders
                         .filter((order) => order.id.toLowerCase().includes(search.toLowerCase()))
-                        .toSorted((a, b) => b.status.localeCompare(a.status))
                         .map((order) => (
                             <li 
                                 key={order.id} 

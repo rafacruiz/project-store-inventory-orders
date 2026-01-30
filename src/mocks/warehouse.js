@@ -12,7 +12,8 @@ let warehouses = localStorage.getItem(WAREHOUSE_LS_KEY) ? JSON.parse(localStorag
 const store = () => localStorage.setItem(WAREHOUSE_LS_KEY, JSON.stringify(warehouses));
 
 export const handleWarehouses = 
-    http.get(`${baseApiURL}/warehouses`, () => HttpResponse.json(warehouses, { status: 200 } ));
+    http.get(`${baseApiURL}/warehouses`, () => 
+        HttpResponse.json(warehouses.toSorted((a, b) => a.name.localeCompare(b.name)), { status: 200 } ));
 
 export const handleWarehouse = 
     http.get(`${baseApiURL}/warehouses/:id`, (req) => {
@@ -31,7 +32,9 @@ export const handleProductsWarehouse =
 
         if (!warehouse) return HttpResponse.json({ message: 'Warehouse not found' }, { status: 400 });
 
-        const products = warehouse.products.filter((product) => product.active);
+        const products = warehouse.products
+            .filter((product) => product.active)
+            .toSorted((a, b) => a.name.localeCompare(b.name));
 
         if (!products) return HttpResponse.json({ message: 'Products of warehouse not found' }, { status: 400 });
 

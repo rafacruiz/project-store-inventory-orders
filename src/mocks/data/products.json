@@ -24,7 +24,7 @@
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg",
     "category": "fruit",
     "sku": "1000003",
-    "active": true
+    "active": false
   },
   {
     "id": "0004a111-b004-4a04-9004-000000000004",

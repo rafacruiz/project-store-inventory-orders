@@ -10,13 +10,16 @@ let orders = localStorage.getItem(ORDERS_LS_KEY) ? JSON.parse(localStorage.getIt
 const store = () => localStorage.setItem(ORDERS_LS_KEY, JSON.stringify(orders));
 
 export const handleOrders = 
-    http.get(`${baseApiURL}/orders`, () => HttpResponse.json(orders, { status: 200 }));
+    http.get(`${baseApiURL}/orders`, () => 
+        HttpResponse.json(orders.toSorted((a, b) => a.status.localeCompare(b.status)), { status: 200 }));
 
 export const handleOrderByStore = 
     http.get(`${baseApiURL}/orders/store/:storeId`, (req) => {
         const { storeId } = req.params;
 
-        const storeOrders  = orders.filter((order) => String(order.storeId) === String(storeId));
+        const storeOrders  = orders
+            .filter((order) => String(order.storeId) === String(storeId))
+            .toSorted((a, b) => b.status.localeCompare(a.status));
         
         return HttpResponse.json(storeOrders , { status: 200 });
     });
@@ -51,9 +54,7 @@ export const handleOrdersById =
         if (!orderId) return HttpResponse.json(
             { message: 'orderId are required' }, { status: 400 } );
 
-        const order = orders.find((order) => 
-            order.id === orderId);
-
+        const order = orders.find((order) => order.id === orderId);
         if (!order) return HttpResponse.json( 
             { message: 'Order not found' }, { status: 400 } );
         

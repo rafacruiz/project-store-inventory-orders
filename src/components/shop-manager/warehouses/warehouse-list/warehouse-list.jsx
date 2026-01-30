@@ -160,7 +160,6 @@ function WarehouseList () {
                 { (warehouses?.products?.length) 
                     ? warehouses.products
                         .filter((product) => product.name.toLowerCase().includes(search.toLowerCase()))
-                        .toSorted((a, b) => a.name.localeCompare(b.name))
                         .map((product) => ( 
                         <WarehouseItem 
                             key={ product.id }

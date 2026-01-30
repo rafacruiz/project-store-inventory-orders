@@ -19,5 +19,5 @@ export const handleStores =
         
         store();
 
-        return HttpResponse.json(storesData, { status: 200 } );
+        return HttpResponse.json(storesData.toSorted((a, b) => a.nameShop.localeCompare(b.nameShop)), { status: 200 } );
     });

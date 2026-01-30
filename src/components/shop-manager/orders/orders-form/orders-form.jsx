@@ -91,7 +91,6 @@ function OrdersForm () {
                     <ol className="list-group pt-3">
                         {products
                             ?.filter((product) => product.active && product.name.toLowerCase().includes(search.toLowerCase()))
-                            .toSorted((a, b) => a.name.localeCompare(b.name))
                             .map((product) => (
                                 <OrdersItem
                                     key={ product.id }
