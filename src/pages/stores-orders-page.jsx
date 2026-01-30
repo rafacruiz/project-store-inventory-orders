@@ -6,7 +6,7 @@ function StoreOrdersPage() {
     
     const jumbotron = {
         title: 'ShopManager',
-        subTitle: 'Stores New Orders'
+        subTitle: 'Stores order details'
     }
 
     return (

@@ -66,3 +66,12 @@ export const getOrderByStore = (storeId) =>
 
 export const setOrdersOpen = (body) => 
     http.post(`/orders/open`, body);
+
+export const getOrdersById = (orderId) =>
+    http.get(`/orders/${orderId}`);
+
+export const getOrdersLinesUpdate = (orderId, body) =>
+    http.patch(`/orders/${orderId}/lines`, body);
+
+export const setOrdersUpdate = (orderId, warehouseId, body) =>
+    http.patch(`/orders/${orderId}/warehouse/${warehouseId}`, body);

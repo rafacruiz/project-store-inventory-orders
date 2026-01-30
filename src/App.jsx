@@ -92,6 +92,14 @@ function App() {
                   </PrivateRoute>
                 } />
 
+              <Route
+                path='/stores/order/:detailOrderId/warehouse/:detailWarehouseId'
+                element={
+                  <PrivateRoute>
+                    <StoreOrdersPage />
+                  </PrivateRoute>
+                } />
+
             <Route path='*' element={ <NotFoundPage /> } />
           </Routes>
         </AnimatePresence>

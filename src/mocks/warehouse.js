@@ -78,7 +78,7 @@ export const handleUpdateProductWarehouse =
         Object.assign(product, updates);
         store();
 
-        return HttpResponse.json(product, {status: 200});
+        return HttpResponse.json(product, {status: 201});
     });
 
 export const handleDeleteProductWarehouse = 
@@ -91,5 +91,5 @@ export const handleDeleteProductWarehouse =
         warehouse.products = warehouse.products.filter(product => product.id !== productId);
         store();
 
-        return HttpResponse.json({ message: 'Product successfully removed from the warehouse' }, {status: 200});
+        return HttpResponse.json({ message: 'Product successfully removed from the warehouse' }, {status: 201});
     });
