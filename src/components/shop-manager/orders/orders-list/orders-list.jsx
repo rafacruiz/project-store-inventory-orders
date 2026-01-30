@@ -1,9 +1,8 @@
 
-import { BounceLoader } from "react-spinners";
 import { useEffect, useState } from "react";
 import { useAuth } from '../../../../contexts';
 import toast, { Toaster } from "react-hot-toast";
-import { InputFinder } from "../../../ui";
+import { AlertMessage, InputFinder, Loader } from "../../../ui";
 import * as ShopManager from '../../../../services/shopManager-service';
 import { Link, useNavigate } from "react-router-dom";
 
@@ -11,19 +10,6 @@ const inpFinderOption = {
     'id': 'orders',
     'placeholder': 'Finder orders...'
 }
-
-const Loader = () => (
-    <div className="d-flex justify-content-center align-items-center py-4">
-        <BounceLoader color="#030404" size={ 35 } />
-    </div>
-);
-
-const AlertMessage = ({ message }) => (
-    <div className="alert alert-primary d-flex justify-content-center align-items-center gap-2">
-        <i className="fa fa-info-circle"></i>
-        <span> { message } </span>
-    </div>
-);
 
 function OrdersList () {
 
@@ -194,7 +180,7 @@ function OrdersList () {
                         ))}
                     </ol>
                 </>
-            ) : ( <AlertMessage message='No orders available' /> )}   
+            ) : ( <AlertMessage message='No orders available' /> )}
         </div>
     );
 }

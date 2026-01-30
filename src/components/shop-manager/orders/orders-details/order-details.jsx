@@ -1,4 +1,5 @@
 
+import {Loader, AlertMessage } from "../../../ui";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from '../../../../contexts/auth-context';
@@ -27,8 +28,11 @@ function OrderDetails() {
         fetchOrderDetails();
     }, [orderId]);
 
+    if (order === null) return <Loader />;
+
+    if (!order?.lines?.length) return <AlertMessage message='The order is not closed. You cannot view lines details.' />
+
     return (
-        
         <div className="container py-4">
             <div className="card shadow-sm mb-4">
                 <div className="card-body d-flex justify-content-between align-items-center">

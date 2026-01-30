@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { BounceLoader } from "react-spinners";
-import { ButtonAdd, InputFinder } from "../../../ui";
+import { AlertMessage, ButtonAdd, InputFinder, Loader } from "../../../ui";
 import * as ShopManager from '../../../../services/shopManager-service';
 
 const inpFinderOption = {
@@ -33,22 +33,10 @@ function StoreList () {
         fetchStores();
     }, []);
 
-    if (stores === null) {
-         return (
-            <div className="d-flex justify-content-center align-items-center py-4">
-                <BounceLoader color="#030404" size={ 35 }  />
-            </div>);
-    }
-
-    if (!stores?.length) {
-         return (
-            <div className="alert alert-primary d-flex justify-content-center align-items-center gap-2">
-                <i className="fa fa-info-circle"></i>
-                <span> No stores available </span>
-            </div>
-        );
-    }
-
+    if (stores === null) return <Loader />;
+        
+    if (!stores?.length) return <AlertMessage message='No stores available' />;
+         
     return (
         <>
             <div className="d-flex py-3">

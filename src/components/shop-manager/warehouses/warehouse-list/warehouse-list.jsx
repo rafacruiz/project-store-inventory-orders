@@ -1,6 +1,6 @@
+
 import { useEffect, useState } from "react";
-import { BounceLoader } from "react-spinners";
-import { InputFinder } from "../../../ui";
+import { AlertMessage, InputFinder, Loader } from "../../../ui";
 import toast, { Toaster } from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import { ProductList } from '../../products';
@@ -138,13 +138,8 @@ function WarehouseList () {
         }
     };
     
-    if (warehouses === null) {
-        return (
-            <div className="d-flex justify-content-center align-items-center py-4">
-                <BounceLoader color="#030404" size={ 35 }  />
-            </div>);
-    } 
-     
+    if (warehouses === null) return <Loader />;
+    
     return (
         <>
             <Toaster position="top-center" reverseOrder={false} />
@@ -170,10 +165,7 @@ function WarehouseList () {
                             onToggleActiveWare={ handleToggleActiveWarehouse } 
                             onDeleteWare={ handleDeleteWarehouse }/>
                     )) 
-                    : <div className="alert alert-primary d-flex justify-content-center align-items-center gap-2">
-                        <i className="fa fa-info-circle"></i>
-                        <span> No products found in warehouse "{ warehouses.name }" </span>
-                    </div>
+                    : <AlertMessage message={`No products found in warehouse "${ warehouses.name }"`} />
                 }
             </ol>
 

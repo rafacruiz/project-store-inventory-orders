@@ -1,6 +1,6 @@
-import { BounceLoader } from "react-spinners";
+
 import { useEffect, useState } from "react";
-import { ButtonAdd, InputFinder } from '../../../ui';
+import { ButtonAdd, InputFinder, Loader } from '../../../ui';
 import { useAuth } from '../../../../contexts';
 import ProductItem from "../product-item/product-item";
 import * as ShopManager from '../../../../services/shopManager-service';
@@ -47,23 +47,10 @@ function ProductList ({ warehouse = false, addItemWarehouse = () => {}}) {
         }
     };
 
-    if (products === null) {
-        return (
-                <div className="d-flex justify-content-center align-items-center py-4">
-                    <BounceLoader color="#030404" size={ 35 }  />
-                </div>
-            );
-    } 
+    if (products === null) return <Loader />;
     
-    if (!products?.length) {
-        return (
-            <div className="alert alert-primary d-flex justify-content-center align-items-center gap-2">
-                <i className="fa fa-info-circle"></i>
-                <span> No products available </span>
-            </div>
-        );
-    }
-    
+    if (!products?.length) return <AlertMessage message='No products available' />;
+        
     return (
         <>
             <div className="d-flex py-3">

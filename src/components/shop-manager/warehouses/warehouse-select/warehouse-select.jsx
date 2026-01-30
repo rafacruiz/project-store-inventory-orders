@@ -1,7 +1,8 @@
+
 import { useEffect, useState } from "react";
-import { ButtonAdd, InputFinder } from "../../../ui";
-import * as ShopManager from "../../../../services/shopManager-service";
+import { AlertMessage, ButtonAdd, InputFinder, Loader } from "../../../ui";
 import WarehouseSelectItem from "../warehouse-select-item/warehouse-select-item";
+import * as ShopManager from "../../../../services/shopManager-service";
 
 const VIEW = {
     LIST: "list",
@@ -22,7 +23,7 @@ function WarehouseSelect() {
         'to': '',
     }
 
-    const [warehouses, setWarehouses] = useState([]);
+    const [warehouses, setWarehouses] = useState(null);
     const [search, setSearch] = useState('');
     const [view, setView] = useState(VIEW.GRID);
 
@@ -38,6 +39,10 @@ function WarehouseSelect() {
 
         fetchWarehouse();
     }, []);
+
+    if (warehouses === null) return <Loader />;
+
+    if (!warehouses?.length) return <AlertMessage message='No products available' />;
 
     return (
         <>

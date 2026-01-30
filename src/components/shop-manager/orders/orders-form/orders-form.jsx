@@ -1,8 +1,7 @@
 
 import toast, { Toaster } from "react-hot-toast";
 import { useLocation, useParams } from "react-router-dom";
-import { BounceLoader } from "react-spinners";
-import { InputFinder } from "../../../ui";
+import { AlertMessage, InputFinder, Loader } from "../../../ui";
 import { useEffect, useState } from "react";
 import OrdersItem from "../orders-item/orders-item";
 import * as ShopManager from '../../../../services/shopManager-service';
@@ -11,19 +10,6 @@ const inpFinderOption = {
     'id': 'ordersProducts',
     'placeholder': 'Finder products...'
 }
-
-const Loader = () => (
-    <div className="d-flex justify-content-center align-items-center py-4">
-        <BounceLoader color="#030404" size={ 35 } />
-    </div>
-);
-
-const AlertMessage = ({ message }) => (
-    <div className="alert alert-primary d-flex justify-content-center align-items-center gap-2">
-        <i className="fa fa-info-circle"></i>
-        <span> { message } </span>
-    </div>
-);
 
 function useOrderNavigation() {
     const { state } = useLocation();

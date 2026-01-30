@@ -6,3 +6,5 @@ export { default as Footer } from './footer/footer';
 export { default as ButtonAdd } from './buttons/button-add';
 export { default as InputFinder } from './inputs/input-finder';
 export { default as ButtonBack } from './buttons/button-back';
+export { default as AlertMessage } from './alert/alert';
+export { default as Loader } from './loader/loader';
