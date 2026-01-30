@@ -1,7 +1,7 @@
 
 import toast, { Toaster } from "react-hot-toast";
 import { useLocation, useParams } from "react-router-dom";
-import { AlertMessage, InputFinder, Loader } from "../../../ui";
+import { AlertMessage, ButtonBack, InputFinder, Loader } from "../../../ui";
 import { useEffect, useState } from "react";
 import OrdersItem from "../orders-item/orders-item";
 import * as ShopManager from '../../../../services/shopManager-service';
@@ -70,10 +70,13 @@ function OrdersForm () {
             ? ( <AlertMessage message='The order is closed. You cannot add products.' /> )
             : products?.length ? (
                 <>
-                    <div className="mx-auto w-100 py-3">
-                        <InputFinder onChange={ setSearch } inputOption={ inpFinderOption } />
-                    </div>                
-                
+                    <div className="d-flex py-3">
+                        <div className="me-2"> <ButtonBack to={'/stores/orders'} /> </div>
+                        <div className="mx-auto w-100">
+                            <InputFinder onChange={ setSearch } inputOption={ inpFinderOption } />
+                        </div>                
+                    </div>
+
                     <ol className="list-group pt-3">
                         {products
                             ?.filter((product) => product.active && product.name.toLowerCase().includes(search.toLowerCase()))
