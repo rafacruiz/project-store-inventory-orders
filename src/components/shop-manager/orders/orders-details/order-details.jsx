@@ -1,11 +1,14 @@
 
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useAuth } from '../../../../contexts/auth-context';
 import * as ShopManager from "../../../../services/shopManager-service";
 
 function OrderDetails() {
 
     const { orderId } = useParams();
+
+    const { user } = useAuth();
 
     const [order, setOrder] = useState(null);
 
@@ -45,7 +48,7 @@ function OrderDetails() {
                     <div className="card h-100">
                         <div className="card-body">
                             <h6 className="text-muted mb-2">Store</h6>
-                            <div className="fw-semibold">{ order?.storeId ?? 'Unknown' }</div>
+                            <div className="fw-semibold">{ user?.nameShop ?? order?.storeId ?? 'Unknown' }</div>
                         </div>
                     </div>
                 </div>
