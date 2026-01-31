@@ -13,17 +13,17 @@ function PageLayout ({ children, jumbotron }) {
     return (
         <>
             { jumbotron && <Jumbotron {...jumbotron} /> }
-            <div className="container-fluid py-2 mx-0">
+            <main className="container-fluid py-2 mx-0">
                 <div className="row">
                     <Sidebar />
                     <motion.div
                         {...pageTransition}
-                        className="col-9 col-md-10"
+                        className="col-9 col-md-10 col-sm-10"
                         >
                             { children }
                     </motion.div>
                 </div>                
-            </div>
+            </main>
         </>
     );
 }
