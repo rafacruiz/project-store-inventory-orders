@@ -25,6 +25,7 @@ function WarehouseItem({ product, onUpdatePrice, onUpdateMinStock, onUpdateStock
             type="number"
             className="form-control form-control-sm"
             value={ product.price }
+            min={0}
             onChange={(e) => onUpdatePrice(product.id, Number(e.target.value))}
           />
         </div>
@@ -35,6 +36,7 @@ function WarehouseItem({ product, onUpdatePrice, onUpdateMinStock, onUpdateStock
             type="number"
             className="form-control form-control-sm"
             value={ product.minStock }
+            min={0}
             onChange={(e) => onUpdateMinStock(product.id,  Number(e.target.value))}
           />
         </div>
@@ -45,6 +47,7 @@ function WarehouseItem({ product, onUpdatePrice, onUpdateMinStock, onUpdateStock
             type="number"
             className="form-control form-control-sm"
             value={ product.stock }
+            min={0}
             onChange={(e) => onUpdateStock(product.id, Number(e.target.value))}
           />
         </div>
