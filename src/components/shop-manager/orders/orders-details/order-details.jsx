@@ -118,7 +118,7 @@ function OrderDetails() {
                         </tbody>
                         <tfoot className="table-light">
                             <tr>
-                                <td colspan="4" className="text-end fw-semibold"> Total</td>
+                                <td colSpan={'4'} className="text-end fw-semibold"> Total</td>
                                 <td className="text-end fs-5 fw-bold">{ order?.total ?? 0 }€</td>
                             </tr>
                         </tfoot>

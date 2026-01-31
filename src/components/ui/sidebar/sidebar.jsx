@@ -12,7 +12,7 @@ function Sidebar () {
                     <>
                         <li className="nav-item">
                             <Link 
-                                class="nav-link text-black d-flex align-items-center justify-content-center justify-content-md-start gap-2" 
+                                className="nav-link text-black d-flex align-items-center justify-content-center justify-content-md-start gap-2" 
                                 to={'/dashboard'}>
                                 <i className="fa fa-home fa-fw"></i>
                                 <span className="d-none d-md-inline">Dashboard</span>
@@ -21,7 +21,7 @@ function Sidebar () {
                 
                         <li className="nav-item">
                             <Link 
-                                class="nav-link text-black d-flex align-items-center justify-content-center justify-content-md-start gap-2" 
+                                className="nav-link text-black d-flex align-items-center justify-content-center justify-content-md-start gap-2" 
                                 to={'/warehouse'}>
                                 <i className="fa fa-cubes fa-fw"></i>
                                 <span className="d-none d-md-inline">Warehouse</span>
@@ -30,7 +30,7 @@ function Sidebar () {
                     
                         <li className="nav-item">
                             <Link 
-                                class="nav-link text-black d-flex align-items-center justify-content-center justify-content-md-start gap-2" 
+                                className="nav-link text-black d-flex align-items-center justify-content-center justify-content-md-start gap-2" 
                                 to={'/stores'}>
                                 <i className="fa fa-building fa-fw"></i>
                                 <span className="d-none d-md-inline">Store</span>
@@ -38,7 +38,7 @@ function Sidebar () {
                         </li>
                         <li className="nav-item">
                             <Link 
-                                class="nav-link text-black d-flex align-items-center justify-content-center justify-content-md-start gap-2" 
+                                className="nav-link text-black d-flex align-items-center justify-content-center justify-content-md-start gap-2" 
                                 to={'/products'}>
                                 <i className="fa fa-apple fa-fw"></i>
                                 <span className="d-none d-md-inline">Products</span>
@@ -50,7 +50,7 @@ function Sidebar () {
                 { user.role === 'shop' && (
                     <li className="nav-item">
                         <Link 
-                            class="nav-link text-black d-flex align-items-center justify-content-center justify-content-md-start gap-2" 
+                            className="nav-link text-black d-flex align-items-center justify-content-center justify-content-md-start gap-2" 
                             to={'/stores/orders'}>
                             <i className="fa fa-shopping-basket"> </i>
                             <span className="d-none d-md-inline">Orders</span>
