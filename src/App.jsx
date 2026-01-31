@@ -3,8 +3,19 @@ import { Routes, Route } from 'react-router';
 import { Footer, Navbar } from './components/ui';
 import { AnimatePresence } from 'motion/react';
 import { PrivateRoute, RoleRoute } from './guards';
-import { HomePage, ProductsDetailsPage, ProductsPage, ProductsAddPage, NotFoundPage, 
-  LoginPage, WarehousePage, StoresPage, StoresOrdersPage, StoresOrderFormPage, StoresOrdersDetailsPage} from './pages';
+import { 
+  HomePage, 
+  ProductsDetailsPage, 
+  ProductsPage, 
+  ProductsAddPage, 
+  NotFoundPage, 
+  LoginPage, 
+  WarehousePage, 
+  StoresPage, 
+  StoresOrdersPage, 
+  StoresOrderFormPage, 
+  StoresOrdersDetailsPage, 
+  OrdersSummaryPage} from './pages';
 import { WarehouseList, WarehouseSelect } from './components/shop-manager/warehouses';
 
 function App() {
@@ -64,6 +75,15 @@ function App() {
                 <PrivateRoute> 
                   <RoleRoute> 
                     <ProductsAddPage /> 
+                  </RoleRoute> 
+                </PrivateRoute> } />
+            
+            <Route 
+              path='/orders/summary' 
+              element={ 
+                <PrivateRoute> 
+                  <RoleRoute> 
+                    <OrdersSummaryPage /> 
                   </RoleRoute> 
                 </PrivateRoute> } />
             

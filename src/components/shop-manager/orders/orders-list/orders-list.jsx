@@ -1,10 +1,10 @@
 
 import { useEffect, useState } from "react";
 import { useAuth } from '../../../../contexts';
+import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { AlertMessage, InputFinder, Loader } from "../../../ui";
 import * as ShopManager from '../../../../services/shopManager-service';
-import { Link, useNavigate } from "react-router-dom";
 
 const inpFinderOption = {
     'id': 'orders',
@@ -24,7 +24,7 @@ function OrdersList () {
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const ordersData = await ShopManager.getOrderByStore(user?.id);
+                const ordersData = await ShopManager.getOrdersByStore(user?.id);
                 setOrders(ordersData);
                 console.log('Orders loading successfully');
             } catch (error) {
@@ -98,7 +98,7 @@ function OrdersList () {
                         <InputFinder onChange={ setSearch } inputOption={ inpFinderOption } />
                     </div>
 
-                    <div className="btn-group mb-3">
+                    <div className="btn-group btn-group-sm mb-3">
                         <button
                             type="button"
                             className="btn btn-outline-dark"

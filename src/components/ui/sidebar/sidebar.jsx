@@ -18,6 +18,15 @@ function Sidebar () {
                                 <span className="d-none d-md-inline">Dashboard</span>
                             </Link>
                         </li>
+
+                        <li className="nav-item">
+                            <Link 
+                                className="nav-link text-black d-flex align-items-center justify-content-center justify-content-md-start gap-2" 
+                                to={'/orders/summary'}>
+                                <i className="fa fa-list-alt fa-fw"></i>
+                                <span className="d-none d-md-inline">Orders</span>
+                            </Link>
+                        </li>
                 
                         <li className="nav-item">
                             <Link 

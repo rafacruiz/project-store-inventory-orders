@@ -9,4 +9,5 @@ export { default as StoresPage } from './stores-page';
 export { default as StoresOrdersPage } from './stores-orders-page';
 export { default as StoresOrderFormPage } from './stores-orders-form-page';
 export { default as StoresOrdersDetailsPage } from './stores-orders-details-page';
+export { default as OrdersSummaryPage } from './orders-summary-page';
 export { default as NotFoundPage } from './404-page';

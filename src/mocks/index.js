@@ -3,10 +3,15 @@ import { setupWorker } from 'msw/browser';
 import { handlerNoImage } from './images';
 import { handleLoginUser } from './auth';
 import { handleListProducts, handleDetailsProduct, handleDeleteProduct, handleCreateProduct } from './products';
-import { handleWarehouses, handleWarehouse, handleProductsWarehouse, handleAddProductWarehouse, 
-    handleUpdateProductWarehouse, handleDeleteProductWarehouse } from './warehouse';
+import { 
+    handleWarehouses, 
+    handleWarehouse, 
+    handleProductsWarehouse, 
+    handleAddProductWarehouse, 
+    handleUpdateProductWarehouse, 
+    handleDeleteProductWarehouse } from './warehouse';
 import { handleStores } from './stores';
-import { handleOrders, handleOrderByStore, handleOrdersOpen, handleOrdersById, handleOrdersUpdate, handleOrdersLinesUpdate } from './orders';
+import { handleOrders, handleOrdersByStore, handleOrdersOpen, handleOrdersById, handleOrdersUpdate, handleOrdersLinesUpdate } from './orders';
 
 const worker = setupWorker(
     handlerNoImage,
@@ -23,7 +28,7 @@ const worker = setupWorker(
     handleDeleteProductWarehouse,
     handleStores,
     handleOrders,
-    handleOrderByStore,
+    handleOrdersByStore,
     handleOrdersOpen,
     handleOrdersById,
     handleOrdersUpdate,

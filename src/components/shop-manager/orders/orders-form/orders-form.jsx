@@ -64,7 +64,7 @@ function OrdersForm () {
     return (
         <div className="d-flex flex-column py-3">
             <Toaster position="top-center" reverseOrder={false} />
-            <small className="fw-semibold text-secondary mb-2"> Orders { orderId } </small>
+            <small className="fw-semibold text-secondary mb-2"> Order #{ orderId } </small>
 
             { order.status === 'closed' 
             ? ( <AlertMessage message='The order is closed. You cannot add products.' /> )
