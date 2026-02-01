@@ -30,7 +30,7 @@ function OrderDetails() {
 
     if (order === null) return <Loader />;
 
-    if (!order?.lines?.length) return <AlertMessage message='The order is not closed. You cannot view lines details.' />
+    if (!order?.lines?.length) return <AlertMessage message='The order is closed. You cannot view lines details.' />
 
     return (
         <div className="container py-4">
