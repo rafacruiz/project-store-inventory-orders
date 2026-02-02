@@ -39,6 +39,17 @@ export const handleOrdersByStore =
         const sortBy = url?.searchParams.get('sortBy') || 'status';
         const orderBy = url?.searchParams.get('orderBy') || 'desc';
 
+        const allowedFields = ['status', 'createdAt']
+        const allowedOrders = ['ASC', 'DESC']
+
+        if (!allowedFields.includes(sortBy)) {
+            return HttpResponse.json({message: 'Invalid sort field'}, { status: 400 });
+        }
+
+        if (!allowedOrders.includes(sortOrder.toUpperCase())) {
+            return HttpResponse.json({message: 'Invalid sort order'}, { status: 400 });
+        }
+
         if (sortBy === 'status') {
             storeOrders = storeOrders.toSorted((a, b) => {
                 if (orderBy === 'asc') return a.status.localeCompare(b.status);
