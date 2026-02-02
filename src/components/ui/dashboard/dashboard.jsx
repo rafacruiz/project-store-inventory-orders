@@ -19,7 +19,7 @@ const Dashboard = () => {
     productsChart.current = new window.Chart(productsCanvas.current, {
       type: "bar",
       data: {
-        labels: ["Electronics", "Clothing", "Books", "Toys", "Home"],
+        labels: ["Banana", "Broccoli", "Lemon", "Potato", "Apple"],
         datasets: [
           {
             label: "Stock per Category",
@@ -40,15 +40,14 @@ const Dashboard = () => {
     ordersChart.current = new window.Chart(ordersCanvas.current, {
       type: "doughnut",
       data: {
-        labels: ["Store A", "Store B", "Store C", "Store D"],
+        labels: ["Shop 1", "Shop 2", "Shop 3"],
         datasets: [
           {
-            data: [15, 30, 22, 18],
+            data: [15, 30, 22],
             backgroundColor: [
               "rgba(40, 167, 69, 0.6)",
               "rgba(255, 193, 7, 0.6)",
               "rgba(220, 53, 69, 0.6)",
-              "rgba(23, 162, 184, 0.6)",
             ],
           },
         ],

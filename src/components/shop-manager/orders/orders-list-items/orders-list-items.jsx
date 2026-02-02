@@ -57,7 +57,7 @@ function OrdersListItems ({ order, setReload }) {
                 </span>
             </div>
 
-            <div className="d-flex gap-2">
+            <div className="d-flex flex-column flex-sm-row gap-2">
                 <button 
                     className="btn btn-success btn-sm" 
                     disabled={ order.status !== 'open' } 

@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import { Jumbotron, Sidebar } from "../../ui";
 import { motion } from 'motion/react';
 
@@ -20,6 +21,7 @@ function PageLayout ({ children, jumbotron }) {
                         {...pageTransition}
                         className="col-9 col-md-10 col-sm-10"
                         >
+                            <Toaster position="top-center" reverseOrder={false} />
                             { children }
                     </motion.div>
                 </div>                
