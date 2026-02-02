@@ -75,6 +75,19 @@ function OrdersList () {
             fetchOrdersByStore();
         }
     }
+
+    const handleDeleteOrder = async (orderId, warehouseId) => {
+        try {
+            const { message } = await ShopManager.setOrdersDelete(orderId, warehouseId);
+            setReload(prev => !prev);
+            console.info(message);
+            toast.success(message);
+        } catch (error) {
+            const message = error?.message || 'Error fetching orders delete';
+            console.error(message);
+            toast.error(message);
+        }
+    };
     
     // Funcion de ordenacion
 
@@ -152,6 +165,13 @@ function OrdersList () {
                                 </div>
 
                                 <div className="d-flex gap-2">
+                                    <button 
+                                        className="btn btn-success btn-sm" 
+                                        disabled={ order.status !== 'open' } 
+                                        onClick={ () => handleStatusOrder(false, order.id, order.warehouseId) } >
+                                            <i className="fa fa-paper-plane-o me-1"></i>
+                                            Send
+                                    </button>
                                     {(order.status !== 'closed') &&
                                         <Link
                                             to={`/stores/order/${order.id}/warehouse/${order.warehouseId}`} 
@@ -169,11 +189,11 @@ function OrdersList () {
                                         </Link>
                                     }
                                     <button 
-                                        className="btn btn-success btn-sm" 
+                                        className="btn btn-danger btn-sm" 
                                         disabled={ order.status !== 'open' } 
-                                        onClick={ () => handleStatusOrder(false, order.id, order.warehouseId) } >
-                                            <i className="fa fa-paper-plane-o me-1"></i>
-                                            Send
+                                        onClick={ () => handleDeleteOrder(order.id, order.warehouseId) } >
+                                            <i className="fa fa-trash me-1"></i>
+                                            Delete
                                     </button>
                                 </div>
                             </li>

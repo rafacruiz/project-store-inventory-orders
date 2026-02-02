@@ -74,8 +74,11 @@ export const setOrdersOpen = (body) =>
 export const getOrdersById = (orderId) =>
     http.get(`/orders/${orderId}`);
 
+export const setOrdersUpdate = (orderId, warehouseId, body) =>
+    http.patch(`/orders/${orderId}/warehouse/${warehouseId}`, body);
+
 export const setOrdersLinesUpdate = (orderId, body) =>
     http.patch(`/orders/${orderId}/lines`, body);
 
-export const setOrdersUpdate = (orderId, warehouseId, body) =>
-    http.patch(`/orders/${orderId}/warehouse/${warehouseId}`, body);
+export const setOrdersDelete = (orderId, warehouseId) => 
+    http.delete(`/orders/${orderId}/warehouses/${warehouseId}`);

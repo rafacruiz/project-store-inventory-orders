@@ -132,3 +132,16 @@ export const handleOrdersUpdate =
             { status: 201 }
         );
     });
+
+export const handleOrdersDelete = 
+    http.delete(`${baseApiURL}/orders/:orderId/warehouses/:warehouseId`, (req) => {
+        const { orderId, warehouseId } = req.params;
+
+        if (!orderId || !warehouseId) return HttpResponse.json(
+            { message: 'orderId and warehouseId are required' }, { status: 400 } );
+
+        orders = orders.filter((order) => !order.id.includes(orderId) && order.warehouseId.includes(warehouseId));
+        store();
+
+        return HttpResponse.json({orders, message: 'Order deleted'}, {status: 200});
+    });

@@ -11,7 +11,7 @@ import {
     handleUpdateProductWarehouse, 
     handleDeleteProductWarehouse } from './warehouse';
 import { handleStores } from './stores';
-import { handleOrders, handleOrdersByStore, handleOrdersOpen, handleOrdersById, handleOrdersUpdate, handleOrdersLinesUpdate } from './orders';
+import { handleOrders, handleOrdersByStore, handleOrdersOpen, handleOrdersById, handleOrdersUpdate, handleOrdersLinesUpdate, handleOrdersDelete } from './orders';
 
 const worker = setupWorker(
     handlerNoImage,
@@ -32,6 +32,7 @@ const worker = setupWorker(
     handleOrdersOpen,
     handleOrdersById,
     handleOrdersUpdate,
-    handleOrdersLinesUpdate);
+    handleOrdersLinesUpdate,
+    handleOrdersDelete);
 
 export default worker;
