@@ -1,5 +1,4 @@
 import axios from "axios";
-import { body } from "motion/react-client";
 
 const http = axios.create({
     baseURL: 'https://fruitproducts.org/api/v1'
