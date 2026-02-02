@@ -26,4 +26,4 @@ jobs:
         run: npm install -g netlify-cli
 
       - name: Netlify Deploy
-        run: netlify deploy --site ${{ secrets.NETLIFY_SITE_ID }} --auth ${{ secrets.NETLIFY_SITE_TOKEN }} --dir=dist --prod
+        run: netlify deploy --site ${{ secrets.NETLIFY_SITE_ID }} --auth ${{ secrets.NETLIFY_SITE_TOKEN }} --dir "dist" --prod
