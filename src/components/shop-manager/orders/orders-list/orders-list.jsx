@@ -9,7 +9,7 @@ import * as ShopManager from '../../../../services/shopManager-service';
 
 const inpFinderOption = {
     'id': 'orders',
-    'placeholder': 'Finder orders...'
+    'placeholder': 'Finder orders id...'
 }
 
 function OrdersList () {
@@ -22,7 +22,7 @@ function OrdersList () {
     const [search, setSearch] = useState('');
     const [reload, setReload] = useState(true);
     const [orderBy, setOrderBy] = useState('asc');
-    const [isActive, setIsActive] = useState(false);
+    const [isActive, setIsActive] = useState('');
 
     const fetchOrders = async (options = {}) => {
         try {
@@ -81,27 +81,30 @@ function OrdersList () {
                             type="button"
                             className={`btn btn-outline-dark ${isActive === 'date'? 'active': ''}`}
                             onClick={() => {
+                                    setIsActive('date');
                                     const nextOrder = orderBy === 'asc' ? 'desc' : 'asc';
                                     fetchOrders({sortBy: 'date', orderBy: nextOrder});
                                     setOrderBy(nextOrder);
-                                    setIsActive('date');
+                                    
                                 }} >
                                 <i className="fa fa-calendar me-1"></i>
                                 Date
-                                <i className={`fa fa fa-long-arrow-${orderBy === 'asc' ? 'down': 'up'} ms-2`}></i>
+                                <i className={`fa fa fa-long-arrow-${orderBy === 'asc' && isActive === 'date' ? 'down': 'up'} ms-2`}></i>
                         </button>
 
                         <button
                             type="button"
-                            className={`btn btn-outline-${orderBy === 'desc' ? 'success' : 'secondary'} ${isActive === 'status'? 'active': ''}`}
+                            className={`btn btn-outline-${orderBy === 'desc' && isActive === 'status' ? 'success' : 'secondary'} 
+                                ${isActive === 'status'? 'active': ''}`}
                             onClick={() => {
+                                    setIsActive('status');
                                     const nextOrder = orderBy === 'asc' ? 'desc' : 'asc';
                                     fetchOrders({sortBy: 'status', orderBy: orderBy });
                                     setOrderBy(nextOrder);
-                                    setIsActive('status');
+                                    
                                 }} >
                                 <i className="fa fa-folder-open me-1"></i>
-                                {orderBy === 'desc' ? 'Open' : 'Closed'}
+                                {orderBy === 'desc' && isActive === 'status' ? 'Open' : 'Closed'}
                         </button>
                     </div>
 
