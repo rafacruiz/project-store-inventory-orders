@@ -21,21 +21,17 @@ http.interceptors.response.use(
     }
 );
 
-export const getProducts = async () => {
-    const products = await http.get('/products');
-
-    return products.toSorted((a, b) => 
-        a.name.localeCompare(b.name));
-};
+export const getProducts = async () =>  
+    http.get('/products');
 
 export const getProductId = (id) => 
     http.get(`/products/${id}`);
 
-export const setProductDelete = (id) => 
-    http.delete(`/products/${id}`);
-
 export const setProductCreate = (data) => 
     http.post('/products', data);
+
+export const setProductDelete = (id) => 
+    http.delete(`/products/${id}`);
 
 export const getWarehouses = () => 
     http.get('/warehouses');
