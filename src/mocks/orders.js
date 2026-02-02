@@ -55,7 +55,7 @@ export const handleOrdersByStore =
                 if (orderBy === 'asc') return a.status.localeCompare(b.status);
                 return b.status.localeCompare(a.status);
             });
-        } else if (sortBy === 'date') {
+        } else if (sortBy === 'createdAt') {
             storeOrders = storeOrders.toSorted((a, b) => {
                 if (orderBy === 'asc') return new Date(a.createdAt) - new Date(b.createdAt);
                 return new Date(b.createdAt) - new Date(a.createdAt);

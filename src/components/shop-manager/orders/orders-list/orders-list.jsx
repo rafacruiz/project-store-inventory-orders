@@ -95,11 +95,11 @@ function OrdersList () {
                     <div className="btn-group btn-group-sm mb-3">
                         <button
                             type="button"
-                            className={`btn btn-outline-dark ${isActive === 'date'? 'active': ''}`}
-                            onClick={() => handleSort('date')} >
+                            className={`btn btn-outline-dark ${isActive === 'createdAt'? 'active': ''}`}
+                            onClick={() => handleSort('createdAt')} >
                                 <i className="fa fa-calendar me-1"></i>
                                 Date
-                                {isActive === 'date' && (
+                                {isActive === 'createdAt' && (
                                     <i className={`fa fa fa-long-arrow-${orderBy === 'asc' ? 'up' : 'down'} ms-2`}></i>
                                 )}
                         </button>
