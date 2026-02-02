@@ -1,0 +1,29 @@
+name: 'Deploy ShopManager'
+on:
+  push:
+    braches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repo checkout
+        uses: actions/checkout@v6
+
+      - name: Setup nodejs
+        uses: actions/setup-node@v6
+        with: 
+          node-version: 22
+      
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+
+      - name: Install netlify CLI
+        run: npm install -g netlify-cli
+
+      - name: Netlify Deploy
+        run: netlify deploy --site ${{ secrets.NETLIFY_SITE_ID}} --auth ${{ secrets.NETLIFY_SITE_TOKEN}} --dir=dist --prod
