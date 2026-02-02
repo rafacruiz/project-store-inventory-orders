@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { BounceLoader } from "react-spinners";
 import { AlertMessage, ButtonAdd, InputFinder, Loader } from "../../../ui";
 import * as ShopManager from '../../../../services/shopManager-service';
 

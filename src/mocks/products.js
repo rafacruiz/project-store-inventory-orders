@@ -35,8 +35,7 @@ export const handleDeleteProduct =
         const { id } = req.params;
         
         products = products
-            .filter((product) => !product.id.includes(id))
-            .toSorted((a, b) => a.status.localeCompare(b.status));
+            .filter((product) => !product.id.includes(id));
         if (!products) return HttpResponse.json({ message: 'Error delete product' }, { status: 404 });
 
         store();

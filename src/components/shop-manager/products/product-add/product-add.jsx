@@ -3,6 +3,7 @@ import { Controller, useForm } from "react-hook-form";
 import Select from "react-select";
 import { ButtonBack } from '../../../ui';
 import * as ShopManager from '../../../../services/shopManager-service';
+import toast from "react-hot-toast";
 
 const category = [
     { value: 'Fruit', label: 'Fruit'},
@@ -53,7 +54,9 @@ function ProductAdd () {
             navigate('/products');
         } catch (error) {
             if ( error.status === 400) {
-                console.error(error?.message || 'Bad Request');
+                const message = error?.message || 'Bad Request';
+                console.error(message);
+                toast.error(message);
             } else {
                 console.error(error || 'Unexpected error');
             }

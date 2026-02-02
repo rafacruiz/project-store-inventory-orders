@@ -1,5 +1,5 @@
 
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useLocation, useParams } from "react-router-dom";
 import { AlertMessage, ButtonBack, InputFinder, Loader } from "../../../ui";
 import { useEffect, useState } from "react";
@@ -63,7 +63,6 @@ function OrdersForm () {
 
     return (
         <div className="d-flex flex-column py-3">
-            <Toaster position="top-center" reverseOrder={false} />
             <small className="fw-semibold text-secondary mb-2"> Order #{ orderId } </small>
 
             { order.status === 'closed' 

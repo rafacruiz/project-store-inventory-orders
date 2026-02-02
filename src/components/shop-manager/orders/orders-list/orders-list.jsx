@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from '../../../../contexts';
 import { useNavigate } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import OrdersListItems from "../orders-list-items/orders-list-items";
 import { AlertMessage, InputFinder, Loader } from "../../../ui";
 import * as ShopManager from '../../../../services/shopManager-service';
@@ -76,7 +76,6 @@ function OrdersList () {
 
     return (
         <div className="d-flex flex-column py-2">
-            <Toaster position="top-center" reverseOrder={false} />
             <small className="fw-semibold text-secondary"> Orders </small>
 
             <div className="py-2">

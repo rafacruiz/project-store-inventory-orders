@@ -1,7 +1,6 @@
 
 import { useEffect, useState } from "react";
 import { AlertMessage, InputFinder, Loader } from "../../../ui";
-import { Toaster } from "react-hot-toast";
 import OrdersSummaryDetails from "../orders-summary-details/orders-summary-details";
 import * as OrdersUtils from './orders-summary-utils';
 import * as ShopManager from '../../../../services/shopManager-service';
@@ -38,7 +37,6 @@ function OrdersSummary () {
     
     return (
         <>
-            <Toaster position="top-center" reverseOrder={false} />
             <small className="fw-semibold text-secondary"> Orders date </small>
             
             <div className="d-flex py-3">                

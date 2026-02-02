@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 import { AlertMessage, InputFinder, Loader } from "../../../ui";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import { ProductList } from '../../products';
 import { WarehouseItem } from '../../warehouses';
@@ -142,7 +142,6 @@ function WarehouseList () {
     
     return (
         <>
-            <Toaster position="top-center" reverseOrder={false} />
             <small className="fw-semibold text-secondary"> Products in {warehouses.name} Warehouse </small>
             
             <div className="d-flex py-3">                

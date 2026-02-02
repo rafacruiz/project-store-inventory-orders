@@ -4,6 +4,7 @@ import { ButtonAdd, InputFinder, Loader } from '../../../ui';
 import { useAuth } from '../../../../contexts';
 import ProductItem from "../product-item/product-item";
 import * as ShopManager from '../../../../services/shopManager-service';
+import toast from "react-hot-toast";
 
 const inpFinderOption = {
     'id': 'product',
@@ -42,6 +43,7 @@ function ProductList ({ warehouse = false, addItemWarehouse = () => {}}) {
         try {
             await ShopManager.setProductDelete(id);
             setReload(prev => !prev);
+            toast.success('Product deleted successfully');
         } catch (error) {
             console.error('Error deleting product:', error);
         }
