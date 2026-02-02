@@ -46,7 +46,7 @@ export const handleOrdersByStore =
             return HttpResponse.json({message: 'Invalid sort field'}, { status: 400 });
         }
 
-        if (!allowedOrders.includes(sortOrder.toUpperCase())) {
+        if (!allowedOrders.includes(orderBy.toUpperCase())) {
             return HttpResponse.json({message: 'Invalid sort order'}, { status: 400 });
         }
 
