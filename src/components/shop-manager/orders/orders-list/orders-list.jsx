@@ -21,22 +21,26 @@ function OrdersList () {
     const [orders, setOrders] = useState(null);
     const [search, setSearch] = useState('');
     const [reload, setReload] = useState(true);
-    
-    useEffect(() => {
-        const fetchOrders = async () => {
-            try {
-                const ordersData = await ShopManager.getOrdersByStore(user?.id);
-                setOrders(ordersData);
-                console.log('Orders loading successfully');
-            } catch (error) {
-                console.error(error?.message || 'Error fetching orders');
-            }
-        }
+    const [orderBy, setOrderBy] = useState('asc');
+    const [isActive, setIsActive] = useState(false);
 
+    const fetchOrders = async (options = {}) => {
+        try {
+            const ordersData = await ShopManager.getOrdersByStore(user?.id, options);
+            setOrders(ordersData);
+            console.log('Orders loading successfully');
+        } catch (error) {
+            const message = error?.message | 'Error fetching orders';
+            console.error(message);
+            toast.error(message);
+        }
+    }
+
+    useEffect(() => {
         if (user?.id) fetchOrders(user?.id);
     }, [user?.id, reload]);
-
-    const fetchOrdersByOpen = async () => {
+    
+    const fetchOpenOrders = async () => {
         try {
             const newOrder = await ShopManager.setOrdersOpen(
                 {storeId: user?.id, warehouseId: user?.warehouseId});
@@ -60,7 +64,7 @@ function OrdersList () {
             <small className="fw-semibold text-secondary"> Orders </small>
 
             <div className="py-2">
-                <button className="btn btn-primary w-100" onClick={() => fetchOrdersByOpen() }>
+                <button className="btn btn-primary w-100" onClick={() => fetchOpenOrders() }>
                     <i className="fa fa-pencil-square-o me-1"></i>
                     Open order
                 </button>
@@ -75,26 +79,29 @@ function OrdersList () {
                     <div className="btn-group btn-group-sm mb-3">
                         <button
                             type="button"
-                            className="btn btn-outline-dark"
-                            onClick={() => handleSort('date')} >
+                            className={`btn btn-outline-dark ${isActive === 'date'? 'active': ''}`}
+                            onClick={() => {
+                                    const nextOrder = orderBy === 'asc' ? 'desc' : 'asc';
+                                    fetchOrders({sortBy: 'date', orderBy: nextOrder});
+                                    setOrderBy(nextOrder);
+                                    setIsActive('date');
+                                }} >
                                 <i className="fa fa-calendar me-1"></i>
                                 Date
+                                <i className={`fa fa fa-long-arrow-${orderBy === 'asc' ? 'down': 'up'} ms-2`}></i>
                         </button>
 
                         <button
                             type="button"
-                            className="btn btn-outline-success"
-                            onClick={() => handleSort('open')} >
+                            className={`btn btn-outline-${orderBy === 'desc' ? 'success' : 'secondary'} ${isActive === 'status'? 'active': ''}`}
+                            onClick={() => {
+                                    const nextOrder = orderBy === 'asc' ? 'desc' : 'asc';
+                                    fetchOrders({sortBy: 'status', orderBy: orderBy });
+                                    setOrderBy(nextOrder);
+                                    setIsActive('status');
+                                }} >
                                 <i className="fa fa-folder-open me-1"></i>
-                                Open
-                        </button>
-
-                        <button
-                            type="button"
-                            className="btn btn-outline-secondary"
-                            onClick={() => handleSort('closed')} >
-                                <i className="fa fa-check-circle me-1"></i>
-                                Closed
+                                {orderBy === 'desc' ? 'Open' : 'Closed'}
                         </button>
                     </div>
 

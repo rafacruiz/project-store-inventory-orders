@@ -5,7 +5,7 @@ import * as ShopManager from '../../../../services/shopManager-service';
 
 function OrdersListItems ({ order, setReload }) {
 
-    const fetchOrdersByClosed = async (orderId, warehouseId) => {
+    const fetchClosedOrders = async (orderId, warehouseId) => {
         try {
             const { message } = await ShopManager.setOrdersUpdate(
                 orderId, 
@@ -61,7 +61,7 @@ function OrdersListItems ({ order, setReload }) {
                 <button 
                     className="btn btn-success btn-sm" 
                     disabled={ order.status !== 'open' } 
-                    onClick={ () => fetchOrdersByClosed(order.id, order.warehouseId) } >
+                    onClick={ () => fetchClosedOrders(order.id, order.warehouseId) } >
                         <i className="fa fa-paper-plane-o me-1"></i>
                         Send
                 </button>

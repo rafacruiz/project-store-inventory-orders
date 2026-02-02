@@ -32,11 +32,26 @@ export const handleOrdersByStore =
     http.get(`${baseApiURL}/orders/store/:storeId`, (req) => {
         const { storeId } = req.params;
 
-        const storeOrders  = orders
-            .filter((order) => String(order.storeId) === String(storeId))
-            .toSorted((a, b) => b.status.localeCompare(a.status));
+        let storeOrders = orders
+            .filter((order) => String(order.storeId) === String(storeId));
+
+        const url = new URL(req.request.url)
+        const sortBy = url?.searchParams.get('sortBy') || 'status';
+        const orderBy = url?.searchParams.get('orderBy') || 'desc';
+
+        if (sortBy === 'status') {
+            storeOrders = storeOrders.toSorted((a, b) => {
+                if (orderBy === 'asc') return a.status.localeCompare(b.status);
+                return b.status.localeCompare(a.status);
+            });
+        } else if (sortBy === 'date') {
+            storeOrders = storeOrders.toSorted((a, b) => {
+                if (orderBy === 'asc') return new Date(a.createdAt) - new Date(b.createdAt);
+                return new Date(b.createdAt) - new Date(a.createdAt);
+            });
+        }
         
-        return HttpResponse.json(storeOrders , { status: 200 });
+        return HttpResponse.json(storeOrders, { status: 200 });
     });
 
 export const handleOrdersOpen = 

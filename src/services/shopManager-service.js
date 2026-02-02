@@ -60,8 +60,12 @@ export const getOrders = (options = {}) =>
             status: options?.status }
     });
 
-export const getOrdersByStore = (storeId) => 
-    http.get(`/orders/store/${storeId}`);
+export const getOrdersByStore = (storeId, options = {}) => 
+    http.get(`/orders/store/${storeId}`, {
+        params: {
+            sortBy: options?.sortBy,
+            orderBy: options?.orderBy }
+    });
 
 export const setOrdersOpen = (body) => 
     http.post(`/orders/open`, body);
