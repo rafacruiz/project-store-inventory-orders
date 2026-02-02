@@ -42,8 +42,9 @@ function OrdersList () {
     
     const fetchOpenOrders = async () => {
         try {
-            const newOrder = await ShopManager.setOrdersOpen(
-                {storeId: user?.id, warehouseId: user?.warehouseId});
+            const newOrder = await ShopManager.setOrdersOpen({
+                storeId: user?.id, warehouseId: user?.warehouseId
+            });
 
             const message = 'Order opened successfully';
             console.log(message);
@@ -54,6 +55,21 @@ function OrdersList () {
             console.error(message);
             toast.error(message);
         }
+    };
+
+    const handleSort = (field) => {
+        const isSameField = isActive === field;
+        const nextOrder = isSameField
+            ? orderBy === 'asc' ? 'desc' : 'asc'
+            : 'asc';
+
+        setIsActive(field);
+        setOrderBy(nextOrder);
+
+        fetchOrders({
+            sortBy: field,
+            orderBy: nextOrder
+        });
     };
 
     if (orders === null) return <Loader />;
@@ -80,29 +96,19 @@ function OrdersList () {
                         <button
                             type="button"
                             className={`btn btn-outline-dark ${isActive === 'date'? 'active': ''}`}
-                            onClick={() => {
-                                    setIsActive('date');
-                                    const nextOrder = orderBy === 'asc' ? 'desc' : 'asc';
-                                    fetchOrders({sortBy: 'date', orderBy: nextOrder});
-                                    setOrderBy(nextOrder);
-                                    
-                                }} >
+                            onClick={() => handleSort('date')} >
                                 <i className="fa fa-calendar me-1"></i>
                                 Date
-                                <i className={`fa fa fa-long-arrow-${orderBy === 'asc' && isActive === 'date' ? 'down': 'up'} ms-2`}></i>
+                                {isActive === 'date' && (
+                                    <i className={`fa fa fa-long-arrow-${orderBy === 'asc' ? 'up' : 'down'} ms-2`}></i>
+                                )}
                         </button>
 
                         <button
                             type="button"
                             className={`btn btn-outline-${orderBy === 'desc' && isActive === 'status' ? 'success' : 'secondary'} 
                                 ${isActive === 'status'? 'active': ''}`}
-                            onClick={() => {
-                                    setIsActive('status');
-                                    const nextOrder = orderBy === 'asc' ? 'desc' : 'asc';
-                                    fetchOrders({sortBy: 'status', orderBy: orderBy });
-                                    setOrderBy(nextOrder);
-                                    
-                                }} >
+                            onClick={() => handleSort('status')} >
                                 <i className="fa fa-folder-open me-1"></i>
                                 {orderBy === 'desc' && isActive === 'status' ? 'Open' : 'Closed'}
                         </button>
