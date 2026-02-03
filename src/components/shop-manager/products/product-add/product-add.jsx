@@ -11,6 +11,7 @@ const category = [
 ]
 
 const validations = {
+    skuProduct: { required: 'Sku is required' },
     nameProduct: { required: 'Name is required' },
     categoryProduct: { required: 'Category is required' },
     descriptionProduct: { required: 'Description is required'},
@@ -63,8 +64,20 @@ function ProductAdd () {
         }
     };
 
-    return (<>
+    return (
+        <>
             <form onSubmit={ handleSubmit(onSubmit) } className="d-flex flex-column py-2 gap-3">
+                <div className="form-floating">
+                    <input 
+                        type="number" 
+                        className={`form-control ${errors.skuProduct ? 'is-invalid' : ''}`}
+                        id="skuProduct" 
+                        placeholder="Sku" 
+                        {...register('skuProduct', validations.skuProduct)} />
+                    {errors.skuProduct && (<div className="invalid-feedback">{errors.skuProduct.message}</div>)}
+                    <label>Sku Product</label>
+                </div>
+
                 <div className="form-floating">
                     <input 
                         type="text" 

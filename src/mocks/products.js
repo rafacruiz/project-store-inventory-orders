@@ -49,6 +49,7 @@ export const handleCreateProduct =
         
         product = {
             'id': self.crypto.randomUUID().toString(),
+            'sku': product.skuProduct,
             'name': product.nameProduct,
             'description': product.descriptionProduct,
             'imageUrl': product.imageProduct,

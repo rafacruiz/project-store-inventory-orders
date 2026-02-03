@@ -16,6 +16,7 @@ function ProductDetails ({ product }) {
                         <div className="col-md-8">
                             <div className="card-body">
                                 <h5 className="card-title">{ product.name }</h5>
+                                <p className="card-text">#{ product.sku }</p>
                                 <p className="card-text">{ product.description }</p>
                                 <p className="card-text"><small className="text-body-secondary">{ product.id }</small></p>
                             </div>
