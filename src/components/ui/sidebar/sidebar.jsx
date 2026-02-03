@@ -13,7 +13,7 @@ function Sidebar () {
                         <li className="nav-item">
                             <Link 
                                 className="nav-link text-black d-flex align-items-center justify-content-center justify-content-md-start gap-2" 
-                                to={'/dashboard'}>
+                                to={'/'}>
                                 <i className="fa fa-home fa-fw"></i>
                                 <span className="d-none d-md-inline">Dashboard</span>
                             </Link>
