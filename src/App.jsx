@@ -27,10 +27,9 @@ function App() {
       <div className="d-flex flex-column min-vh-100">
         <AnimatePresence mode="wait">
           <Routes>            
-            <Route path='/' element={ <LoginPage /> } />
-
+          
             <Route 
-              path='/dashboard' 
+              path='/' 
               element={ 
                 <PrivateRoute>
                   <RoleRoute>
@@ -96,39 +95,41 @@ function App() {
                   </RoleRoute>
                 </PrivateRoute> } />
 
-              <Route
-                path='/stores/orders'
-                element={
-                  <PrivateRoute>
-                    <StoresOrdersPage />
-                  </PrivateRoute>
-                } />
+            <Route
+              path='/stores/orders'
+              element={
+                <PrivateRoute>
+                  <StoresOrdersPage />
+                </PrivateRoute>
+              } />
 
-              <Route
-                path='/stores/orders/new/:orderId'
-                element={
-                  <PrivateRoute>
-                    <StoresOrderFormPage />
-                  </PrivateRoute>
-                } />
+            <Route
+              path='/stores/orders/new/:orderId'
+              element={
+                <PrivateRoute>
+                  <StoresOrderFormPage />
+                </PrivateRoute>
+              } />
 
-              <Route
-                path='/stores/order/:detailOrderId/warehouse/:detailWarehouseId'
-                element={
-                  <PrivateRoute>
-                    <StoresOrderFormPage />
-                  </PrivateRoute>
-                } />
+            <Route
+              path='/stores/order/:detailOrderId/warehouse/:detailWarehouseId'
+              element={
+                <PrivateRoute>
+                  <StoresOrderFormPage />
+                </PrivateRoute>
+              } />
 
-              <Route
-                path='/stores/order/:orderId/details'
-                element={
-                  <PrivateRoute>
-                    <StoresOrdersDetailsPage />
-                  </PrivateRoute>
-                } />
+            <Route
+              path='/stores/order/:orderId/details'
+              element={
+                <PrivateRoute>
+                  <StoresOrdersDetailsPage />
+                </PrivateRoute>
+              } />
 
             <Route path='*' element={ <NotFoundPage /> } />
+            
+            <Route path='/login' element={ <LoginPage /> } />
           </Routes>
         </AnimatePresence>
       </div>

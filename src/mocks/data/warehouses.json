@@ -22,9 +22,9 @@
   },
   {
     "id": "550e8400-e29b-41d4-a716-446655440003",
-    "name": "Almacén Sur",
-    "email": "sur@almacen.com",
-    "location": "Ciudad C",
+    "name": "Almacén Este",
+    "email": "este@almacen.com",
+    "location": "Ciudad D",
     "products": []
   }
 ]

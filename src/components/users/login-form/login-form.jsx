@@ -52,7 +52,7 @@ function LoginForm () {
             const response = await AuthUsers.getUserLogin(userData);
             console.info(response);
             login(response);
-            navigate('/dashboard');
+            navigate('/');
         } catch (error) {
             const { status, message } = error;
 

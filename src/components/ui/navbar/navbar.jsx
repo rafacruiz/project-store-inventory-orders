@@ -9,7 +9,7 @@ function Navbar () {
     return (
         <nav className="navbar bg-body-tertiary">
             <div className="container">
-                <Link className="navbar-brand d-flex align-items-center" to='/dashboard'>
+                <Link className="navbar-brand d-flex align-items-center" to='/'>
                     <img src={ boxIcon }
                         alt="Logo" 
                         width="35" 
