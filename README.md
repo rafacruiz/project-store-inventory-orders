@@ -1,48 +1,59 @@
-# Project Store Inventory & Orders
+# 📦 Project Store Inventory & Orders
 
-## Descripción
-Este proyecto es un **laboratorio** que simula un sistema de gestión de **almacén, productos y pedidos** para tiendas.  
-Incluye funcionalidades básicas de control de acceso y autenticación de usuarios.
+Aplicación web para la **gestión de almacenes y pedidos de tiendas**, que permite administrar productos, controlar inventario y gestionar pedidos según el rol del usuario (administrador o tienda).
 
-El objetivo principal es **aprender y practicar** conceptos de desarrollo web, gestión de inventario y control de acceso.
+Este proyecto está orientado a practicar el desarrollo de aplicaciones con **React**, control de estado y gestión de usuarios.
 
----
-
-## Funcionalidades
-
-- Gestión de **productos**:
-  - Crear, editar y eliminar productos
-  - Listado de productos disponibles en el almacén
-
-- Gestión de **pedidos**:
-  - Crear pedidos asociados a productos
-  - Visualizar el estado de los pedidos
-
-- **Control de acceso**:
-  - Autenticación de usuarios
-  - Diferentes roles de acceso (ej. administrador, empleado)
-
-- **Laboratorio**:
-  - Código orientado a aprendizaje y pruebas
-  - Integración con servicios simulados
+Demo: https://projectshopmanager.netlify.app/
 
 ---
 
-## Tecnologías
+## 📋 Funcionalidades principales
 
-- Frontend: React, React Hook Form
-- Backend: Servicio simulado mediante API
-- Gestión de estado: Context API
-- Control de errores y validaciones
-- Axios para llamadas HTTP con interceptor de errores
+- 🔐 Autenticación de usuarios
+- 👥 Roles diferenciados (Administrador / Tienda)
+- 📦 Gestión de productos
+- 🧾 Creación y visualización de pedidos
+- 🏬 Gestión de inventario por tienda
+- 🔎 Visualización de información según permisos
 
 ---
 
-## Instalación
+## 👥 Usuarios de prueba
+
+Puedes usar las siguientes credenciales para probar la aplicación:
+
+| Rol            | Email              | Contraseña |
+|----------------|--------------------|------------|
+| Administrador  | admin@shop.com     | 123456     |
+| Tienda         | shop1@shop.com     | 123456     |
+
+---
+
+## 🚀 Tecnologías utilizadas
+
+- **Frontend:** React
+- **Gestión de estado:** Context API
+- **Cliente HTTP:** Axios
+- **Formularios:** React Hook Form
+- **Backend:** API simulada / mock
+- **Herramientas:** Vite, npm
+
+---
+
+## 🧰 Requisitos previos
+
+Antes de empezar, asegúrate de tener instalado:
+
+- Node.js (versión 14 o superior)
+- npm o yarn
+
+---
+
+## 📥 Instalación
+
+Clona el repositorio:
 
 ```bash
-git clone <URL_DEL_REPOSITORIO>
+git clone https://github.com/rafacruiz/project-store-inventory-orders.git
 cd project-store-inventory-orders
-npm install
-npm start
-
