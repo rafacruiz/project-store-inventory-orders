@@ -29,7 +29,7 @@ function OrdersSummary () {
 
     if (orders === null) return <Loader />;
 
-    if (orders?.length) return <AlertMessage message='Orders no available.' />
+    if (!orders?.length) return <AlertMessage message='Orders no available.' />
 
     const toggleAccordion = (id) => setShowOrders(showOrders === id ? 'null' : id);
 
