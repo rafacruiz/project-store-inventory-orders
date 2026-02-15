@@ -127,9 +127,9 @@ function App() {
                 </PrivateRoute>
               } />
 
-            <Route path='*' element={ <NotFoundPage /> } />
-            
             <Route path='/login' element={ <LoginPage /> } />
+
+            <Route path='*' element={ <NotFoundPage /> } />
           </Routes>
         </AnimatePresence>
       </div>
